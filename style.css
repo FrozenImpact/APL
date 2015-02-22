@@ -15,9 +15,37 @@ a.s1:hover {
 a.s1:active {
     text-decoration: none;
 }
-.center {
-	text-align: center;
-}
+
+/*seda kasutada teksti ja nuppude kõrvuti paigutamiseks*/
 img.mid {
     vertical-align: middle;
+}
+
+.container {
+    overflow: hidden;
+}
+
+/*see on meie vasakpoolne ekraani osa*/
+.left {
+    overflow: hidden;
+	text-align: center;	
+	border-right:1px solid;
+}
+
+/*parepoolne ekraani osa*/
+.right {
+    float: right;
+}
+
+/*profiili osa*/
+.up {
+    height: 350px;
+    width: 400px;
+	float: top;
+    border-bottom:1px solid;
+}
+
+/*otsingu osa*/
+.down {
+    overflow: hidden;
 }
