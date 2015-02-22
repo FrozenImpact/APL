@@ -1,19 +1,23 @@
 h1 {
- text-align: center;
+	text-align: center;
+	font-size: 250%;
 }
-
 a.s1:link {
     text-decoration: none;
+	font-size: 180%;
 }
-
 a.s1:visited {
     text-decoration: none;
 }
-
 a.s1:hover {
     text-decoration: none;
 }
-
 a.s1:active {
     text-decoration: none;
+}
+.center {
+	text-align: center;
+}
+img.mid {
+    vertical-align: middle;
 }
