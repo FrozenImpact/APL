@@ -8,14 +8,12 @@
 <?php
 
 	echo '<h1>Matemaatiline analüüs</h1>';
-	
-	$i = 1;
-	while ($i < 10){
-	echo '<a href="#">post ' .$i. '</a><br />';
-	$i++;
-	};
 
-	
+	echo '<a class="s1" href="#">post</a><br />';
+	echo '<a class="s1" href="#">post</a><br />';
+	echo '<a class="s1" href="#">post</a><br />';
+	echo '<a class="s1" href="#">post</a><br />';
+	echo '<a class="s1" href="#">post</a><br />';	
 
 ?>
 

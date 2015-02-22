@@ -2,18 +2,18 @@ h1 {
  text-align: center;
 }
 
-a:link {
+a.s1:link {
     text-decoration: none;
 }
 
-a:visited {
+a.s1:visited {
     text-decoration: none;
 }
 
-a:hover {
+a.s1:hover {
     text-decoration: none;
 }
 
-a:active {
+a.s1:active {
     text-decoration: none;
 }
