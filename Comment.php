@@ -17,11 +17,11 @@ class Comment {
 		echo '';
 		
 		
-		echo '<a href="http://www.reddit.com/"><img src="up.png" width="20" height="20" alt="" />';
+		echo '<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="upV.png" width="20" height="20" alt="" />';
 
 		echo '<a>' .$this->sisu. '</a>';
 	
-		echo '<a href="http://www.reddit.com/"><img src="up.png" width="20" height="20" alt="" />';
+		echo '<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="downV.png" width="20" height="20" alt="" />';
 		
 		echo '<br /><a>'.$this->autor.' </a>';
 		echo '<a>'.$this->skoor.' </a>';
