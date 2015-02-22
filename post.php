@@ -4,18 +4,26 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 </head>
-
+<body>
+<div class="container">
+	<div class="right">
+		<div class="up">
+		</div>
+		<div class="down">
+		</div>
+    </div>
+    <div class="left">
 <?php
 
 	echo '<h1>Matemaatiline analüüs</h1>';
 	
-	echo '<a href="http://www.reddit.com/"><img src="up.png" width="20" height="20" alt="" />';
+	echo '<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="upV.png" width="50" height="50" alt="" />';
 	
-	echo '<a href="#">Ostan kohvikus saiakese kes mulle testi vastuseid jagab</a>';
+	echo '<a class="s1" href="#">Ostan kohvikus saiakese kes mulle testi vastuseid jagab</a>';
 	
-	echo '<a href="http://www.reddit.com/"><img src="up.png" width="20" height="20" alt="" />';
+	echo '<a class="s1" href="http://www.reddit.com/"><img class="mid" src="downV.png" width="50" height="50" alt="" /><br/><br/>';
 	
-	echo '<br /><a> tiitel ütleb kõik, aitäh! </a><br />';
+	echo '<br /><a class="s1"> tiitel ütleb kõik, aitäh! </a><br />';
 
 ?>
 <form method="POST">
@@ -39,12 +47,6 @@ if (isset($_POST['action'])) {
 			   
 
                           }
-               
-          
-     
-          
-     
-     
 }
 
 
@@ -80,5 +82,8 @@ foreach ($data as $entryData) {
 
 	
 ?>
+	</div>	   
+</div>
 
+</body>
 </html>
