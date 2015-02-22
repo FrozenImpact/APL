@@ -27,6 +27,7 @@ img.mid {
 
 /*see on meie vasakpoolne ekraani osa*/
 .left {
+	height:100%;
     overflow: hidden;
 	text-align: center;	
 	border-right:1px solid;
@@ -47,5 +48,6 @@ img.mid {
 
 /*otsingu osa*/
 .down {
+	height:auto;
     overflow: hidden;
 }
