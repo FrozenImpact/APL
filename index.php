@@ -8,8 +8,15 @@
 <?php
 
 	echo '<h1>Matemaatiline analüüs</h1>';
+	
+	$i = 1;
+	while ($i < 10){
+	echo '<a href="#">post ' .$i. '</a><br />';
+	$i++;
+	};
 
 	
+
 ?>
 
 </html>
