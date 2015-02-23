@@ -1,8 +1,11 @@
+/*HEADLINE*/
 h1 {
 	font-size: 250%;
 }
+/*POST*/
 a.s1:link {
     text-decoration: none;
+	color: blue;
 	font-size: 180%;
 }
 a.s1:visited {
@@ -13,6 +16,24 @@ a.s1:hover {
 }
 a.s1:active {
     text-decoration: none;
+	color: orange;
+}
+/*NORMALISH*/
+a.n1:link {
+    text-decoration: none;
+	color: blue;
+	font-size: 100%;
+}
+a.n1:visited {
+    text-decoration: none;
+    color: blue;
+}
+a.n1:hover {
+    text-decoration: none;
+}
+a.n1:active {
+    text-decoration: none;
+	color: orange;
 }
 
 /*BUTTONS, FORMS AND ICON ALIGNMENT*/
@@ -20,28 +41,10 @@ a.s1:active {
 img.mid {
     vertical-align: middle;
 }
-.butLeft{
-	float: left;
-	width: 10em;  height: 2em;
-	margin-left:30px;
-}
-.butRight{
-	float: right;
-	width: 10em;  height: 2em;
-	margin-right:30px;
-}
-.panRight{
-	position: absolute;
-	margin-top:20px;
-	margin-left:20px;
-}
 .pic{
 	margin-top:20px;
 }
 /*----------------------------------------------------*/
-
-.container {
-}
 
 /*see on meie vasakpoolne ekraani osa*/
 .left {
@@ -61,7 +64,6 @@ img.mid {
     height: 300px;
     width: 400px;
 	float: top;
-    border-bottom:1px solid;
 }
 .upUp{
 	float:top;
@@ -72,16 +74,19 @@ img.mid {
 	height: 50px;
 }
 .upUpLeft{
+	position:relative;
 	float:left;
 	width:200px;
 	height:250px;
 	text-align: center;
 }
 .upUpRight{
-	width:auto;
-    height:250px;
+	float:right;
+	width:200px;	
+	height: 250px;
+}
+.down{
+	width:400;
+	height:200;
 }
 
-/*otsingu osa*/
-.down {
-}
