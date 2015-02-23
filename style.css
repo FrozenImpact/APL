@@ -1,5 +1,4 @@
 h1 {
-	text-align: center;
 	font-size: 250%;
 }
 a.s1:link {
@@ -16,13 +15,32 @@ a.s1:active {
     text-decoration: none;
 }
 
+/*BUTTONS, FORMS AND ICON ALIGNMENT*/
 /*seda kasutada teksti ja nuppude kõrvuti paigutamiseks*/
 img.mid {
     vertical-align: middle;
 }
+.butLeft{
+	float: left;
+	width: 10em;  height: 2em;
+	margin-left:30px;
+}
+.butRight{
+	float: right;
+	width: 10em;  height: 2em;
+	margin-right:30px;
+}
+.panRight{
+	position: absolute;
+	margin-top:20px;
+	margin-left:20px;
+}
+.pic{
+	margin-top:20px;
+}
+/*----------------------------------------------------*/
 
 .container {
-    overflow: hidden;
 }
 
 /*see on meie vasakpoolne ekraani osa*/
@@ -40,14 +58,30 @@ img.mid {
 
 /*profiili osa*/
 .up {
-    height: 350px;
+    height: 300px;
     width: 400px;
 	float: top;
     border-bottom:1px solid;
 }
+.upUp{
+	float:top;
+	height: 250px;
+}
+.upDown{
+	float:bottom;
+	height: 50px;
+}
+.upUpLeft{
+	float:left;
+	width:200px;
+	height:250px;
+	text-align: center;
+}
+.upUpRight{
+	width:auto;
+    height:250px;
+}
 
 /*otsingu osa*/
 .down {
-	height:auto;
-    overflow: hidden;
 }
