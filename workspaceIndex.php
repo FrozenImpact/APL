@@ -1,8 +1,6 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 
-	
-	
 <div class="right">
 	<div class="up">
 		<div class="upUp">
@@ -35,27 +33,31 @@
 	<div class="postBox">	
 		<div class="voteBox">
 			<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="upV.png" width="50" height="50" alt="" /></a>
+			
 		</div>
 		<div class="postDataBox">	
 			<div class="postDataBoxUp">	
-				<a class="s1" href="#4">Kas asdasdasdasdadasdasasdaskest?</a>
+				<a class="s1" href="#4">Kat?</a>
+				
 			</div>
 			<div class="postDataBoxDown">
 				<div class="dataComments">	
 					<h>Replies: 16</h>
+					
 				</div>
 				<div class="dataScore">	
-					<h>78</h>
+					<i1>78</i1>
+					
 				</div>				
 				<div class="dataDate">	
 					<h>16.02.2015</h>
+					
 				</div>
 			</div>			
 		</div>			
 		<div class="voteBox">
 			<a class="s1" href="http://www.reddit.com/"><img class="mid" src="downV.png" width="50" height="50" alt=""/></a>
-		</div>
-				
-	</div>
-	
+			
+		</div>				
+	</div>	
 </div>
