@@ -3,18 +3,18 @@ h1 {
 	font-size: 250%;
 }
 /*POST*/
-a.s1:link {
+.s1 {
     text-decoration: none;
 	color: blue;
 	font-size: 180%;
 }
-a.s1:visited {
+.s1:visited {
     text-decoration: none;
 }
-a.s1:hover {
+.s1:hover {
     text-decoration: none;
 }
-a.s1:active {
+.s1:active {
     text-decoration: none;
 	color: orange;
 }
@@ -50,7 +50,7 @@ img.mid {
 .left {
 	height:100%;
     overflow: hidden;
-	text-align: center;	
+	text-align:center;
 	border-right:1px solid;
 }
 
@@ -90,5 +90,32 @@ img.mid {
 .down{
 	width:400;
 	height:200;
+}
+
+/*postituse osa pealehel*/
+.postBox{
+	display: inline-block;
+}
+.postDataBox{
+	float:left;
+}
+.postDataBoxUp{
+}
+.postDataBoxDown{
+	text-align:center;
+}
+.voteBox{
+	float:left;
+}
+.dataComments{
+	display: inline-block;
+	margin-right: 10px;
+}
+.dataScore{
+	display: inline-block;
+}
+.dataDate{
+	display: inline-block;
+	margin-left: 10px;
 }
 
