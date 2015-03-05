@@ -6,13 +6,24 @@
 
 	<div class="up">
 <?php
+session_start();
+
+
 	include_once '_Sidebar.php';
 	
-		$sidebar = new Sidebar("Potato");
+	if (isset( $_SESSION['login_user'] )){
+		$sidebar = new Sidebar($_SESSION['login_user']);
 		$sidebar->kirjuta();
+	}
+	else{
+		echo '';
+	}
+
 	
+	
+//$_SESSION['login_user']= 'username'; 
 
-
+	
 
 ?>
 	</div>

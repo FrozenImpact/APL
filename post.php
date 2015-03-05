@@ -6,16 +6,22 @@
 
 	<div class="up">
 <?php
+session_start();
+
+
 	include_once '_Sidebar.php';
 	
-	if (isset($_GET['user'])){
-		$sidebar = new Sidebar($_GET['user']);
+	if (isset( $_SESSION['login_user'] )){
+		$sidebar = new Sidebar($_SESSION['login_user']);
 		$sidebar->kirjuta();
 	}
-	else{
-		$sidebar = new Sidebar("Jah");
-		$sidebar->kirjuta();
+
+		else{
+		echo '';
 	}
+	
+//$_SESSION['login_user']= 'username'; 
+
 	
 
 ?>
