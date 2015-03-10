@@ -3,41 +3,42 @@
 
 	
 <div class="right">
-
-	<div class="up">
+<div class="up">
 <?php
-session_start();
-
-
+	session_start();
+	
 	include_once '_Sidebar.php';
 	
+	// kas sisselogimisnuppu on vajutatud
+	if (isset( $_POST['login_button'] )){
+		$_SESSION['login_user']= $_POST['login_username']; 
+	}
+	
+	// kas väljalogimisnuppu on vajutatud
+	if (isset( $_POST['logout_button'] )){
+		unset($_SESSION['login_user']); 
+	}
+	
+	// kas kasutaja on sisse logitud
 	if (isset( $_SESSION['login_user'] )){
 		$sidebar = new Sidebar($_SESSION['login_user']);
-		$sidebar->kirjuta();
+		$sidebar->draw_sidebar_top();
 	}
+	// kui ei siis n2ita sisselogimisnuppu
 	else{
-		echo '';
+		$sidebar = new Sidebar("");
+		$sidebar->draw_login_form();
 	}
-
-	
-	
-//$_SESSION['login_user']= 'username'; 
-
-	
-
 ?>
-	</div>
-	
-	
-	
-	<div class="down">					
-	</div>
+</div>
+<div class="down">					
+</div>
 </div>
 
 
 <div class="left">
-	
-	<h1>Matemaatiline analüüs</h1><br/><br/>
+	<div class="postHead">
+	<j1>Matemaatiline analüüs</j1><br/><br/>
 	
 	<?php
 		include_once '_Post.php';
@@ -49,7 +50,7 @@ session_start();
 		
 				if ($comm != ''){
 					$post = new Post($comm);
-					$post->kirjuta();
+					$post->draw_post();
 				}
 			}
 		}
@@ -57,4 +58,5 @@ session_start();
 	
 	
   
+</div>
 </div>

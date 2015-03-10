@@ -6,7 +6,20 @@ private $username;
 	$this->username = $username;
 }
 
-public function kirjuta (){
+public function draw_login_form (){
+echo '
+		<form method="POST">
+			<input type="text" size="15" maxlength="15" value="Username" name="login_username" ><br/>
+			<input type="password" size="15" maxlength="15" value="Password" name="login_password" ><br/>
+			
+		<div class="upDown">
+			<a><input class="button" type="submit" name="login_button" value="Log in"></a>
+			<a href="#"><button type="button">Make account</button></a>
+		</div>
+		</form>';
+}
+
+public function draw_sidebar_top (){
 echo'
 		<div class="upUp">
 			<div class="upUpLeft">	
@@ -24,18 +37,16 @@ echo'
 				
 			</div>
 		</div>
+		<form method="POST">
 		<div class="upDown">
 		
 			<a href="profile.php"><button type="button">Settings</button></a>
 			
-			
-			<form method="POST">
-			<a href="profile.php"><button type="button">Log Out</button></a>
-			</form>
+
+			<a><input class="button" type="submit" name="logout_button" value="Log Out"></a>
 
 		</div>
-
-
+		</form>
 ';
 }	
 }
