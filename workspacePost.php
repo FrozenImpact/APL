@@ -32,7 +32,7 @@
 </div>
 
 <div class="left">	
-	<div class="postHead">
+	<div class="head">
 		<j1>Matemaatiline analüüs</j1>
 		
 	</div><br></br>	

@@ -1,6 +1,4 @@
 html,body {
-    width:100%;
-	height:100%;
 }
 
 /*HEADLINE*/
@@ -114,6 +112,7 @@ img.mid {
 	width:100%-5px;
 	margin-left:10px;
 	margin-right:10px;
+	margin-top:10px;
 	background:white;
 }
 .postBoxRow:hover{
@@ -148,16 +147,17 @@ img.mid {
 	margin-left: 10px;
 }
 
-/*POST PAGE DIVS*/
-.postHead{
+.head{
 }
+
+/*POST PAGE DIVS*/
 .selfPost{	
 	width: 500px;
 	height: 100px;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top: 15px;
-	background:#D6E6E1;
+	background:white;
 	border:1px solid;
 	text-align: left;
 }
@@ -170,7 +170,7 @@ img.mid {
 
 .vertIcon{
 	position:absolute;
-	background:red;
+	background:pink;
 	height:100%;
 	width:5px;
 }
