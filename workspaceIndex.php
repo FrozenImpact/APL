@@ -8,24 +8,39 @@
 		<div class="upUp">
 			<div class="upUpLeft">			
 				<a href="http://www.reddit.com/"><img class="pic" src="img/pic.jpeg" width="100" height="100"/></a><br/><br/>
-				<h>Joined: 29.01.2015</h><br/><br/>
-				<h>Last Visit: 29.01.2015</h><br/><br/>
+				<b>Joined: 29.01.2015</b><br/><br/>
+				<b>Last Visit: 29.01.2015</b><br/><br/>
 				
-			</div>
-			<div class="upUpRight">				
-				<br/><a class="n1" href="#1">PotatoeMan</a><br/><br/>
-				<a class="n1" href="#2">Posts: 54</a><br/><br/>
-				<a class="n1" href="#3">Comments: 172</a><br/><br/>
-				
-			</div>
+			</div>	
+			<div class="upUpRight">		
+				<div class="upUpRightLeft">	
+					<div class="upUpRightBox"></div>
+					<div class="upUpRightBox">
+						<a class="n1" href="#1"><b>PotatoeMan</b></a>
+					</div>
+					<div class="upUpRightBox"></div>
+					<div class="upUpRightBox">
+						<a class="n1" href="#2"><b>Posts: 54</a></b>
+					</div>
+					<div class="upUpRightBox"></div>
+					<div class="upUpRightBox">
+						<a class="n1" href="#3"><b>Comments: 172</b></a>
+					</div>
+				</div>
+				<div class="upUpRightRight">				
+				</div>
+			</div>					
 		</div>
-		<div class="upDown">		
-			<a href="https://reddit.com"><button class="settingsBut" type="button">Settings</button></a>
-			<a href="https://reddit.com"><button class="logOutBut" type="button">Log Out</button></a>			
+		<div class="upDown">
+			<div class="upDownLeft">
+				<a class="n2 rightLink" href="#">Settings</a>
+			</div>
+			<div class="upDownRight">
+				<a class="n2 rightLink" href="#">Log Out</a>
+			</div>		
 		</div>
 	</div>
-	<div class="down">
-	asd
+	<div class="down">	
 	</div>
 </div>	
 
@@ -42,10 +57,10 @@
 				<input type="search" placeholder="Search">
 			</form>
 			
-		</div>
-							
-			
-	</div><br></br>		
+		</div>			
+	</div>
+	<div class="separator">				
+	</div>
 	<div class="postBoxRow">
 		<div class="vertIcon">
 		</div>

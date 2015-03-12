@@ -19,6 +19,12 @@ a {
 	color: #246;
 	text-decoration: none;
 }
+
+a.n2:active {color: black;}
+a.n2{
+	color: #246;
+	text-decoration: none;
+}
 /*POST*/
 .s1 {
     text-decoration: none;
@@ -48,10 +54,6 @@ a.n1:visited {
 a.n1:hover {
     text-decoration: none;
 }
-a.n1:active {
-    text-decoration: none;
-	color: orange;
-}
 
 /*alignment n stuff*/
 /*seda kasutada teksti ja nuppude kõrvuti paigutamiseks*/
@@ -60,6 +62,9 @@ img.mid {
 }
 .pic{
 	margin-top:20px;
+	-webkit-box-shadow: 0px 0px 2px 4px rgba(0,0,0,1);
+-moz-box-shadow: 0px 0px 2px 4px rgba(0,0,0,1);
+box-shadow: 0px 0px 2px 4px rgba(0,0,0,1);
 }
 
 
@@ -70,21 +75,20 @@ img.mid {
 	height:100%;
     overflow: hidden;
 	text-align:center;
-	border-right:1px solid;
 	background:#eeeeee;
 }
 
 /*parepoolne ekraani osa*/
 .right {
+	display:table;
     float: right;
 	-moz-box-shadow:    3px 5px 7px 8px #ccc;
 	-webkit-box-shadow: 3px 5px 7px 8px #ccc;
-	box-shadow:         3px 5px 7px 8px #ccc;
-	display:table;
+	box-shadow:         3px 5px 7px 8px #ccc;	
 	height:100%;
 	width:400px;
-	border-collapse: collapse;
-	background:
+	/*border-collapse: collapse;*/
+	background:#FFEDDC;
 }
 
 /*profiili osa*/
@@ -98,7 +102,27 @@ img.mid {
 }
 .upDown{
 	float:bottom;
-	background:red;
+	display: table;
+	/*border-collapse:separate; probably useless*/
+	table-layout: fixed;
+    width: 100%;
+	background: #FFDAB6;
+	height:45px;
+	-webkit-box-shadow: 2px 0px 5px 2px rgba(0,0,0,0.74);
+	-moz-box-shadow: 2px 0px 5px 2px rgba(0,0,0,0.74);
+	box-shadow: 2px 0px 5px 2px rgba(0,0,0,0.74);
+}
+.upDownLeft{
+	display: table-cell;
+	padding-left:10px;
+	text-align: left;
+	vertical-align: middle;	
+}
+.upDownRight{
+	display: table-cell;
+	padding-right:10px;
+	text-align: right;
+	vertical-align: middle;
 }
 .upUpLeft{
 	float:left;
@@ -106,14 +130,33 @@ img.mid {
 	text-align: center;
 }
 .upUpRight{
+	width:200px;
 	float:right;
-	width:200px;	
+}
+.upUpRightRight{
+}
+.upUpRightLeft{
+	display: table;
+	table-layout: fixed;
+	width:120px;
+	float:left;
+}
+
+.upUpRightBox{
+	text-align:center;
+	display:table-row;
+	height:20px;
+}
+.upUpRightBox:hover{
+	background-color:#FD8F29;
+	
+    border: solid 1px #20538D;
+	
 }
 
 /*otsingu osa*/
 .down{
 	display:table-row;
-	border-top:1px solid;
     height:100%;
 	width:400;
 }
@@ -161,35 +204,39 @@ img.mid {
 
 .head{
 	display: table;
-	border-collapse:separate;
-	table-layout: fixed;
+	/*border-collapse:separate; probably useless*/
+	
     width: 100%;
 	background: #4479BA;
     color: #FFF;
 	height:50px;
-	-webkit-box-shadow: 0px 10px 17px -5px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 10px 17px -5px rgba(0,0,0,0.75);
-	box-shadow: 0px 10px 17px -5px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
+	box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
 }
-
 .headLeft{	
 	display: table-cell;
-	padding-left:10px;
+	padding-left:15px;
+	width:15%;
 	text-align: left;
 	vertical-align: middle;
 }
-
 .headMid{
 	display: table-cell;
+	width:70%;
+	text-align: center;
+	vertical-align: middle;
+}
+.headRight{
+	display: table-cell;
+	padding-right:15px;
+	width:15%;
 	text-align: center;
 	vertical-align: middle;
 }
 
-.headRight{
-	display: table-cell;
-	padding-right:15px;
-	text-align: center;
-	vertical-align: middle;
+.separator{
+	height:10px;
 }
 
 /*POST PAGE DIVS*/
@@ -215,6 +262,46 @@ img.mid {
 	background:pink;
 	height:100%;
 	width:5px;
+}
+
+.rightLink{
+	padding: 5px 15px;
+    background: #FDAC60;
+    color: #000;
+	
+	-webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: solid 1px #20538D;
+	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	
+	-webkit-transition-duration: 0.05s;
+    -moz-transition-duration: 0.05s;
+    transition-duration: 0.05s;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	cursor: default;
+}
+.rightLink:hover{
+    background: #FD8F29;
+    border: solid 1px #2A4E77;
+    text-decoration: none;
+}
+
+.rightLink:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #FC800C;
+    border: solid 1px #203E5F;
 }
 
 .headLink {
