@@ -1,15 +1,17 @@
 <?php
 class Post {
 	private $tiitel;
+	private $category;
 	
 	
-	public function __construct ($tiitel) {
+	public function __construct ($tiitel, $category) {
 	$this->tiitel = $tiitel;
+	$this->category = $category;
 }
 
 	public function draw_post (){
 		echo '
-			<div class="postBoxRow">
+			<div class="postBoxRow" id="postBoxRow">
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
@@ -19,7 +21,7 @@ class Post {
 			</div>
 			<div class="postDataBox">	
 				<div class="postDataBoxUp">	
-					<a class="s1" href="post.php?lehekylg=' .$this->tiitel. '">' .$this->tiitel. '</a>
+					<a class="s1" href="index.php?lecture=' .$this->category. '&lehekylg=' .$this->tiitel. '">' .$this->tiitel. '</a>
 					
 				</div>
 				<div class="postDataBoxDown">

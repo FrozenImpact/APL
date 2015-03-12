@@ -13,8 +13,8 @@ echo '
 			<input type="password" size="15" maxlength="15" value="Password" name="login_password" ><br/>
 			
 		<div class="upDown">
-			<a><input class="button" type="submit" name="login_button" value="Log in"></a>
-			<a href="#"><button type="button">Make account</button></a>
+			<a><input class="settingsBut" type="submit" name="login_button" value="Log in"></a>
+			<a href="#"><button class="logOutBut" type="button">Make account</button></a>
 		</div>
 		</form>';
 }
@@ -37,17 +37,30 @@ echo'
 				
 			</div>
 		</div>
-		<form method="POST">
 		<div class="upDown">
 		
-			<a href="profile.php"><button type="button">Settings</button></a>
+		<form method="POST">
+			<a href="profile.php"><button class="settingsBut" type="button">Settings</button></a>
 			
 
-			<a><input class="button" type="submit" name="logout_button" value="Log Out"></a>
+			<a><input class="logOutBut" type="submit" name="logout_button" value="Log Out"></a>
 
-		</div>
-		</form>
+		</form>	
+		</div>	
 ';
-}	
+}
+
+public function draw_sidebar_bot (){
+	echo'
+	<form method="post">
+		<input type="text" value="" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
+	</form>
+	';
+}
+
+
+
+
+	
 }
 ?>

@@ -1,0 +1,19 @@
+﻿Rahvahuumor: struktuur, kommunikatsioon ja esteetika
+Erialane inglise keel informaatika üliõpilastele, tase B2 > C1
+Arvuti arhitektuur ja riistvara
+Sissejuhatus informaatikasse
+Programmeerimine
+Elementaarmatemaatika I
+Diskreetse matemaatika elemendid
+Arvutiriistvara praktikum
+IT-ettevõtja baaskursus
+Objektorienteeritud programmeerimine
+Füüsika ja tehnika
+Andmebaasid
+Algebra I
+Arvutimängude loomine ja disain
+Infotehnoloogia sotsiaalsed aspektid
+Operatsioonisüsteemid
+Algoritmid ja andmestruktuurid
+Tarkvaratehnika
+Matemaatiline analüüs

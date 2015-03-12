@@ -1,6 +1,21 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+		var search = $("#class_search_entry");
+        $("#class_search_entry").keyup(function() {
+			$.post( 
+				'readClasses.php', // location of your php script
+				{ filter: search.val() }, // any data you want to send to the script
+				function( data ){  // a function to deal with the returned information
+					$('#down li').remove();
+					$( '#down').append( data );
+				});
+        });
+});
+</script>
 
 <div class="right">
 <div class="up">
@@ -31,37 +46,61 @@
 	}
 ?>
 </div>
-<div class="down">					
-</div>
-</div>
-
-
-<div class="left">
-
-<div class="postHead">
+<div class="down" id="down">	
 <?php
-
-	echo '<j1>Matemaatiline analüüs</j1><br/><br/>';
+	$sidebar->draw_sidebar_bot ();
+	include_once 'readClasses.php';
 	
+?>								
+</div>
+</div>
+
+
+<div class="left">	
+	<div class="head">	
+		<div class="headLeft">
+			<a href="index.php" class="headLink">APL</a>
+		</div>
+		<div class="headMid">
+			<a href="index.php?lecture=<?php if (isset($_GET['lecture'])) echo $_GET['lecture']; ?>   " class="headLink">
+			<?php 
+			if (isset($_GET['lecture'])){
+				echo ''.$_GET['lecture'].'';
+			}
+			?>
+			</a>
+		</div>
+		<div class="headRight">
+			<form id="demo-2">
+				<input type="search" placeholder="Search">
+			</form>
+		</div>
+							
+			
+	</div><br></br>
+	
+	
+<?php
 	include_once '_Post.php';
 
-	$post = new Post($_GET['lehekylg']);
+	$post = new Post($_GET['lehekylg'], $_GET['lecture']);
 	$post->draw_post();
-?>
-	<div class="selfPost">
-		<h> tiitel ütleb kõik, aitäh! </h>
-	</div>
+
+	echo '
+		<div class="selfPost">
+			<h> tiitel ütleb kõik, aitäh! </h>
+		</div>
 
 
-<div class="selfComment">	
-		<form method="POST">
-			<input type="hidden" name="action" value="new_entry"/>
-			<textarea rows="6" cols="68" value="" name="name" ></textarea><br><br/>			
-			<input class="button" type="submit" value="Reply"/>
-		</form>	
-</div>
+	<div class="selfComment">	
+			<form method="POST">
+				<input type="hidden" name="action" value="new_entry"/>
+				<textarea rows="6" cols="68" value="" name="name" ></textarea><br><br/>			
+				<input class="button" type="submit" value="Reply"/>
+			</form>	
+	</div>';
 
-<?php
+
 	if (isset($_POST['action'])) {
 		save($_POST);
 	}
