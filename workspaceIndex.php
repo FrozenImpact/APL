@@ -38,7 +38,7 @@
 			<a class="headLink">Matemaatiline Analüüs</a>
 		</div>
 		<div class="headRight">			
-			<form id="demo-2">
+			<form id="searchMain">
 				<input type="search" placeholder="Search">
 			</form>
 			
