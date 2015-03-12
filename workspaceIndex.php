@@ -32,13 +32,16 @@
 <div class="left">	
 	<div class="head">	
 		<div class="headLeft">
-			<a class="midLink">APL</a>
+			<a class="headLink" href="#">APL</a>
 		</div>
 		<div class="headMid">
-			<a class="midLink">Matemaatiline Analüüs</a>
+			<a class="headLink">Matemaatiline Analüüs</a>
 		</div>
-		<div class="headRight">
-			<a class="midLink">Search</a>
+		<div class="headRight">			
+			<form id="demo-2">
+				<input type="search" placeholder="Search">
+			</form>
+			
 		</div>
 							
 			

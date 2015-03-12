@@ -1,5 +1,5 @@
 html,body {
-margin: 0 !important;
+	margin: 0 !important;
     padding: 0 !important;
 }
 
@@ -14,7 +14,7 @@ i1 {
 	font-size: 110%;
 	font-weight:bold;
 }
-a:focus,a:active {color: pink;}
+a:active {color: pink;}
 a {
 	color: #246;
 	text-decoration: none;
@@ -83,7 +83,7 @@ img.mid {
 	display:table;
 	height:100%;
 	border-collapse: collapse;
-	
+	background:
 }
 
 /*profiili osa*/
@@ -160,6 +160,10 @@ img.mid {
 }
 
 .head{
+	display: table;
+	border-collapse:separate;
+	table-layout: fixed;
+    width: 100%;
 	background: #4479BA;
     color: #FFF;
 	height:50px;
@@ -168,24 +172,24 @@ img.mid {
 	box-shadow: 0px 10px 17px -5px rgba(0,0,0,0.75);
 }
 
-.headLeft{
-	position: relative;
-	top: 30%;
-	float:left;
-	margin-left:10px;
+.headLeft{	
+	display: table-cell;
+	padding-left:10px;
+	text-align: left;
+	vertical-align: middle;
 }
 
 .headMid{
-	position: relative;
-	top: 30%;
-	display: inline-block;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .headRight{
-	position: relative;
-	top: 30%;
-	float:right;
-	margin-right:10px;
+	display: table-cell;
+	padding-right:15px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 /*POST PAGE DIVS*/
@@ -213,7 +217,7 @@ img.mid {
 	width:5px;
 }
 
-.midLink {
+.headLink {
     padding: 10px 15px;
     background: #4479BA;
     color: #FFF;
@@ -222,12 +226,15 @@ img.mid {
     border-radius: 4px;
     border: solid 1px #20538D;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-	-webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
+	
+	-webkit-transition-duration: 0.05s;
+    -moz-transition-duration: 0.05s;
     transition-duration: 0.05s;
+	
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -237,13 +244,13 @@ img.mid {
 	cursor: default;
 }
 
-.midLink:hover, .midLink:focus {
+.headLink:hover{
     background: #356094;
     border: solid 1px #2A4E77;
     text-decoration: none;
 }
 
-.midLink:active {
+.headLink:active {
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
@@ -260,4 +267,102 @@ img.mid {
 	position:relative;
     float:right;
 	margin-right: 55px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*SEARCH TRINKET*/
+input {
+	outline: none;
+}
+input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+	display: none; 
+}
+
+input[type=search] {
+	background: #ededed url('img/search-icon.png') no-repeat 9px center;
+	border: solid 1px #20538D;
+	width: 55px;	
+	padding: 10px 14px;    
+	
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	transition: all .25s;
+}
+input[type=search]:focus {
+	width: 130px;
+	background-color: #fff;
+	border-color: #66CC75;	
+	
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+input:-moz-placeholder {
+	color: #999;
+}
+input::-webkit-input-placeholder {
+	color: #999;
+}
+
+/* Demo 2 */
+#demo-2 input[type=search] {
+	float:right;
+	width: 15px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+#demo-2 input[type=search]:hover {
+	float:right;
+	background-color: #fff;
+}
+#demo-2 input[type=search]:focus {
+	float:right;
+	width: 130px;
+	padding-left: 32px;
+	color: #000;
+	background-color: #fff;
+	cursor: auto;
+}
+#demo-2 input:-moz-placeholder {
+	float:right;
+	color: transparent;
+}
+#demo-2 input::-webkit-input-placeholder {
+	float:right;
+	color: transparent;
 }
