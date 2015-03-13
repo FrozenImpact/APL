@@ -375,15 +375,6 @@ box-shadow: 0px 0px 2px 4px rgba(0,0,0,1);
 
 
 
-
-
-
-
-
-
-
-
-
 /*SEARCH TRINKET*/
 input {
 	outline: none;
@@ -465,9 +456,6 @@ input::-webkit-input-placeholder{
 	color: transparent;
 }
 
-
-
-
 input[type=search2] {
 	-webkit-appearance: textfield;
 	-webkit-box-sizing: content-box;
@@ -476,7 +464,7 @@ input[type=search2] {
 }
 input[type=search2] {
 	background: url('img/search-iconB.png') no-repeat 9px center;
-	background-color:#FFDAB6;
+	background-color:#FFE9D3;
 	border: solid 1px #20538D;
 	width: 89%;	
 	padding: 9px 10px 9px 32px;
@@ -521,4 +509,3 @@ input[type=search2]:focus {
 	color: #000;
 	background-color: #fff;
 	cursor: auto;
-}
