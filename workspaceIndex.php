@@ -14,15 +14,15 @@
 			</div>	
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
-					<div class="upUpRightBox"></div>
+					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
 						<a class="n1" href="#1"><b>PotatoeMan</b></a>
 					</div>
-					<div class="upUpRightBox"></div>
+					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
 						<a class="n1" href="#2"><b>Posts: 54</a></b>
 					</div>
-					<div class="upUpRightBox"></div>
+					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
 						<a class="n1" href="#3"><b>Comments: 172</b></a>
 					</div>
@@ -41,6 +41,24 @@
 		</div>
 	</div>
 	<div class="down">	
+		<div class="separator"></div>
+		<div class="downBoxRow">
+			<form>
+				<input type="search2" placeholder="Search SubPages">
+			</form>
+		</div>
+		<div class="downBoxRow"></div>
+		<div class="downBoxRow">
+			<a class="n1" href="#1"><b>Algebra</b></a>
+		</div>
+		<div class="downBoxRow"></div>
+		<div class="downBoxRow">
+			<a class="n1" href="#2"><b>Erialane Inglise Keel</a></b>
+		</div>
+		<div class="downBoxRow"></div>
+		<div class="downBoxRow">
+			<a class="n1" href="#3"><b>Füüsika</b></a>
+		</div>	
 	</div>
 </div>	
 
@@ -52,15 +70,13 @@
 		<div class="headMid">
 			<a class="headLink">Matemaatiline Analüüs</a>
 		</div>
-		<div class="headRight">			
+		<div class="headRight">		
 			<form id="searchMain">
-				<input type="search" placeholder="Search">
-			</form>
-			
+				<input type="search" placeholder="tetere">
+			</form>			
 		</div>			
 	</div>
-	<div class="separator">				
-	</div>
+	<div class="separator"></div>
 	<div class="postBoxRow">
 		<div class="vertIcon">
 		</div>
