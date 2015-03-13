@@ -453,3 +453,28 @@ input::-webkit-input-placeholder {
 	float:right;
 	color: transparent;
 }
+
+/*siin on profilestyle*/
+#image {
+	margin: 50px;
+	float: left;
+}
+
+td {
+	padding: 10px;
+}
+
+.userinfo {
+	margin-top: 100px;
+	font-size: 18px;
+	font-family: 'Open Sans';
+	float: left;
+}
+
+#username{
+	font-size: 25px;
+}
+
+.timeline{
+	margin-top: 50px;
+}
