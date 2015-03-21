@@ -1,20 +1,84 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
-
+<link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="jquery.cookie.js"></script>
 <script>
+function checkConnection() {
+	$.post('checkServerConnection.php', function(data){ $('#infobox').empty(); });
+}
+
 $(document).ready(function() {
+		
+		// kui server ei vasta
+		$.ajaxSetup({
+		type: 'GET',
+		cache: true,
+		timeout: 4000,
+		error: function(xhr) {
+				$('#infobox').empty();
+				$( '#infobox').append( '<font color="red">TÄHELEPANU: Ühendus serveriga katkes. Kogu funktionaalsus ei pruugi enam olla kättesaadav. Juhul, kui teil on vastamine pooleli, võite seda jätkata, mustandit, kaasaarvatud teie võrguta tehtud muudatused talletatakse teie arvutis, ja see jääb alles, isegi kui te selle akna sulgete.</font>' );
+			}
+		})
+		
+		// facebook
+		$.getScript('//connect.facebook.net/ee_ET/all.js', function(){
+			FB.init({
+				 appId: 901484619902464,
+				  //xfbml      : true,
+				  //version    : 'v2.1'
+			});     
+		
+			//var e = document.createElement('script');
+			//e.async = true;
+			//e.src = document.location.protocol +'//connect.facebook.net/ee_ET/all.js';
+		
+		
+        $("#facebook").click(function() {
+			
+			//$( '#up').append(e);
+				
+				FB.login(function(response) {       
+						if (response.status === "connected") {
+							FB.api('/me', function(data) {
+								//$("#Username").val(data.name);
+								//$("#login_form").submit();
+								
+								$.post( 
+									'index.php', 
+									{ fb: data.name }, 
+									function( data ){ 
+										location.reload();
+									});
+								
+						  });
+						 }
+					}, {display: "popup"});
+		
+		
+		 });
+		
+				//$('#loginbutton,#feedbutton').removeAttr('disabled');
+				//FB.getLoginStatus(updateStatusCallback);
+		});
+		 
+
+		
+		// ainete filter paremal all
 		var search = $("#class_search_entry");
         $("#class_search_entry").keyup(function() {
 			$.post( 
-				'readClasses.php', // location of your php script
-				{ filter: search.val() }, // any data you want to send to the script
-				function( data ){  // a function to deal with the returned information
-					$('#down li').remove();
-					$( '#down').append( data );
+				'readClasses.php', 
+				{ filter: search.val() }, 
+				function( data ){ 
+					//$('#down li').remove();
+					$('#scroller2').empty();
+					$( '#scroller2').append( data );
 				});
         });
 		
+		
+		
+		//suur otsing ülemise riba paremas servas
 		var search2 = $("#searchBig");
         $("#searchBig").keyup(function() {
 			$.post( 
@@ -28,57 +92,106 @@ $(document).ready(function() {
 					}
 					?>' },
 				function( data ){
-					//$('#left #postBoxRow').remove();
-					//$( '#left').append( data );
-					$('#content').empty();
-					$( '#content').append( data );
+					$('#priit').empty();
+					$( '#priit').append( data );
 				});
         });
+		
+		$('#priit').hide();
+		
+		$("#searchBig").focus(function() {
+			$('#priit').fadeIn();
+		});
+		
+		$("#searchBig").focusout(function() {
+			//setTimeout(function(){	
+				//$('#priit').hide();
+				$('#priit').fadeOut();
+			//}, 200);
+			
+		});		
+		
+		// küpsised, poolelioleva vastuse mustandi võrguühenduseta redigeerimiseks
+		$("#comment").val($.cookie("example"))
+		$("#comment").keyup(function() {
+			$.cookie("example", $("#comment").val());
+        });
+		
+		
+		// kasutaja informeerimine võrguühenduse katkemisest
+		setInterval(function(){
+			checkConnection();
+		}, 1000);
+		
+		//alert(  );
+		//$.removeCookie("example");
+		
+
+		
+		
 });
 </script>
 	
 
 <div class="right">
-<div class="up">
-<?php
-	session_start();
+	<div class="up" id="up">
+	<?php
+		session_start();
+		
+		include_once '_Sidebar.php';
+		
+		// kas sisselogimisnuppu on vajutatud
+		if (isset( $_POST['login_button'] )){
+			if (userExists ($_POST['login_username'], $_POST['login_password'])){
+				
+				$_SESSION['login_user']= $_POST['login_username']; 
+			}
+			else{
+				echo '<font color="red">Sisestati vale või puudulik info.</font>';
+			}
+		}
+		else if (isset($_POST['fb'])){
+			$_SESSION['login_user']= $_POST['fb']; 
+		}
+		
+		// kas väljalogimisnuppu on vajutatud
+		if (isset( $_POST['logout_button'] )){
+			unset($_SESSION['login_user']); 
+		}
+		
+		// kas kasutaja on sisse logitud
+		if (isset( $_SESSION['login_user'] )){
+			$sidebar = new Sidebar($_SESSION['login_user']);
+			$sidebar->draw_sidebar_top();
+		}
+		// kui ei siis n2ita sisselogimisnuppu
+		else{
+			$sidebar = new Sidebar("");
+			$sidebar->draw_login_form();
+		}
+	?>
+	</div>
 	
-	include_once '_Sidebar.php';
-	
-	// kas sisselogimisnuppu on vajutatud
-	if (isset( $_POST['login_button'] )){
-		$_SESSION['login_user']= $_POST['login_username']; 
-	}
-	
-	// kas väljalogimisnuppu on vajutatud
-	if (isset( $_POST['logout_button'] )){
-		unset($_SESSION['login_user']); 
-	}
-	
-	// kas kasutaja on sisse logitud
-	if (isset( $_SESSION['login_user'] )){
-		$sidebar = new Sidebar($_SESSION['login_user']);
-		$sidebar->draw_sidebar_top();
-	}
-	// kui ei siis n2ita sisselogimisnuppu
-	else{
-		$sidebar = new Sidebar("");
-		$sidebar->draw_login_form();
-	}
-?>
+	<div class="down" id="down">	
+		<div class="separator2"></div>
+			<div class="s2">
+			<?php
+				$sidebar->draw_sidebar_bot ();
+			?>
+			</div>
+			
+			<div class="downContainer" id="scroller2">
+			<?php
+				include_once 'readClasses.php';
+			?>				
+			</div>
+	</div>
 </div>
-<div class="down" id="down">	
-<?php
-	$sidebar->draw_sidebar_bot ();
-	include_once 'readClasses.php';
-	
-?>				
-
-</div>
-</div>
-
+<!-- ------------------------------------------------------------------------------------- -->
 
 <div class="left" id="left">	
+
+
 	<div class="head">	
 		<div class="headLeft">
 			<a href="index.php" class="headLink">APL</a>
@@ -96,24 +209,95 @@ $(document).ready(function() {
 			</a>
 		</div>
 		<div class="headRight">			
-			<form id="searchMain">
-				<input type="search" id="searchBig" placeholder="Search">
+			<form id="searchMain" method="GET">
+				<input type="search" id="searchBig" placeholder="Search" name="search">
+			<?php	
+				if (isset($_GET['lecture'])){
+					echo '<input type="hidden" name="lecture" value="' . $_GET['lecture'] . '" />';
+				}
+				?>
+				
 			</form>
+			
+		<div class="searchSuggestionBox" id="priit">
+			<!-- priidu loodud -->
 		</div>
+			
+		</div>
+
+		
 							
 			
-	</div><br></br>
-	<div id="content">	
-	<?php
+	</div>
 	
-		if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
-			echo "Tere!<br/>Valige paremalt õppeaine.";
+	
+	<!-- veebilehe peamine osa -->
+	
+	<div class="leftMain" id="scroller1">	
+				
+	<div class="separator1"></div>
+	<div id="infobox"></div>
+
+
+	<?php
+		
+		include_once '_Post.php';
+		
+		// search results page
+		if (isset($_GET['search'])){
+			echo '
+			<form method="GET">
+				<input type="search2" placeholder="Search SubPages" name="search" value="'.$_GET['search'].'">';
+				
+			if (isset($_GET['lecture'])){
+				echo '<input type="hidden" name="lecture" value="' . $_GET['lecture'] . '" />';
+			}
+			echo'</form>';
+			echo '<font color="white">Otsingu "'.$_GET['search'].'" tulemused';
+			
+			if (isset($_GET['lecture'])){
+				echo ' kategoorias "'.$_GET['lecture'].'".</font>';
+			}
+			loe_postitused_failist ($_GET['search']);
 		}
 		
+		// make profile page
+		else if (isset($_GET['kontoloomine'])){
+			include_once 'makeacc.php';
+		}
+		
+		// meldimine
+		else if (isset($_GET['settings'])){
+			
+			if (isset( $_SESSION['login_user'] )){
+				echo'<font color="white">Settings page, to be created...</font>';
+			}
+			else if (isset($_POST['logout_button'])){
+				echo '<script>window.location.href = "index.php";</script>';
+			}
+			else{
+				echo '<script>window.location.href = "logon.php?settings=true";</script>';
+			}
+		}	
+		
+		// profile page
+		else if (isset($_GET['profile'])){
+			include_once 'profile.php';
+		}
+		
+		// homepage
+		else if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
+			echo '<font color="white">Tere!<br/>Valige paremalt õppeaine.<br/><br/>';
+			echo 'Testimist abistavad ajutised lingid:<br/>
+				<a href="workspaceIndex.php">workspaceIndex</a><br/>';
+			echo '<a href="workspacePost.php">workspacePost</a><br/>';
+			echo '<a href="profile.php">profile</a><br/></font>';
+		}
+		
+
+		// subreddit homepage
 		else if (isset($_GET['lecture']) &&  !isset($_GET['lehekylg'])){
 		
-			include_once '_Post.php';
-
 			$data = file('...posts.txt');
 			foreach ($data as $entryData) {
 				$entryParts = explode(';', $entryData);
@@ -126,70 +310,47 @@ $(document).ready(function() {
 				}
 			}
 		}
-		
+	
+		// post page
 		else if (isset($_GET['lecture']) &&  isset($_GET['lehekylg'])){
-			
-			include_once '_Post.php';
+			include_once 'post.php';
+		}
 
-			$post = new Post($_GET['lehekylg'], $_GET['lecture']);
-			$post->draw_post();
-
-			echo '
-				<div class="selfPost">
-					<h> tiitel ütleb kõik, aitäh! </h>
-				</div>
-
-
-			<div class="selfComment">	
-					<form method="POST">
-						<input type="hidden" name="action" value="new_entry"/>
-						<textarea rows="6" cols="68" value="" name="name" ></textarea><br><br/>			
-						<input class="button" type="submit" value="Reply"/>
-					</form>	
-			</div>';
-
-
-			if (isset($_POST['action'])) {
-				save($_POST);
-			}
-			include_once '_Comment.php';
-			
-			// failist lugemine
-			$data = file('...comments.txt');
+		// postituste otsimine filtri järgi
+		function loe_postitused_failist ($filter){
+			$data = file('...posts.txt');
 			foreach ($data as $entryData) {
 				$entryParts = explode(';', $entryData);
-				if ( isset($entryParts[0]) && isset($entryParts[1]) && isset($entryParts[2]) ){
-				
-					$comm = $entryParts[0];
-					$author = $entryParts[1];
-					$date = $entryParts[2];
+				foreach ($entryParts as $comm) {
+			
+					if ($comm != '' && stripos ($comm, $filter)!== false){
 						
-					$comment = new Comment($comm, $author, $date);
-					$comment->draw_comment();
+						if (isset($_GET['lecture'])){
+							$aine=$_GET['lecture'];
+						}
+						else{
+							$aine="Matemaatiline analüüs";
+						}
+						
+						$post = new Post($comm, $aine);
+						$post->draw_post();
+					}
 				}
 			}
 		}
-	
-		// kirjuta comment tekstfaili
-		function save ($dataArray) {
-			$fp = fopen('...comments.txt', 'a+');
-			fwrite($fp, $dataArray['name']);
-			
-			if(isset($_SESSION['login_user'])){
-				fwrite($fp, ';'.$_SESSION['login_user'].';');
+		
+		
+		function userExists ($un, $pw){
+			$data = file('...users.txt');
+			foreach ($data as $entryData) {
+				$entryParts = explode(';', $entryData);
+				if ( stripos ($entryParts[0], $un) !== false && stripos ($entryParts[1], $pw) !== false ){
+					return true;
+				}
 			}
-			else{
-				fwrite($fp, ';Anon;');
-			}
-			
-			fwrite($fp, time());
-			fwrite($fp, ''. PHP_EOL .'');  	//reavahetus
-			fclose($fp);
-			return true;
+			return false;
 		}
-
+		
 	?>
-
 </div>
 </div>
-

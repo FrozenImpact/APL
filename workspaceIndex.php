@@ -81,7 +81,7 @@
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
-			<div class="voteBox">
+			<div class="voteBox" id="upvote">
 				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
 				
 			</div>
@@ -105,7 +105,7 @@
 					</div>
 				</div>			
 			</div>			
-			<div class="voteBox">
+			<div class="voteBox" id="upvote">
 				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
 				
 			</div>				

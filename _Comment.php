@@ -65,12 +65,12 @@ class Comment {
 		
 			<div class="postDataBox">
 				<div class="postDataBoxUp">	
-					<a>' .$this->sisu. '</a>
+					<font color="white">' .$this->sisu. '</font>
 				</div>
 				
 				<div class="postDataBoxDown">
 					<div class="dataComments">	
-						<a class="n1" href="profile.php">'.$this->autor.' </a>
+						<a class="n1" href="index.php?profile='.$this->autor.'">'.$this->autor.' </a>
 					</div>
 					<div class="dataScore">	
 						<i1>'.$this->skoor.'</i1>

@@ -48,6 +48,12 @@ class Post {
 		';
 	}
 
+	public function draw_post_mini (){	
+			echo'<div class="downBoxRow1">
+				<a class="n1" href="index.php?lecture=' .$this->category. '&lehekylg=' .$this->tiitel. '"><b>' .$this->tiitel. '</b></a>
+			</div>';
+	}
+
 
 }
 
