@@ -64,15 +64,15 @@ echo'
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
 					<div class="upUpRightBox">
-						<a class="n1" href="index.php?profile=' .$this->username. '"><b>'.$this->username.'</b></a>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>'.$this->username.'</b></a>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Posts: 54</a></b>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: 54</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Comments: 172</b></a>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: 172</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				
