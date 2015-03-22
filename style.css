@@ -47,13 +47,35 @@ a.n1:link {
 	font-size: 90%;
 	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
 	color: orange;
+	margin-left:15px;
+	margin-right:20px;
 }
 a.n1:visited {
 	font-size: 90%;
 	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
 	color: orange;
+	margin-left:15px;
+	margin-right:20px;
 }
 a.n1:hover {
+	font-size: 90%;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color: orange;
+	margin-left:15px;
+	margin-right:20px;
+}
+
+a.m1:link {
+	font-size: 90%;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color: orange;
+}
+a.m1:visited {
+	font-size: 90%;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	color: orange;
+}
+a.m1:hover {
 	font-size: 90%;
 	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
 	color: orange;
@@ -88,7 +110,6 @@ h{
 	border: 1px solid black;
 	background:#222222;
 	width:172px;
-	
 	margin-top:20px;
     z-index: 999;
 	height:200px;
@@ -96,8 +117,7 @@ h{
 	float:right;
 }
 .center-wrapper_{
-   position: absolute;
-   
+   position: absolute;   
 	text-align:center;
     top: 0;
     bottom: 0;

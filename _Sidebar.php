@@ -68,11 +68,11 @@ echo'
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Postitusi: 54</a></b>
+						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Posts: 54</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Kommentaare: 172</b></a>
+						<a class="n1" href="index.php?profile=' .$this->username. '"><b>Comments: 172</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				
@@ -87,12 +87,12 @@ echo'
 		
 		
 			<div class="upDownLeft">
-			<a href="index.php?settings=true"><input class="n2 rightLink" type="button" name="settings" id="settings" value="Sätted"></a>
+			<a href="index.php?settings=true"><input class="n2 rightLink" type="button" name="settings" id="settings" value="Settings"></a>
 							
 		</div>
 
 		<div class="upDownRight">
-			<a><input class="n2 rightLink" type="submit" name="logout_button" value="Logi välja"></a>
+			<a><input class="n2 rightLink" type="submit" name="logout_button" value="Log Out"></a>
 				
 		</div>	
 		</div></form>';

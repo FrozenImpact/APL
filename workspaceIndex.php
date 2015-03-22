@@ -7,24 +7,21 @@
 	<div class="up">
 		<div class="upUp">
 			<div class="upUpLeft">			
-				<a href="http://www.reddit.com/"><img class="pic" src="img/pic.jpeg" width="100" height="100"/></a><br/><br/>
-				<b>Joined: 29.01.2015</b><br/><br/>
-				<b>Last Visit: 29.01.2015</b><br/><br/>
+				<a href="http://www.reddit.com/"><img class="pic" src="img/pic.jpeg" width="104" height="104"/></a><br/><br/>
 				
 			</div>	
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
-					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="#1"><b>PotatoeMan</b></a>
+						<a class="m1" href="#1"><b>PotatoeMan</b></a>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="#2"><b>Posts: 54</a></b>
+						<a class="m1" href="#2"><b>Posts: 54</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="n1" href="#3"><b>Comments: 172</b></a>
+						<a class="m1" href="#3"><b>Comments: 172</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				
@@ -33,32 +30,63 @@
 		</div>
 		<div class="upDown">
 			<div class="upDownLeft">
-				<a class="n2 rightLink" href="#">Settings</a>
+				<a class="rightLink" href="#">Settings</a>
 			</div>
 			<div class="upDownRight">
-				<a class="n2 rightLink" href="#">Log Out</a>
+				<a class="rightLink" href="#">Log Out</a>
 			</div>		
 		</div>
 	</div>
 	<div class="down">	
-		<div class="separator"></div>
-		<div class="downBoxRow">
+		<div class="separator2"></div>
+		<div class="s2">
 			<form>
 				<input type="search2" placeholder="Search SubPages">
 			</form>
 		</div>
-		<div class="downBoxRow"></div>
-		<div class="downBoxRow">
-			<a class="n1" href="#1"><b>Algebra</b></a>
-		</div>
-		<div class="downBoxRow"></div>
-		<div class="downBoxRow">
-			<a class="n1" href="#2"><b>Erialane Inglise Keel</a></b>
-		</div>
-		<div class="downBoxRow"></div>
-		<div class="downBoxRow">
-			<a class="n1" href="#3"><b>Füüsika</b></a>
-		</div>	
+		
+		<div class="downContainer" id="scroller2">
+			<div class="downBoxRow1">
+				<a class="n1" href="#1"><b>Algebra</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#2"><b>Erialane Inglise Keel</a></b>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#2"><b>Erialane Inglise Keel</a></b>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#2"><b>Erialane Inglise Keel</a></b>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow2">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			<div class="downBoxRow1">
+				<a class="n1" href="#3"><b>Füüsika</b></a>
+			</div>
+			
+		</div>			
 	</div>
 </div>	
 
@@ -72,182 +100,86 @@
 		</div>
 		<div class="headRight">		
 			<form id="searchMain">
-				<input type="search" placeholder="tetere">
+				<input type="search" placeholder="teretere">
 			</form>			
 		</div>			
 	</div>
-	<div class="separator"></div>
-	<div class="postBoxRow">
-		<div class="vertIcon">
-		</div>
-		<div class="postBox">	
-			<div class="voteBox" id="upvote">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
-				
+	
+	<div class="leftMain" id="scroller1">	
+		<div class="separator1"></div>
+		<div class="postBoxRow">
+			<div class="vertIcon">
 			</div>
-			<div class="postDataBox">	
-				<div class="postDataBoxUp">	
-					<a class="s1" href="#4">Kat?</a>
+			<div class="postBox">	
+				<div class="voteBox">
+					<a id="upvote" href="#"><span></span></a>
 					
 				</div>
-				<div class="postDataBoxDown">
-					<div class="dataComments">	
-						<h>Replies: 16</h>
+				<div class="postDataBox">	
+					<div class="postDataBoxUp">	
+						<a class="s1" href="#4">Jebus christ Priit</a>
 						
 					</div>
-					<div class="dataScore">	
-						<i1>78</i1>
-						
-					</div>				
-					<div class="dataDate">	
-						<h>16.02.2015</h>
-						
-					</div>
+					<div class="postDataBoxDown">
+						<div class="dataComments">	
+							<h>Replies: 16</h>
+							
+						</div>
+						<div class="dataScore">	
+							<i1>78</i1>
+							
+						</div>				
+						<div class="dataDate">	
+							<h>16.02.2015</h>
+							
+						</div>
+					</div>			
 				</div>			
-			</div>			
-			<div class="voteBox" id="upvote">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
-				
-			</div>				
-		</div>	
-	</div>
-	<div class="postBoxRow">
-		<div class="vertIcon">
-		</div>
-		<div class="postBox">	
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
-				
+				<div class="voteBox">
+					<a id="downvote" href="#"><span></span></a>
+					
+				</div>				
 			</div>
-			<div class="postDataBox">	
-				<div class="postDataBoxUp">	
-					<a class="s1" href="#4">Kat?</a>
+			
+			
+		</div>
+		<div class="postBoxRow">
+			<div class="vertIcon">
+			</div>
+			<div class="postBox">	
+				<div class="voteBox">
+					<a id="upvote" href="#"><span></span></a>
 					
 				</div>
-				<div class="postDataBoxDown">
-					<div class="dataComments">	
-						<h>Replies: 16</h>
+				<div class="postDataBox">	
+					<div class="postDataBoxUp">	
+						<a class="s1" href="#4">Jebus christ Priit</a>
 						
 					</div>
-					<div class="dataScore">	
-						<i1>78</i1>
-						
-					</div>				
-					<div class="dataDate">	
-						<h>16.02.2015</h>
-						
-					</div>
+					<div class="postDataBoxDown">
+						<div class="dataComments">	
+							<h>Replies: 16</h>
+							
+						</div>
+						<div class="dataScore">	
+							<i1>78</i1>
+							
+						</div>				
+						<div class="dataDate">	
+							<h>16.02.2015</h>
+							
+						</div>
+					</div>			
 				</div>			
-			</div>			
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
-				
-			</div>				
-		</div>	
-	</div>
-	<div class="postBoxRow">
-		<div class="vertIcon">
-		</div>
-		<div class="postBox">	
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
-				
-			</div>
-			<div class="postDataBox">	
-				<div class="postDataBoxUp">	
-					<a class="s1" href="#4">Kat?</a>
+				<div class="voteBox">
+					<a id="downvote" href="#"><span></span></a>
 					
-				</div>
-				<div class="postDataBoxDown">
-					<div class="dataComments">	
-						<h>Replies: 16</h>
-						
-					</div>
-					<div class="dataScore">	
-						<i1>78</i1>
-						
-					</div>				
-					<div class="dataDate">	
-						<h>16.02.2015</h>
-						
-					</div>
-				</div>			
+				</div>				
 			</div>			
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
-				
-			</div>				
-		</div>	
-	</div>
-	<div class="postBoxRow">
-		<div class="vertIcon">
-		</div>
-		<div class="postBox">	
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
-				
-			</div>
-			<div class="postDataBox">	
-				<div class="postDataBoxUp">	
-					<a class="s1" href="#4">Kat?</a>
-					
-				</div>
-				<div class="postDataBoxDown">
-					<div class="dataComments">	
-						<h>Replies: 16</h>
-						
-					</div>
-					<div class="dataScore">	
-						<i1>78</i1>
-						
-					</div>				
-					<div class="dataDate">	
-						<h>16.02.2015</h>
-						
-					</div>
-				</div>			
-			</div>			
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
-				
-			</div>				
-		</div>	
-	</div>
-	<div class="postBoxRow">
-		<div class="vertIcon">
-		</div>
-		<div class="postBox">	
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
-				
-			</div>
-			<div class="postDataBox">	
-				<div class="postDataBoxUp">	
-					<a class="s1" href="#4">Kat?</a>
-					
-				</div>
-				<div class="postDataBoxDown">
-					<div class="dataComments">	
-						<h>Replies: 16</h>
-						
-					</div>
-					<div class="dataScore">	
-						<i1>78</i1>
-						
-					</div>				
-					<div class="dataDate">	
-						<h>16.02.2015</h>
-						
-					</div>
-				</div>			
-			</div>			
-			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
-				
-			</div>				
-		</div>	
+		</div>		
 	</div>
 </div>
 
+<script src="index.js"></script>
 </body>
 </html>

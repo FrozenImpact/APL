@@ -5,5 +5,5 @@
 
             document.querySelector("#downvote")
                 .addEventListener("click", function(){
-                    this.classList.toggle("downmod");
+                   this.classList.toggle("downmod");
                 });
