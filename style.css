@@ -265,7 +265,7 @@ h{
 }
 .downBoxRow2{
 	line-height: 31px; 
-	height:31px;
+	/*height:31px;*/
 	text-align: center;
 	background:#222222;
 	border-top:1px solid #252525;
