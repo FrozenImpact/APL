@@ -10,13 +10,17 @@ class Post {
 }
 
 	public function draw_post (){
+		
+		$upmod = "'upmod'";
+		$downmod = "'downmod'";
+		
 		echo '
 			<div class="postBoxRow" id="postBoxRow">
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
 			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid"" src="img/upV.png" width="50" height="50" alt="" /></a>
+					<a id="upvote" href="#" onclick="this.classList.toggle( '.$upmod.' );"><span></span></a>
 				
 			</div>
 			<div class="postDataBox">	
@@ -40,7 +44,7 @@ class Post {
 				</div>			
 			</div>			
 			<div class="voteBox">
-				<a class="s1" href="http://www.reddit.com/"><img class="mid" src="img/downV.png" width="50" height="50" alt=""/></a>
+					<a id="downvote" href="#" onclick="this.classList.toggle( '.$downmod.' );"><span></span></a>
 				
 			</div>				
 		</div>	
