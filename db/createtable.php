@@ -1,14 +1,15 @@
 <?php
 // azure DB connection info
+/*
 $host = "eu-cdbr-azure-north-c.cloudapp.net";
 $user = "be787757308987";
 $pwd = "a435f8ab";
-$db = "APL";
+$db = "APL";*/
 // DB connection
-/*$host = "localhost";
+$host = "localhost";
 $user = "root";
 $pwd = "";
-$db = "apl";*/
+$db = "apl";
 try{
     $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -39,17 +40,26 @@ try{
               Name int    NOT NULL ,
              CONSTRAINT Class_pk PRIMARY KEY (ID)
           )";*/
-    $addpw = "ALTER TABLE User ADD COLUMN Password BINARY(200) NOT NULL";
-    $autoincr1 = "ALTER TABLE User MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
-    $autoincr2 = "ALTER TABLE Comment MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
-    $autoincr3 = "ALTER TABLE Post MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
-            
+    $addheading = "ALTER TABLE Post ADD COLUMN Heading VARCHAR(150) NOT NULL";
+    $addupvotepost = "ALTER TABLE Post ADD COLUMN Upvote integer NOT NULL";
+    $adddownvotepost = "ALTER TABLE Post ADD COLUMN Downvote integer NOT NULL";
+    $addupvotecomment = "ALTER TABLE Comment ADD COLUMN Upvote integer NOT NULL";
+    $adddownvotecomment = "ALTER TABLE Comment ADD COLUMN Downvote integer NOT NULL";
+    //$addpw = "ALTER TABLE User ADD COLUMN Password BINARY(200) NOT NULL";
+    //$autoincr1 = "ALTER TABLE User MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
+    //$autoincr2 = "ALTER TABLE Comment MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
+    //$autoincr3 = "ALTER TABLE Post MODIFY ID INTEGER NOT NULL AUTO_INCREMENT";
     
+    //$conn->query($adddownvotepost);
+    //$conn->query($addupvotepost);
+    //$conn->query($addupvotecomment);
+    //$conn->query($adddownvotecomment);        
+    $conn->query($addheading);
     //$conn->query($createclass);
-    $conn->query($addpw);
-    $conn->query($autoincr1);
-    $conn->query($autoincr2);
-    $conn->query($autoincr3);
+    //$conn->query($addpw);
+    //$conn->query($autoincr1);
+    //$conn->query($autoincr2);
+    //$conn->query($autoincr3);
 
     //$conn->exec($sql4);
     echo "successful";
