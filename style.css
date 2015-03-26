@@ -167,10 +167,9 @@ h{
 	background:#222222;
 }
 .upUp{
-	float:top;
-	height:140px;
+	height:160px;
 	border-top:1px solid #252525;
-	border-bottom:1px solid #000000;
+	border-bottom:1px solid black;
 }
 .upDown{
 	float:bottom;
@@ -205,16 +204,18 @@ h{
 	float:right;
 }
 .upUpRightRight{
+	margin-top:17px;
+	text-align:center;
+	background:red;
 }
 .upUpRightLeft{
 	display: table;
 	table-layout: fixed;
 	width:125px;
 	float:left;
-	border-left:1px solid #000000;
 	border-top:1px solid #000000;
-	border-right:1px solid #000000;
 	margin-top:17px;
+	text-align:center;
 }
 
 .upUpRightBox{	
@@ -223,12 +224,16 @@ h{
 	/*display:table-row;*/
 	border-top:1px solid #252525;
 	border-bottom:1px solid #000000;
+	border-left:1px solid black;
+	border-right:1px solid black;
 	height:19px;	
 }
 .upUpRightBoxT{		
 	background:#1E1E1E;
 	border-top:1px solid #252525;
 	border-bottom:1px solid #000000;
+	border-left:1px solid black;
+	border-right:1px solid black;
 	height:19px;
 }
 .upUpRightBox:hover{
@@ -360,6 +365,7 @@ h{
 
 .separator1{
 	height:14px;
+	text-align: center;
 }
 .separator2{
 	height:14px;

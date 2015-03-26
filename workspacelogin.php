@@ -12,17 +12,10 @@
 			</div>	
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
-					<div class="upUpRightBox">
-						<a class="m1" href="#1"><b>PotatoeMan</b></a>
-					</div>
-					<div class="upUpRightBoxT"></div>
-					<div class="upUpRightBox">
-						<a class="m1" href="#2"><b>Posts: 54</a></b>
-					</div>
-					<div class="upUpRightBoxT"></div>
-					<div class="upUpRightBox">
-						<a class="m1" href="#3"><b>Comments: 172</b></a>
-					</div>
+					<input type="text" size="15" maxlength="15" value="" placeholder="Kasutajanimi" style="color:black" id="Username" name="login_username" ><br/>
+					<input type="password" size="15" maxlength="15" value="" placeholder="Parool" style="color:black" name="login_password" ><br/></br>
+					<a class="rightLink" href="#">Log In</a></br></br>
+					<a class="rightLink" href="#">Facebook</a>
 				</div>
 				<div class="upUpRightRight">				
 				</div>
@@ -33,7 +26,7 @@
 				<a class="rightLink" href="#">New Post</a>
 			</div>
 			<div class="upDownRight">
-				<a class="rightLink" href="#">Log Out</a>
+				<a class="rightLink" href="#">Sign Up</a>
 			</div>		
 		</div>
 	</div>
