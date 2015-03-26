@@ -1,10 +1,26 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 <link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
+<?php
+	session_start();
+?>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="jquery.cookie.js"></script>
 <script>
 function checkConnection() {
 	$.post('checkServerConnection.php', function(data){ $('#infobox').empty(); });
+}
+
+function readClasses() {
+	$.post( 
+	'readClasses.php', 
+	{ filter: $("#class_search_entry").val() }, 
+	function( data ){ 
+		//$('#down li').remove();
+		$('#scroller2').empty();
+		$( '#scroller2').append( data );
+	});
+	
 }
 
 $(document).ready(function() {
@@ -64,16 +80,26 @@ $(document).ready(function() {
 
 		
 		// ainete filter paremal all
-		var search = $("#class_search_entry");
+		// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
+		readClasses();
+		var vana = $("#class_search_entry").val();
         $("#class_search_entry").keyup(function() {
-			$.post( 
-				'readClasses.php', 
-				{ filter: search.val() }, 
-				function( data ){ 
-					//$('#down li').remove();
-					$('#scroller2').empty();
-					$( '#scroller2').append( data );
-				});
+			readClasses();
+			
+			var hetkeUrl = window.location.href;
+
+			if (hetkeUrl.indexOf("?")==-1){
+				window.history.replaceState("", "", window.location.href+"?");
+			}
+			
+			if (hetkeUrl.indexOf("&filter=")!=-1){
+				var uus = hetkeUrl.replace("&filter="+vana,"&filter="+ $("#class_search_entry").val());
+				window.history.replaceState("", "", uus);
+				vana = $("#class_search_entry").val();
+			} else {
+				window.history.replaceState("", "", window.location.href + "&filter=" + $("#class_search_entry").val());
+				vana = $("#class_search_entry").val();
+			}
         });
 		
 		
@@ -136,7 +162,6 @@ $(document).ready(function() {
 <div class="right">
 	<div class="up" id="up">
 	<?php
-		session_start();
 		
 		include_once '_Sidebar.php';
 		
@@ -175,15 +200,20 @@ $(document).ready(function() {
 	<div class="down" id="down">	
 		<div class="separator2"></div>
 			<div class="s2">
-			<?php
-				$sidebar->draw_sidebar_bot ();
-			?>
+			<form method="post">
+				<input type="search2" value="<?php 
+					if (isset($_GET['filter'])){
+						echo $_GET['filter'];
+					}
+					else{
+						echo '';
+					}				
+				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
+			</form>
 			</div>
 			
 			<div class="downContainer" id="scroller2">
-			<?php
-				include_once 'readClasses.php';
-			?>				
+			
 			</div>
 	</div>
 </div>
