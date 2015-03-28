@@ -36,49 +36,7 @@ $(document).ready(function() {
 			}
 		})
 		
-		// facebook
-		$.getScript('//connect.facebook.net/ee_ET/all.js', function(){
-			FB.init({
-				 appId: 901484619902464,
-				  //xfbml      : true,
-				  //version    : 'v2.1'
-			});     
-		
-			//var e = document.createElement('script');
-			//e.async = true;
-			//e.src = document.location.protocol +'//connect.facebook.net/ee_ET/all.js';
-		
-		
-        $("#facebook").click(function() {
-			
-			//$( '#up').append(e);
-				
-				FB.login(function(response) {       
-						if (response.status === "connected") {
-							FB.api('/me', function(data) {
-								//$("#Username").val(data.name);
-								//$("#login_form").submit();
-								
-								$.post( 
-									'index.php', 
-									{ fb: data.name }, 
-									function( data ){ 
-										location.reload();
-									});
-								
-						  });
-						 }
-					}, {display: "popup"});
-		
-		
-		 });
-		
-				//$('#loginbutton,#feedbutton').removeAttr('disabled');
-				//FB.getLoginStatus(updateStatusCallback);
-		});
-		 
 
-		
 		// ainete filter paremal all
 		// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
 		readClasses();
@@ -114,6 +72,7 @@ $(document).ready(function() {
 						echo $_GET['lecture'];
 					}
 					else{
+						// joonistatud postitus peab kuskile linkima
 						echo 'Matemaatiline analüüs';
 					}
 					?>' },
@@ -134,7 +93,6 @@ $(document).ready(function() {
 				//$('#priit').hide();
 				$('#priit').fadeOut();
 			//}, 200);
-			
 		});		
 		
 		// küpsised, poolelioleva vastuse mustandi võrguühenduseta redigeerimiseks
@@ -143,6 +101,10 @@ $(document).ready(function() {
 			$.cookie("example", $("#comment").val());
         });
 		
+		$("#title").val($.cookie("example2"))
+		$("#title").keyup(function() {
+			$.cookie("example2", $("#title").val());
+        });
 		
 		// kasutaja informeerimine võrguühenduse katkemisest
 		setInterval(function(){
@@ -151,19 +113,18 @@ $(document).ready(function() {
 		
 		//alert(  );
 		//$.removeCookie("example");
-		
-
-		
-		
 });
 </script>
-	
+
+<script src="facebook.js"></script>	
 
 <div class="right">
 	<div class="up" id="up">
 	<?php
 		
 		include_once '_Sidebar.php';
+		
+		include_once '_logonFunctions.php';
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
@@ -221,7 +182,6 @@ $(document).ready(function() {
 
 <div class="left" id="left">	
 
-
 	<div class="head">	
 		<div class="headLeft">
 			<a href="index.php" class="headLink">APL</a>
@@ -249,17 +209,11 @@ $(document).ready(function() {
 				
 			</form>
 			
-		<div class="searchSuggestionBox" id="priit">
-			<!-- priidu loodud -->
+			<div class="searchSuggestionBox" id="priit">
+				<!-- priidu loodud -->
+			</div>
 		</div>
-			
-		</div>
-
-		
-							
-			
 	</div>
-	
 	
 	<!-- veebilehe peamine osa -->
 	
@@ -297,16 +251,15 @@ $(document).ready(function() {
 		}
 		
 		// meldimine
-		else if (isset($_GET['settings'])){
-			
+		else if (isset($_GET['newpost'])){
 			if (isset( $_SESSION['login_user'] )){
-				echo'<font color="white">Settings page, to be created...</font>';
+				include_once 'makepost.php';
 			}
 			else if (isset($_POST['logout_button'])){
 				echo '<script>window.location.href = "index.php";</script>';
 			}
 			else{
-				echo '<script>window.location.href = "logon.php?settings=true";</script>';
+				echo '<script>window.location.href = "logon.php?newpost=true'.$sidebar->getLecture().'";</script>';
 			}
 		}	
 		
@@ -318,10 +271,11 @@ $(document).ready(function() {
 		// homepage
 		else if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
 			echo '<font color="white">Tere!<br/>Valige paremalt õppeaine.<br/><br/>';
-			echo 'Testimist abistavad ajutised lingid:<br/>
-				<a href="workspaceIndex.php">workspaceIndex</a><br/>';
-			echo '<a href="workspacePost.php">workspacePost</a><br/>';
-			echo '<a href="profile.php">profile</a><br/></font>';
+			echo 'Testimist abistavad ajutised lingid:<br/><br/>
+				<a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
+			echo '<a class="rightLink" href="workspacePost.php">workspacePost</a><br/><br/>';
+			echo '<a class="rightLink" href="workspaceLogin.php">workspaceLogin</a><br/><br/>';
+			echo '<a class="rightLink" href="profile.php">profile</a><br/></font>';
 		}
 		
 
@@ -367,18 +321,6 @@ $(document).ready(function() {
 					}
 				}
 			}
-		}
-		
-		
-		function userExists ($un, $pw){
-			$data = file('...users.txt');
-			foreach ($data as $entryData) {
-				$entryParts = explode(';', $entryData);
-				if ( stripos ($entryParts[0], $un) !== false && stripos ($entryParts[1], $pw) !== false ){
-					return true;
-				}
-			}
-			return false;
 		}
 		
 	?>

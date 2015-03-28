@@ -27,29 +27,27 @@ $post->draw_post();
 echo '
 	<div class="selfPost">
 		<font color="white"> tiitel ütleb kõik, aitäh! </font>
-	</div>
-
-
-	<div class="selfComment">	
-			<form method="POST">
-				<input type="hidden" name="action" value="new_entry"/>
-				<textarea rows="6" cols="68" value="" name="name" id="comment" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
-				<input class="rightLink" type="submit" value="Reply"/>
-			</form>	
 	</div>';
+?>
 
+<div class="selfComment">	
+	<form method="POST">
+		<input type="hidden" name="action" value="new_entry"/>
+		<textarea rows="6" cols="68" value="" name="name" id="comment" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
+		<input class="rightLink" type="submit" value="Reply"/>
+	</form>	
+</div>
 
+<?php
 if (isset($_POST['action'])) {
-		if (isset( $_SESSION['login_user'] )){
-			save($_POST);
-			echo "<script type='text/javascript'>$.removeCookie('example');</script>";
-		}
+	if (isset( $_SESSION['login_user'] )){
+		save($_POST);
+		echo "<script type='text/javascript'>$.removeCookie('example');</script>";
+	}
 
-		else{
-			echo '<script>window.location.href = "logon.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '";</script>';
-		}
-
-
+	else{
+		echo '<script>window.location.href = "logon.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '";</script>';
+	}
 }
 include_once '_Comment.php';
 
