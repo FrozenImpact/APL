@@ -2,41 +2,52 @@
 
 function connect()
 {
-	$host = "localhost";
-	$user = "root";
-	$pwd = "";
+	// DB connection info
+	$host = "eu-cdbr-azure-north-c.cloudapp.net";
+	$user = "be787757308987";
+	$pwd = "a435f8ab";
 	$db = "apl";
-
-	try{
-    $conn = new PDO( "mysql:host=$host;dbname=$db;charset=utf8", $user, $pwd);
-    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-    }
-
-    catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
+	// Connect to database.
+	try {
+		$conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+		$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $sql = "SET @@auto_increment_increment=1";
+        $stmt = $conn->query($sql);
+        $stmt->execute();
+	}
+	catch(Exception $e){
+		die(var_dump($e));
+	}
+	
     return $conn;
 }
 
 function addUser($username, $password)
 {
 	$conn = connect();
-	$sql = "INSERT INTO User (Name, Password) VALUES (?, ?)";
-	$stmt = $conn->prepare($sql);
-	$stmt->bindValue(1, $username);
-	$stmt->bindValue(2, $password);
+    if ($password==""){
+        $sql = "INSERT INTO User (Name) VALUES (?)";
+        $stmt = $conn->prepare($sql);
+	    $stmt->bindValue(1, $username);
+    }
+    else {
+        $sql = "INSERT INTO User (Name, Password) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+	    $stmt->bindValue(1, $username);
+	    $stmt->bindValue(2, $password);
+    }
 	$stmt->execute();
 }
 
-function addPost($userid, $heading, $description)
+function addPost($userid, $category, $heading, $description)
 {
 	$conn = connect();
-	$sql = "INSERT INTO Post(Description, User_ID, Heading) VALUES (?, ?, ?)";
+	$sql = "INSERT INTO Post(Description, Category, User_ID, Heading) VALUES (?, ?, ?)";
 	$stmt = $conn->prepare($sql);
 	$stmt->bindValue(1, $description);
-	$stmt->bindValue(2, $userid);
-	$stmt->bindValue(3, $heading);
+    $stmt->bindValue(2, $category);
+	$stmt->bindValue(3, $userid);
+	$stmt->bindValue(4, $heading);
 	$stmt->execute();
 }
 
@@ -51,12 +62,46 @@ function addComment($userid, $postid, $content)
 	$stmt->execute();
 }
 
-function getPosts()
+/*getPost(post_id); - kogu info, mis postituses on*/
+function getPost($post_id)
 {
 	$conn = connect();
-	$sql = "SELECT Heading, Description FROM Post";
+	$sql = "SELECT * FROM post WHERE id = ?";
 	$stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $post_id);
 	$stmt->execute();
+	$data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+	return $data;
+}
+
+/* GetAllPosts(category); - select TOP_20 from posts group by date;
+   getAllPosts(category, searchstring); otsingu jaoks
+   getAllPosts(searchstring); otsingu jaoks, otsib kõikjalt
+   kui ainult searchstring, siis category pane 0, kui ainult category siis searchstring pane ""
+   SELECT * FROM post join category on category.id=category where category.name="Matemaatiline analüüs"; (???)
+*/
+function getAllPosts($category_id, $searchstring) 
+{
+    $conn = connect();
+    if ($category_id == 0) {
+        $sql = "SELECT * FROM post WHERE heading LIKE ? OR description LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $search = "%". $searchstring ."%";  
+        $stmt->bindValue(1, $search);
+        $stmt->bindValue(2, $search);
+    } elseif ($searchstring == "") {
+        $sql = "SELECT * FROM post WHERE category = ? ORDER BY posted DESC LIMIT 20";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $category_id);
+    } else {
+        $sql = "SELECT * FROM post WHERE category = ? AND heading LIKE ? OR description LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $search = "%". $searchstring ."%";
+        $stmt->bindValue(1, $category_id);
+        $stmt->bindValue(2, $search);
+        $stmt->bindValue(3, $search);
+    }
+    $stmt->execute();
 	$data = $stmt->fetchAll( PDO::FETCH_ASSOC );
 	return $data;
 }
@@ -66,4 +111,73 @@ foreach($data as $row){
 }
 kui on vaja ainult pealkirju või ainult sisu, siis muuta vastavalt kas 
 echo $row['Heading']. "<br>"; või echo $row['Description']. "<br>";*/
+
+function getAllComments($post_id)
+{
+	$conn = connect();
+	$sql = "SELECT * FROM comment WHERE post_id = ?";
+	$stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $post_id);
+	$stmt->execute();
+	$data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+	return $data;
+}
+
+function getUserById($user_id)
+{
+    $conn = connect();
+    $sql = "SELECT Name FROM user WHERE ID = ? ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $user_id);
+	$stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    foreach ($data as $row){
+        $result = $row['Name'];
+    }
+	return $result;
+}
+
+//userExists(username, password); tagastab user_id, kui userit pole tagastab 0
+//fbUserHasLoggedOnBefore(username); tagastab user_id, kui pole varem sisse loginud tagastab 0
+function userExists($username, $password)
+{
+    $conn = connect();
+    if ($password=="")
+    {
+        $sql = "SELECT IFNULL( (SELECT id FROM user WHERE name= ?) , 0)";
+	    $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+    } else {
+        $sql = "SELECT IFNULL( (SELECT id FROM user WHERE name= ? and password = ?) , 0)";
+	    $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $password);
+    }
+	$stmt->execute();
+	$data = $stmt->fetchAll( PDO::FETCH_NUM );
+    foreach ($data as $row)
+    {
+        $result = $row[0];
+    }
+	return $result;
+}
+/*getAllCategories(searchInputString); tühja stringi korral kõik */
+
+function getAllCategories($searchInputString)
+{
+    $conn = connect();
+    if ($searchInputString==""){
+        $sql = "SELECT name FROM category";
+        $stmt = $conn->query($sql);
+    } else {
+        $sql = "SELECT * FROM category WHERE name LIKE ?";
+        $search = "%".$searchInputString."%";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $search);
+        $stmt->execute();
+    }
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+
+    return $data;
+}
 ?>

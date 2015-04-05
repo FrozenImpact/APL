@@ -1,15 +1,16 @@
 <?php
 // azure DB connection info
-/*
+
 $host = "eu-cdbr-azure-north-c.cloudapp.net";
 $user = "be787757308987";
 $pwd = "a435f8ab";
-$db = "APL";*/
+$db = "APL";
+/*
 // DB connection
 $host = "localhost";
 $user = "root";
 $pwd = "";
-$db = "apl";
+$db = "apl";*/
 try{
     $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
     $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -56,10 +57,10 @@ try{
     //$conn->query($adddownvotecomment);        
     $conn->query($addheading);
     //$conn->query($createclass);
-    //$conn->query($addpw);
-    //$conn->query($autoincr1);
-    //$conn->query($autoincr2);
-    //$conn->query($autoincr3);
+    $conn->query($addpw);
+    $conn->query($autoincr1);
+    $conn->query($autoincr2);
+    $conn->query($autoincr3);
 
     //$conn->exec($sql4);
     echo "successful";
