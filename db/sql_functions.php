@@ -180,4 +180,18 @@ function getAllCategories($searchInputString)
 
     return $data;
 }
+
+function getCategoriesInPopularityOrder()
+{
+    $conn = connect();
+	$sql = "SELECT category.name, count(post.category) 'popular' from post right join category on post.category=category.id group by category.name order by popular desc";
+    $stmt = $conn->query($sql);
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+/* $data = getCategoriesInPopularityOrder();
+foreach($data as $row){
+    echo $row['name']."<br>";
+}
+*/
 ?>
