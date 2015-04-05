@@ -48,7 +48,7 @@ function getCategoryId($category_name)
     $stmt->execute();
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     foreach($data as $row){
-        $result = $row['id']."<br>";
+        $result = $row['id'];
     }
     return $result;
 }
@@ -62,7 +62,7 @@ function getCategoryName($category_id)
     $stmt->execute();
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     foreach($data as $row){
-        $result = $row['name']."<br>";
+        $result = $row['name'];
     }
     return $result;
 }
@@ -123,7 +123,7 @@ function getAllPosts($category_name, $searchstring)
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $category_name);
     } else {
-        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? AND heading LIKE ? OR description LIKE ?";
+        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? AND (heading LIKE ? OR description LIKE ?)";
         $stmt = $conn->prepare($sql);
         $search = "%". $searchstring ."%";
         $stmt->bindValue(1, $category_name);
