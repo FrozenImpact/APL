@@ -1,5 +1,4 @@
 <?php
-
 function connect()
 {
     // DB connection info
@@ -24,7 +23,6 @@ function connect()
     
     return $conn;
 }
-
 function addUser($username, $password)
 {
     $conn = connect();
@@ -41,7 +39,6 @@ function addUser($username, $password)
     }
     $stmt->execute();
 }
-
 function getCategoryId($category_name)
 {
     $conn = connect();
@@ -55,7 +52,6 @@ function getCategoryId($category_name)
     }
     return $result;
 }
-
 function getCategoryName($category_id)
 {
     $conn = connect();
@@ -69,7 +65,6 @@ function getCategoryName($category_id)
     }
     return $result;
 }
-
 function addPost($userid, $category_name, $heading, $description)
 {
     $category = getCategoryId($category_name);
@@ -91,7 +86,6 @@ function addPost($userid, $category_name, $heading, $description)
     }
     return $result;
 }
-
 function addComment($userid, $postid, $content)
 {
     $conn = connect();
@@ -102,7 +96,6 @@ function addComment($userid, $postid, $content)
     $stmt->bindValue(3, $postid);
     $stmt->execute();
 }
-
 /*getPost(post_id); - kogu info, mis postituses on*/
 function getPost($post_id)
 {
@@ -114,7 +107,6 @@ function getPost($post_id)
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
-
 /* GetAllPosts(category); - select TOP_20 from posts group by date;
    getAllPosts(category, searchstring); otsingu jaoks
    getAllPosts(searchstring); otsingu jaoks, otsib kõikjalt
@@ -152,7 +144,6 @@ foreach($data as $row){
 }
 kui on vaja ainult pealkirju või ainult sisu, siis muuta vastavalt kas 
 echo $row['Heading']. "<br>"; või echo $row['Description']. "<br>";*/
-
 function getAllComments($post_id)
 {
     $conn = connect();
@@ -163,7 +154,6 @@ function getAllComments($post_id)
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
-
 function getUserById($user_id)
 {
     $conn = connect();
@@ -177,7 +167,6 @@ function getUserById($user_id)
     }
     return $result;
 }
-
 //userExists(username, password); tagastab user_id, kui userit pole tagastab 0
 //fbUserHasLoggedOnBefore(username); tagastab user_id, kui pole varem sisse loginud tagastab 0
 function userExists($username, $password)
@@ -203,7 +192,6 @@ function userExists($username, $password)
     return $result;
 }
 /*getAllCategories(searchInputString); tühja stringi korral kõik */
-
 function getAllCategories($searchInputString)
 {
     $conn = connect();
@@ -218,10 +206,8 @@ function getAllCategories($searchInputString)
         $stmt->execute();
     }
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
-
     return $data;
 }
-
 function getCategoriesInPopularityOrder()
 {
     $conn = connect();

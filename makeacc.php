@@ -1,13 +1,15 @@
 <?php
 
 	if (isset( $_POST['makeacc_button'] )){
-		$fp = fopen('...users.txt', 'a+');
-		fwrite($fp, $_POST['makeacc_username']);
-		fwrite($fp, ';');
-		fwrite($fp, $_POST['makeacc_password']);
-		fwrite($fp, ''. PHP_EOL .'');  	//reavahetus
-		fclose($fp);
-		echo '<font color="white">Konto '.$_POST['makeacc_username'].' loodud.</font></br>';
+		
+		if (userExists($_POST['makeacc_username'], "")==0){
+			addUser($_POST['makeacc_username'], $_POST['makeacc_password']);
+			echo '<font color="white">Konto '.$_POST['makeacc_username'].' loodud.</font></br>';
+		}
+		else{
+			echo '<font color="white">Konto '.$_POST['makeacc_username'].' on juba olemas.</font></br>';
+		}
+		
 	}
 	
 

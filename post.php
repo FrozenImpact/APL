@@ -1,32 +1,26 @@
 <?php
 // kirjuta comment tekstfaili
 function save ($dataArray) {
-	$fp = fopen('...comments.txt', 'a+');
-	fwrite($fp, $dataArray['name']);
 	
 	if(isset($_SESSION['login_user'])){
-		fwrite($fp, ';'.$_SESSION['login_user'].';');
+		addComment($_SESSION['login_user_id'], $_GET['post_id'], $dataArray['name']);
 	}
 	else{
-		fwrite($fp, ';Anon;');
 	}
-	
-	fwrite($fp, time());
-	fwrite($fp, ''. PHP_EOL .'');  	//reavahetus
-	fclose($fp);
 	return true;
 }
 
 
 include_once '_Post.php';
 
-$post = new Post($_GET['lehekylg'], $_GET['lecture']);
+$post_data = getPost($_GET['post_id']);
+$post = new Post($_GET['post_id'], $_GET['lehekylg'], $_GET['lecture'], $post_data[0]['Posted'], $post_data[0]['Upvote']-$post_data[0]['Downvote']);
 $post->draw_post();
 
-// sample andmed
+
 echo '
 	<div class="selfPost">
-		<font color="white"> tiitel ütleb kõik, aitäh! </font>
+		<font color="white"> ' .$post_data[0]['Description']. ' </font>
 	</div>';
 ?>
 
@@ -46,24 +40,33 @@ if (isset($_POST['action'])) {
 	}
 
 	else{
-		echo '<script>window.location.href = "logon.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '";</script>';
+		echo '<script>window.location.href = "logon.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '&post_id=' .$_GET['post_id']. '";</script>';
 	}
 }
 include_once '_Comment.php';
 
 // failist lugemine
-$data = file('...comments.txt');
-foreach ($data as $entryData) {
-	$entryParts = explode(';', $entryData);
-	if ( isset($entryParts[0]) && isset($entryParts[1]) && isset($entryParts[2]) ){
+//$data = file('...comments.txt');
+// foreach ($data as $entryData) {
+	// $entryParts = explode(';', $entryData);
+	// if ( isset($entryParts[0]) && isset($entryParts[1]) && isset($entryParts[2]) ){
 	
-		$comm = $entryParts[0];
-		$author = $entryParts[1];
-		$date = $entryParts[2];
+		// $comm = $entryParts[0];
+		// $author = $entryParts[1];
+		// $date = $entryParts[2];
 			
-		$comment = new Comment($comm, $author, $date);
-		$comment->draw_comment();
-	}
+		// $comment = new Comment($comm, $author, $date);
+		// $comment->draw_comment();
+	// }
+// }
+
+$data = getAllComments($_GET['post_id']);
+
+foreach ($data as $row) {
+    $user = getUserById($row['User_ID']);
+	$comment = new Comment($row['Content'], $user, $row['Posted'], $row['Upvote']-$row['Downvote']);
+	$comment->draw_comment();
+	
 }
 
 ?>

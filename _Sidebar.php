@@ -72,11 +72,11 @@ echo'
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: 54</a></b>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: ??</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: 172</b></a>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: ??</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				

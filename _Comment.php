@@ -2,21 +2,16 @@
 class Comment {
 	private $sisu;
 	private $autor;
-	private $skoor;
 	private $kuup2ev;
+	private $skoor;
 	
-	public function __construct ($sisu, $author, $date) {
+	public function __construct ($sisu, $author, $date, $score) {
 	$this->sisu = $sisu;
 	$this->autor = $author;
-	$this->skoor = rand ( 1 , 20 );
-	$this->kuup2ev = date("d.m.Y H:i:s", (int)$date); //''.rand ( 1 , 31 ).'.'.rand ( 1 , 12 ).'.'.rand ( 1994 , 2015 ).'';
+	$this->kuup2ev = $date;
+	$this->skoor = $score;
 }
  
-
-
-
-
-
 
 	public function draw_comment (){
 		echo '

@@ -1,6 +1,5 @@
 <?php
 // azure DB connection info
-
 $host = "eu-cdbr-azure-north-c.cloudapp.net";
 $user = "be787757308987";
 $pwd = "a435f8ab";
@@ -20,7 +19,6 @@ try{
                 Joined TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
                 CONSTRAINT User_pk PRIMARY KEY (ID)
             )";
-
      $sql = "CREATE TABLE Comment (
                 ID int    NOT NULL ,
                Content text    NOT NULL ,
@@ -61,7 +59,6 @@ try{
     $conn->query($autoincr1);
     $conn->query($autoincr2);
     $conn->query($autoincr3);
-
     //$conn->exec($sql4);
     echo "successful";
     }

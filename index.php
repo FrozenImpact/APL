@@ -2,6 +2,9 @@
 <link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
 <?php
 	session_start();
+	
+	include_once 'db/sql_functions.php';
+	
 ?>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -67,15 +70,7 @@ $(document).ready(function() {
         $("#searchBig").keyup(function() {
 			$.post( 
 				'searchPosts.php',
-				{ filter: search2.val(), lecture: '<?php 
-					if (isset($_GET['lecture'])){
-						echo $_GET['lecture'];
-					}
-					else{
-						// joonistatud postitus peab kuskile linkima
-						echo 'Matemaatiline analüüs';
-					}
-					?>' },
+				{ filter: search2.val() },
 				function( data ){
 					$('#priit').empty();
 					$( '#priit').append( data );
@@ -96,14 +91,21 @@ $(document).ready(function() {
 		});		
 		
 		// küpsised, poolelioleva vastuse mustandi võrguühenduseta redigeerimiseks
+		// comment
 		$("#comment").val($.cookie("example"))
 		$("#comment").keyup(function() {
 			$.cookie("example", $("#comment").val());
         });
 		
+		// new post
 		$("#title").val($.cookie("example2"))
 		$("#title").keyup(function() {
 			$.cookie("example2", $("#title").val());
+        });
+		
+		$("#kehatekst").val($.cookie("example3"))
+		$("#kehatekst").keyup(function() {
+			$.cookie("example3", $("#kehatekst").val());
         });
 		
 		// kasutaja informeerimine võrguühenduse katkemisest
@@ -111,8 +113,18 @@ $(document).ready(function() {
 			checkConnection();
 		}, 1000);
 		
-		//alert(  );
-		//$.removeCookie("example");
+		
+/* 		$("#scroller1").scroll(function () {
+			if ($("#scroller1").height() <= $("#scroller1").scrollTop() + $("#scroller1").height()) {
+				$.post( 
+					'drawPosts.php',
+					function( data ){
+						$( '#scroller1').append( data );
+				});
+			}
+		}); */
+		
+		
 });
 </script>
 
@@ -128,21 +140,33 @@ $(document).ready(function() {
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
-			if (userExists ($_POST['login_username'], $_POST['login_password'])){
+			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
 				
 				$_SESSION['login_user']= $_POST['login_username']; 
+				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 			}
 			else{
 				echo '<font color="red">Sisestati vale või puudulik info.</font>';
 			}
 		}
 		else if (isset($_POST['fb'])){
-			$_SESSION['login_user']= $_POST['fb']; 
+			
+			if (userExists ($_POST['fb'], "") != 0){
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			else{
+				addUser($_POST['fb'], "");
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			 
 		}
 		
 		// kas väljalogimisnuppu on vajutatud
 		if (isset( $_POST['logout_button'] )){
 			unset($_SESSION['login_user']); 
+			unset($_SESSION['login_user_id']); 
 		}
 		
 		// kas kasutaja on sisse logitud
@@ -240,9 +264,22 @@ $(document).ready(function() {
 			echo '<font color="white">Otsingu "'.$_GET['search'].'" tulemused';
 			
 			if (isset($_GET['lecture'])){
+				$data = getAllPosts($_GET['lecture'], $_GET['search']);
 				echo ' kategoorias "'.$_GET['lecture'].'".</font>';
 			}
-			loe_postitused_failist ($_GET['search']);
+			else{
+				echo ' kõigis kategooriates.';
+				$data = getAllPosts("", $_GET['search']);
+			}
+			
+			foreach($data as $row){
+				$category = getCategoryName($row['Category']);
+				$post = new Post($row['ID'], $row['Heading'], $category, $row['Posted'], $row['Upvote']-$row['Downvote']);
+				$post->draw_post();
+				
+			}	
+		
+			
 		}
 		
 		// make profile page
@@ -265,62 +302,61 @@ $(document).ready(function() {
 		
 		// profile page
 		else if (isset($_GET['profile'])){
-			include_once 'profile.php';
+			if (userExists($_GET['profile'], "")!=0){
+				include_once 'profile.php';
+			}
+			else{
+				echo '404';
+			}
 		}
 		
 		// homepage
 		else if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
-			echo '<font color="white">Tere!<br/>Valige paremalt õppeaine.<br/><br/>';
-			echo 'Testimist abistavad ajutised lingid:<br/><br/>
-				<a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
-			echo '<a class="rightLink" href="workspacePost.php">workspacePost</a><br/><br/>';
-			echo '<a class="rightLink" href="workspaceLogin.php">workspaceLogin</a><br/><br/>';
-			echo '<a class="rightLink" href="profile.php">profile</a><br/></font>';
+			echo '<font color="white">Tere!<br/>Valige õppeaine. </br>Populaarsed õppeained:<br/><br/>';
+			$data = getCategoriesInPopularityOrder();
+			
+			$oneOrTwo = 1;
+			$kogus=0;
+			foreach($data as $row){
+				if ($kogus>5){
+					break;
+				}
+				echo '<div class="downBoxRow'.$oneOrTwo.'">
+					<a class="n1" href="index.php?lecture=' .$row['name']. '"><b>' .$row['name']. '</b></a>
+				</div>';
+				if ($oneOrTwo == 1){
+					$oneOrTwo=2;
+				}
+				else{
+					$oneOrTwo=1;
+				}	
+				$kogus+=1;
+	}
+			
+			// echo 'Testimist abistavad ajutised lingid:<br/><br/>
+				// <a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
+			// echo '<a class="rightLink" href="workspacePost.php">workspacePost</a><br/><br/>';
+			// echo '<a class="rightLink" href="workspaceLogin.php">workspaceLogin</a><br/><br/>';
+			// echo '<a class="rightLink" href="profile.php">profile</a><br/></font>';
 		}
 		
 
 		// subreddit homepage
 		else if (isset($_GET['lecture']) &&  !isset($_GET['lehekylg'])){
 		
-			$data = file('...posts.txt');
-			foreach ($data as $entryData) {
-				$entryParts = explode(';', $entryData);
-				foreach ($entryParts as $comm) {
+			$data = getAllPosts($_GET['lecture'], "");
+			foreach($data as $row){
+				 
+				$post = new Post($row['ID'], $row['Heading'], $_GET['lecture'], $row['Posted'], $row['Upvote']-$row['Downvote']);
+				$post->draw_post();
+				
+			}	
 			
-					if ($comm != ''){
-						$post = new Post($comm, $_GET['lecture']);
-						$post->draw_post();
-					}
-				}
-			}
 		}
 	
 		// post page
 		else if (isset($_GET['lecture']) &&  isset($_GET['lehekylg'])){
 			include_once 'post.php';
-		}
-
-		// postituste otsimine filtri järgi
-		function loe_postitused_failist ($filter){
-			$data = file('...posts.txt');
-			foreach ($data as $entryData) {
-				$entryParts = explode(';', $entryData);
-				foreach ($entryParts as $comm) {
-			
-					if ($comm != '' && stripos ($comm, $filter)!== false){
-						
-						if (isset($_GET['lecture'])){
-							$aine=$_GET['lecture'];
-						}
-						else{
-							$aine="Matemaatiline analüüs";
-						}
-						
-						$post = new Post($comm, $aine);
-						$post->draw_post();
-					}
-				}
-			}
 		}
 		
 	?>

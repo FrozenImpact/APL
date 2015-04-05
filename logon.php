@@ -10,12 +10,14 @@
 <?php
 		session_start();
 		
-		include_once '_logonFunctions.php';
+		include_once 'db/sql_functions.php';
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
-			if (userExists ($_POST['login_username'], $_POST['login_password'])){
+			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
+				
 				$_SESSION['login_user']= $_POST['login_username']; 
+				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 			}
 			else{
 				echo '<font color="red">Sisestati vale või puudulik info.</font>';
@@ -33,7 +35,7 @@
 				}
 			}
 			else if (isset($_GET['lecture']) && isset($_GET['lehekylg'])){				
-				echo '<script>window.location.href = "index.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '";</script>';
+				echo '<script>window.location.href = "index.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '&post_id=' .$_GET['post_id']. '";</script>';
 			}
 			else{				
 				echo '<script>window.location.href = "index.php";</script>';
