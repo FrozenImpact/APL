@@ -14,6 +14,9 @@ function connect()
         $sql = "SET @@auto_increment_increment=1";
         $stmt = $conn->query($sql);
         $stmt->execute();
+        $sql2 = "set time_zone = '+03:00'";
+        $stmt2 = $conn->query($sql2);
+        $stmt2->execute();
     }
     catch(Exception $e){
         die(var_dump($e));
@@ -78,6 +81,15 @@ function addPost($userid, $category_name, $heading, $description)
     $stmt->bindValue(3, $userid);
     $stmt->bindValue(4, $heading);
     $stmt->execute();
+    $sql2 = "SELECT id FROM post WHERE user_id = ? ORDER BY posted DESC LIMIT 1;";
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bindValue(1, $userid);
+    $stmt2->execute();
+    $data = $stmt2->fetchAll( PDO::FETCH_ASSOC );
+    foreach($data as $row){
+        $result = $row['id'];
+    }
+    return $result;
 }
 
 function addComment($userid, $postid, $content)
