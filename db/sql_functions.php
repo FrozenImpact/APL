@@ -39,10 +39,39 @@ function addUser($username, $password)
     $stmt->execute();
 }
 
-function addPost($userid, $category, $heading, $description)
+function getCategoryId($category_name)
 {
     $conn = connect();
-    $sql = "INSERT INTO Post(Description, Category, User_ID, Heading) VALUES (?, ?, ?)";
+    $sql = "SELECT id FROM category WHERE name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $category_name);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    foreach($data as $row){
+        $result = $row['id']."<br>";
+    }
+    return $result;
+}
+
+function getCategoryName($category_id)
+{
+    $conn = connect();
+    $sql = "SELECT name FROM category WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $category_id);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    foreach($data as $row){
+        $result = $row['name']."<br>";
+    }
+    return $result;
+}
+
+function addPost($userid, $category_name, $heading, $description)
+{
+    $category = getCategoryId($category_name);
+    $conn = connect();
+    $sql = "INSERT INTO Post(Description, Category, User_ID, Heading) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $description);
     $stmt->bindValue(2, $category);
