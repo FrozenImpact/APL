@@ -2,19 +2,13 @@
 <link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
 <?php
 	session_start();
-	
 	include_once 'db/sql_functions.php';
-	
 ?>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="jquery.cookie.js"></script>
 <script>
-function checkConnection() {
-	$.post('checkServerConnection.php', function(data){ $('#infobox').empty(); });
-}
-
 function readClasses() {
+	$('#scroller2').empty();
+	$( '#scroller2').append( '<font color="white">Loading...</font>' );
 	$.post( 
 	'readClasses.php', 
 	{ filter: $("#class_search_entry").val() }, 
@@ -23,108 +17,63 @@ function readClasses() {
 		$('#scroller2').empty();
 		$( '#scroller2').append( data );
 	});
-	
 }
 
 $(document).ready(function() {
+	
+	// ainete filter paremal all
+	// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
+	readClasses();
+	var vana = $("#class_search_entry").val();
+	$("#class_search_entry").keyup(function() {
 		
-		// kui server ei vasta
-		$.ajaxSetup({
-		type: 'GET',
-		cache: true,
-		timeout: 4000,
-		error: function(xhr) {
-				$('#infobox').empty();
-				$( '#infobox').append( '<font color="red">TÄHELEPANU: Ühendus serveriga katkes. Kogu funktionaalsus ei pruugi enam olla kättesaadav. Juhul, kui teil on vastamine pooleli, võite seda jätkata, mustandit, kaasaarvatud teie võrguta tehtud muudatused talletatakse teie arvutis, ja see jääb alles, isegi kui te selle akna sulgete.</font>' );
-			}
-		})
-		
-
-		// ainete filter paremal all
-		// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
 		readClasses();
-		var vana = $("#class_search_entry").val();
-        $("#class_search_entry").keyup(function() {
-			readClasses();
-			
-			var hetkeUrl = window.location.href;
+		
+		var hetkeUrl = window.location.href;
 
-			if (hetkeUrl.indexOf("?")==-1){
-				window.history.replaceState("", "", window.location.href+"?");
-			}
-			
-			if (hetkeUrl.indexOf("&filter=")!=-1){
-				var uus = hetkeUrl.replace("&filter="+vana,"&filter="+ $("#class_search_entry").val());
-				window.history.replaceState("", "", uus);
-				vana = $("#class_search_entry").val();
-			} else {
-				window.history.replaceState("", "", window.location.href + "&filter=" + $("#class_search_entry").val());
-				vana = $("#class_search_entry").val();
-			}
-        });
+		if (hetkeUrl.indexOf("?")==-1){
+			window.history.replaceState("", "", window.location.href+"?");
+		}
 		
-		
-		
-		//suur otsing ülemise riba paremas servas
-		var search2 = $("#searchBig");
-        $("#searchBig").keyup(function() {
-			$.post( 
-				'searchPosts.php',
-				{ filter: search2.val() },
-				function( data ){
-					$('#priit').empty();
-					$( '#priit').append( data );
-				});
-        });
-		
-		$('#priit').hide();
-		
-		$("#searchBig").focus(function() {
-			$('#priit').fadeIn();
-		});
-		
-		$("#searchBig").focusout(function() {
-			//setTimeout(function(){	
-				//$('#priit').hide();
-				$('#priit').fadeOut();
-			//}, 200);
-		});		
-		
-		// küpsised, poolelioleva vastuse mustandi võrguühenduseta redigeerimiseks
-		// comment
-		$("#comment").val($.cookie("example"))
-		$("#comment").keyup(function() {
-			$.cookie("example", $("#comment").val());
-        });
-		
-		// new post
-		$("#title").val($.cookie("example2"))
-		$("#title").keyup(function() {
-			$.cookie("example2", $("#title").val());
-        });
-		
-		$("#kehatekst").val($.cookie("example3"))
-		$("#kehatekst").keyup(function() {
-			$.cookie("example3", $("#kehatekst").val());
-        });
-		
-		// kasutaja informeerimine võrguühenduse katkemisest
-		setInterval(function(){
-			checkConnection();
-		}, 1000);
-		
-		
-/* 		$("#scroller1").scroll(function () {
-			if ($("#scroller1").height() <= $("#scroller1").scrollTop() + $("#scroller1").height()) {
-				$.post( 
-					'drawPosts.php',
-					function( data ){
-						$( '#scroller1').append( data );
-				});
-			}
-		}); */
-		
-		
+		if (hetkeUrl.indexOf("&filter=")!=-1){
+			var uus = hetkeUrl.replace("&filter="+vana,"&filter="+ $("#class_search_entry").val());
+			window.history.replaceState("", "", uus);
+			vana = $("#class_search_entry").val();
+		} else {
+			window.history.replaceState("", "", window.location.href + "&filter=" + $("#class_search_entry").val());
+			vana = $("#class_search_entry").val();
+		}
+	});
+	
+	
+	
+	//suur otsing ülemise riba paremas servas
+	var search2 = $("#searchBig");
+	$("#searchBig").keyup(function() {		
+		$('#priit').empty();
+		$( '#priit').append( '<font color="white"><br/><br/><br/>Loading...</font>' );
+		$.post( 
+			'searchPosts.php',
+			{ filter: search2.val() },
+			function( data ){
+				$('#priit').empty();
+				$( '#priit').append( data );
+			});
+	});
+	
+	$('#priit').hide();
+	
+	$("#searchBig").focus(function() {
+		$('#priit').fadeIn();
+	});
+	
+	$("#searchBig").focusout(function() {
+		//setTimeout(function(){	
+			//$('#priit').hide();
+			$('#priit').fadeOut();
+		//}, 200);
+	});		
+	
 });
 </script>
 
@@ -135,8 +84,6 @@ $(document).ready(function() {
 	<?php
 		
 		include_once '_Sidebar.php';
-		
-		include_once '_logonFunctions.php';
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
@@ -306,7 +253,7 @@ $(document).ready(function() {
 				include_once 'profile.php';
 			}
 			else{
-				echo '404';
+				echo '<font color="white">404: Ei leitud.</font>';
 			}
 		}
 		
@@ -343,15 +290,7 @@ $(document).ready(function() {
 
 		// subreddit homepage
 		else if (isset($_GET['lecture']) &&  !isset($_GET['lehekylg'])){
-		
-			$data = getAllPosts($_GET['lecture'], "");
-			foreach($data as $row){
-				 
-				$post = new Post($row['ID'], $row['Heading'], $_GET['lecture'], $row['Posted'], $row['Upvote']-$row['Downvote']);
-				$post->draw_post();
-				
-			}	
-			
+			include_once 'home.php';
 		}
 	
 		// post page

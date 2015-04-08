@@ -1,3 +1,10 @@
+<script src="extended_features.js"></script>
+<script src="jquery.cookie.js"></script>
+<script>
+function perioodiliselt_tehtav() {
+	// sellel lehel pole midagi vaja teha
+}
+</script>
 <?php
 	include_once 'db/sql_functions.php';
 	function save ($dataArray) {

@@ -12,19 +12,20 @@
 	//echo 'filter: '.$_POST['filter'].'<br/>';
 	
 	include_once 'db/sql_functions.php';
-	$data = getAllCategories($filter);
 	
+	$data = getAllCategories($filter);
+		
 	foreach($data as $row){
 	 
-			echo '<div class="downBoxRow'.$oneOrTwo.'">
-				<a class="n1" href="index.php?lecture=' .$row['name']. '"><b>' .$row['name']. '</b></a>
-			</div>';
-			if ($oneOrTwo == 1){
-				$oneOrTwo=2;
-			}
-			else{
-				$oneOrTwo=1;
-			}
+		echo '<div class="downBoxRow'.$oneOrTwo.'">
+			<a class="n1" href="index.php?lecture=' .$row['name']. '"><b>' .$row['name']. '</b></a>
+		</div>';
+		if ($oneOrTwo == 1){
+			$oneOrTwo=2;
+		}
+		else{
+			$oneOrTwo=1;
+		}
 	}	
 	
 ?>

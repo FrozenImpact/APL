@@ -1,3 +1,16 @@
+<script src="extended_features.js"></script>
+<script src="jquery.cookie.js"></script>
+<script>
+function perioodiliselt_tehtav() {
+	$.post( 
+	'drawComments.php', 
+	{ post_id: '<?php if (isset($_GET['post_id'])) echo $_GET['post_id']; ?>' }, 
+	function( data ){ 
+		$('#comments').empty();
+		$( '#comments').append( data );
+	});
+}
+</script>
 <?php
 // kirjuta comment tekstfaili
 function save ($dataArray) {
@@ -43,30 +56,8 @@ if (isset($_POST['action'])) {
 		echo '<script>window.location.href = "logon.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '&post_id=' .$_GET['post_id']. '";</script>';
 	}
 }
-include_once '_Comment.php';
-
-// failist lugemine
-//$data = file('...comments.txt');
-// foreach ($data as $entryData) {
-	// $entryParts = explode(';', $entryData);
-	// if ( isset($entryParts[0]) && isset($entryParts[1]) && isset($entryParts[2]) ){
-	
-		// $comm = $entryParts[0];
-		// $author = $entryParts[1];
-		// $date = $entryParts[2];
-			
-		// $comment = new Comment($comm, $author, $date);
-		// $comment->draw_comment();
-	// }
-// }
-
-$data = getAllComments($_GET['post_id']);
-
-foreach ($data as $row) {
-    $user = getUserById($row['User_ID']);
-	$comment = new Comment($row['Content'], $user, $row['Posted'], $row['Upvote']-$row['Downvote']);
-	$comment->draw_comment();
-	
-}
-
 ?>
+<div id="comments">
+<script>perioodiliselt_tehtav();</script>
+</div>
+

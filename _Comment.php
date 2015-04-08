@@ -7,6 +7,9 @@ class Comment {
 	
 	public function __construct ($sisu, $author, $date, $score) {
 	$this->sisu = $sisu;
+	if ($sisu == ""){
+		$this->sisu = "-";
+	}
 	$this->autor = $author;
 	$this->kuup2ev = $date;
 	$this->skoor = $score;
