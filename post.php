@@ -27,7 +27,7 @@ function save ($dataArray) {
 include_once '_Post.php';
 
 $post_data = getPost($_GET['post_id']);
-$post = new Post($_GET['post_id'], $_GET['lehekylg'], $_GET['lecture'], $post_data[0]['Posted'], $post_data[0]['Upvote']-$post_data[0]['Downvote']);
+$post = new Post($_GET['post_id'], $post_data[0]['Heading'], $_GET['lecture'], $post_data[0]['Posted'], $post_data[0]['Upvote']-$post_data[0]['Downvote']);
 $post->draw_post();
 
 

@@ -3,6 +3,7 @@
 <?php
 	session_start();
 	include_once 'db/sql_functions.php';
+
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
@@ -87,8 +88,8 @@ $(document).ready(function() {
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
+			$fbUser = false;
 			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
-				
 				$_SESSION['login_user']= $_POST['login_username']; 
 				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 			}
@@ -97,7 +98,6 @@ $(document).ready(function() {
 			}
 		}
 		else if (isset($_POST['fb'])){
-			
 			if (userExists ($_POST['fb'], "") != 0){
 				$_SESSION['login_user']= $_POST['fb'];
 				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
@@ -118,12 +118,12 @@ $(document).ready(function() {
 		
 		// kas kasutaja on sisse logitud
 		if (isset( $_SESSION['login_user'] )){
-			$sidebar = new Sidebar($_SESSION['login_user']);
+			$sidebar = new Sidebar($_SESSION['login_user'], !isset($fbUser));
 			$sidebar->draw_sidebar_top();
 		}
 		// kui ei siis n2ita sisselogimisnuppu
 		else{
-			$sidebar = new Sidebar("");
+			$sidebar = new Sidebar("", false);
 			$sidebar->draw_login_form();
 		}
 	?>
@@ -249,12 +249,8 @@ $(document).ready(function() {
 		
 		// profile page
 		else if (isset($_GET['profile'])){
-			if (userExists($_GET['profile'], "")!=0){
-				include_once 'profile.php';
-			}
-			else{
-				echo '<font color="white">404: Ei leitud.</font>';
-			}
+			include_once 'profile.php';
+
 		}
 		
 		// homepage

@@ -11,9 +11,15 @@ class Post {
 		$this->id = $id;
 		$this->tiitel = $tiitel;
 		$this->category = $category;
-		$this->postDate = $postDate;
+		if ($postDate ==""){
+			$this->postDate = "";
+		}else{
+			$this->postDate = formatDate($postDate);
+		}
 		$this->score = $score;
 	}
+	
+
 
 	public function draw_post (){
 		

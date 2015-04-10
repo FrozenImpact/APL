@@ -1,4 +1,13 @@
 <?php
+// priit lisas
+function formatDate($str){
+	$space = explode(" ", $str);
+	$minus = explode("-", $space[0]);
+	$colon = explode(":", $space[1]);
+	return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
+}
+
+	
 function connect()
 {
     // DB connection info
@@ -157,16 +166,18 @@ function getAllComments($post_id)
 function getUserById($user_id)
 {
     $conn = connect();
-    $sql = "SELECT Name FROM user WHERE ID = ? ";
+    $sql = "SELECT Name, Password, Joined FROM user WHERE ID = ? ";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $user_id);
     $stmt->execute();
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
-    foreach ($data as $row){
-        $result = $row['Name'];
-    }
-    return $result;
+    // foreach ($data as $row){
+        // $result = $row['Name'];
+    // }
+    return $data;
 }
+
+
 //userExists(username, password); tagastab user_id, kui userit pole tagastab 0
 //fbUserHasLoggedOnBefore(username); tagastab user_id, kui pole varem sisse loginud tagastab 0
 function userExists($username, $password)

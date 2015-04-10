@@ -1,4 +1,7 @@
 // facebook
+
+$.ajaxSetup({ cache: true });
+
 $.getScript('//connect.facebook.net/ee_ET/all.js', function(){
 	FB.init({
 		 appId: 901484619902464,
@@ -17,6 +20,7 @@ $("#facebook").click(function() {
 		
 		FB.login(function(response) {       
 				if (response.status === "connected") {
+					
 					FB.api('/me', function(data) {
 						//$("#Username").val(data.name);
 						//$("#login_form").submit();

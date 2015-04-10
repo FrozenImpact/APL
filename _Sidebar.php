@@ -2,8 +2,10 @@
 
 class Sidebar {
 private $username;
-	public function __construct ($username) {
+private $fbUser;
+	public function __construct ($username, $fbUser) {
 	$this->username = $username;
+	$this->fbUser = $fbUser;
 	
 }
 
@@ -30,9 +32,9 @@ public function draw_login_form (){
 						<input type="text" size="15" maxlength="15" value="" placeholder="Kasutajanimi" style="color:black" id="Username" name="login_username" ><br/>
 						<input type="password" size="15" maxlength="15" value="" placeholder="Parool" style="color:black" name="login_password" ><br/></br>
 						<a><input class="rightLink" type="submit" name="login_button" id="login_button" value="Log in"></a></br></br>
-						<a class="rightLink" type="button" name="facebook" id="facebook">Facebook</a>
-					</div>
 				</form>	
+					<a><input class="n2 rightLink" type="button" name="facebook" id="facebook" value="Facebook"></a>
+					</div>
 				<div class="upUpRightRight">				
 				</div>
 			</div>
@@ -59,16 +61,27 @@ public function draw_login_form (){
 }
 
 public function draw_sidebar_top (){
+	
+	if ($this->fbUser){
+		$fbIcon = '<img src="img/facebook-icon.png" width="15" height="15"/>';
+		$userNameDotsInsteadOfSpaces = str_replace(" ", ".", $this->username);
+		$userImageUrl = 'http://graph.facebook.com/'.$userNameDotsInsteadOfSpaces.'/picture?type=large';
+	}
+	else{
+		$fbIcon = '';
+		$userImageUrl = "img/pic.jpeg";
+	}
+	
 echo'
 		<div class="upUp">
 			<div class="upUpLeft">			
-				<a href="index.php?username=' .$this->username. '"><img class="pic" src="img/pic.jpeg" width="104" height="104"/></a><br/><br/>
+				<a href="index.php?username=' .$this->username. '"><img class="pic" src="'.$userImageUrl.'" width="104" height="104"/></a><br/><br/>
 				
 			</div>	
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>'.$this->username.'</b></a>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>'.$fbIcon.''.$this->username.'</b></a>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
