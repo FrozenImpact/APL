@@ -10,81 +10,100 @@
 	session_start();
 	include_once 'db/sql_functions.php';
 
+	function getLecture(){
+		if (isset($_GET['lecture'])){
+			return '&lecture='.$_GET['lecture'].'';
+		}
+		else{
+			return '';
+	}
+}
+	
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>
-function readClasses() {
-	$('#scroller2').empty();
-	$( '#scroller2').append( '<a style="color:white;">Loading...</a>' );
-	$.post( 
-	'readClasses.php', 
-	{ filter: $("#class_search_entry").val() }, 
-	function( data ){ 
-		//$('#down li').remove();
-		$('#scroller2').empty();
-		$( '#scroller2').append( data );
-	});
-}
-
-$(document).ready(function() {
-	
-	// ainete filter paremal all
-	// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
-	readClasses();
-	var vana = $("#class_search_entry").val();
-	$("#class_search_entry").keyup(function() {
-		
-		readClasses();
-		
-		var hetkeUrl = window.location.href;
-
-		if (hetkeUrl.indexOf("?")==-1){
-			window.history.replaceState("", "", window.location.href+"?");
-		}
-		
-		if (hetkeUrl.indexOf("&filter=")!=-1){
-			var uus = hetkeUrl.replace("&filter="+vana,"&filter="+ $("#class_search_entry").val());
-			window.history.replaceState("", "", uus);
-			vana = $("#class_search_entry").val();
-		} else {
-			window.history.replaceState("", "", window.location.href + "&filter=" + $("#class_search_entry").val());
-			vana = $("#class_search_entry").val();
-		}
-	});
-	
-	
-	
-	//suur otsing ülemise riba paremas servas
-	var search2 = $("#searchBig");
-	$("#searchBig").keyup(function() {		
-		$('#priit').empty();
-		$( '#priit').append( '<a style="color:white;"><br/><br/><br/>Loading...</a>' );
-		$.post( 
-			'searchPosts.php',
-			{ filter: search2.val() },
-			function( data ){
-				$('#priit').empty();
-				$( '#priit').append( data );
-			});
-	});
-	
-	$('#priit').hide();
-	
-	$("#searchBig").focus(function() {
-		$('#priit').fadeIn();
-	});
-	
-	$("#searchBig").focusout(function() {
-		//setTimeout(function(){	
-			//$('#priit').hide();
-			$('#priit').fadeOut();
-		//}, 200);
-	});		
-	
-});
-</script>
-
+<script src="script_for_all_pages.js"></script>	
 <script src="facebook.js"></script>	
+
+<div class="right">
+	<div class="up" id="up">
+	<?php
+		
+		include_once '_Sidebar.php';
+		
+		// kas sisselogimisnuppu on vajutatud
+		if (isset( $_POST['login_button'] )){
+			//$fbUser = false;
+			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
+				$_SESSION['login_user']= $_POST['login_username']; 
+				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
+			}
+			else{
+				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
+			}
+		}
+		else if (isset($_POST['fb'])){
+			if (userExists ($_POST['fb'], "") != 0){
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			else{
+				addUser($_POST['fb'], "");
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			 
+		}
+		
+		// kas väljalogimisnuppu on vajutatud
+		if (isset( $_POST['logout_button'] )){
+			unset($_SESSION['login_user']); 
+			unset($_SESSION['login_user_id']); 
+		}
+		
+
+		
+		// kas kasutaja on sisse logitud
+		if (isset( $_SESSION['login_user'] )){
+			
+			// is facebook user?
+			if (getUserById($_SESSION['login_user_id'])[0]['Password'] == null ){
+				$fbUser = true;
+			}
+			else{
+				$fbUser = false;
+			}
+			
+			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
+			$sidebar->draw_sidebar_top();
+		}
+		// kui ei siis n2ita sisselogimisnuppu
+		else{
+			$sidebar = new Sidebar("", false);
+			$sidebar->draw_login_form();
+		}
+	?>
+	</div>
+	
+	<div class="down" id="down">	
+		<div class="separator2"></div>
+			<div class="s2">
+			<form method="post">
+				<input type="search" class="search2" value="<?php 
+					if (isset($_GET['filter'])){
+						echo $_GET['filter'];
+					}
+					else{
+						echo '';
+					}				
+				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
+			</form>
+			</div>
+			
+			<div class="downContainer" id="scroller2">
+			
+			</div>
+	</div>
+</div>
 
 
 <!-- _________________________________________________________________________________________________________ -->
@@ -174,14 +193,15 @@ $(document).ready(function() {
 		
 		// meldimine
 		else if (isset($_GET['newpost'])){
-			if (isset( $_SESSION['login_user'] )){
-				include_once 'makepost.php';
-			}
-			else if (isset($_POST['logout_button'])){
+			
+			if (isset($_POST['logout_button'])){
 				echo '<script>window.location.href = "index.php";</script>';
 			}
+			else if (isset( $_SESSION['login_user'] )){
+				include_once 'makepost.php';
+			}
 			else{
-				echo '<script>window.location.href = "logon.php?newpost=true'.$sidebar->getLecture().'";</script>';
+				echo '<script>window.location.href = "logon.php?newpost=true'.getLecture().'";</script>';
 			}
 		}	
 		
@@ -233,90 +253,10 @@ $(document).ready(function() {
 		}
 		
 	?>
-</div>
-</div>
-
-
-<div class="right">
-	<div class="up" id="up">
-	<?php
-		
-		include_once '_Sidebar.php';
-		
-		// kas sisselogimisnuppu on vajutatud
-		if (isset( $_POST['login_button'] )){
-			//$fbUser = false;
-			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
-				$_SESSION['login_user']= $_POST['login_username']; 
-				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
-			}
-			else{
-				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
-			}
-		}
-		else if (isset($_POST['fb'])){
-			if (userExists ($_POST['fb'], "") != 0){
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			else{
-				addUser($_POST['fb'], "");
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			 
-		}
-		
-		// kas väljalogimisnuppu on vajutatud
-		if (isset( $_POST['logout_button'] )){
-			unset($_SESSION['login_user']); 
-			unset($_SESSION['login_user_id']); 
-		}
-		
-
-		
-		// kas kasutaja on sisse logitud
-		if (isset( $_SESSION['login_user'] )){
-			
-			// is facebook user?
-			if (getUserById($_SESSION['login_user_id'])[0]['Password'] == null ){
-				$fbUser = true;
-			}
-			else{
-				$fbUser = false;
-			}
-			
-			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
-			$sidebar->draw_sidebar_top();
-		}
-		// kui ei siis n2ita sisselogimisnuppu
-		else{
-			$sidebar = new Sidebar("", false);
-			$sidebar->draw_login_form();
-		}
-	?>
-	</div>
-	
-	<div class="down" id="down">	
-		<div class="separator2"></div>
-			<div class="s2">
-			<form method="post">
-				<input type="search" class="search2" value="<?php 
-					if (isset($_GET['filter'])){
-						echo $_GET['filter'];
-					}
-					else{
-						echo '';
-					}				
-				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
-			</form>
-			</div>
-			
-			<div class="downContainer" id="scroller2">
-			
-			</div>
 	</div>
 </div>
+
+
 
 </body>
 </html>
