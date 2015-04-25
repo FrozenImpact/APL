@@ -94,7 +94,7 @@ $(document).ready(function() {
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
-			$fbUser = false;
+			//$fbUser = false;
 			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
 				$_SESSION['login_user']= $_POST['login_username']; 
 				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
@@ -122,9 +122,20 @@ $(document).ready(function() {
 			unset($_SESSION['login_user_id']); 
 		}
 		
+
+		
 		// kas kasutaja on sisse logitud
 		if (isset( $_SESSION['login_user'] )){
-			$sidebar = new Sidebar($_SESSION['login_user'], !isset($fbUser));
+			
+			// is facebook user?
+			if (getUserById($_SESSION['login_user_id'])[0]['Password'] == null ){
+				$fbUser = true;
+			}
+			else{
+				$fbUser = false;
+			}
+			
+			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
 			$sidebar->draw_sidebar_top();
 		}
 		// kui ei siis n2ita sisselogimisnuppu
