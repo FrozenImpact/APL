@@ -4,7 +4,7 @@
 function perioodiliselt_tehtav() {
 	$.post( 
 	'drawPosts.php', 
-	{ lecture: '<?php if (isset($_GET['lecture'])) echo $_GET['lecture']; ?>' }, 
+	{ lecture: '<?php if (isset($_GET['lecture'])) echo $_GET['lecture']; ?>', page: '<?php if (isset($_GET['page'])) echo $_GET['page']; ?>'}, 
 	function( data ){ 
 		$('#scroller1').empty();
 		$( '#scroller1').append( data );

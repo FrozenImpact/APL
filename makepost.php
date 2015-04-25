@@ -41,7 +41,7 @@ function perioodiliselt_tehtav() {
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		echo "<script type='text/javascript'>$.removeCookie('example2');</script>";
 		echo "<script type='text/javascript'>$.removeCookie('example3');</script>";
-		echo '<script>window.location.href = "index.php?'.$sidebar->getLecture().'&lehekylg='.$_POST['title'].'&post_id='.$uusid.'";</script>';
+		echo '<script>window.location.href = "index.php?'.getLecture().'&lehekylg='.$_POST['title'].'&post_id='.$uusid.'";</script>';
 	}
 
 ?>
