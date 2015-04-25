@@ -86,86 +86,7 @@ $(document).ready(function() {
 
 <script src="facebook.js"></script>	
 
-<div class="right">
-	<div class="up" id="up">
-	<?php
-		
-		include_once '_Sidebar.php';
-		
-		// kas sisselogimisnuppu on vajutatud
-		if (isset( $_POST['login_button'] )){
-			//$fbUser = false;
-			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
-				$_SESSION['login_user']= $_POST['login_username']; 
-				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
-			}
-			else{
-				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
-			}
-		}
-		else if (isset($_POST['fb'])){
-			if (userExists ($_POST['fb'], "") != 0){
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			else{
-				addUser($_POST['fb'], "");
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			 
-		}
-		
-		// kas väljalogimisnuppu on vajutatud
-		if (isset( $_POST['logout_button'] )){
-			unset($_SESSION['login_user']); 
-			unset($_SESSION['login_user_id']); 
-		}
-		
 
-		
-		// kas kasutaja on sisse logitud
-		if (isset( $_SESSION['login_user'] )){
-			
-			// is facebook user?
-			if (getUserById($_SESSION['login_user_id'])[0]['Password'] == null ){
-				$fbUser = true;
-			}
-			else{
-				$fbUser = false;
-			}
-			
-			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
-			$sidebar->draw_sidebar_top();
-		}
-		// kui ei siis n2ita sisselogimisnuppu
-		else{
-			$sidebar = new Sidebar("", false);
-			$sidebar->draw_login_form();
-		}
-	?>
-	</div>
-	
-	<div class="down" id="down">	
-		<div class="separator2"></div>
-			<div class="s2">
-			<form method="post">
-				<input type="search" class="search2" value="<?php 
-					if (isset($_GET['filter'])){
-						echo $_GET['filter'];
-					}
-					else{
-						echo '';
-					}				
-				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
-			</form>
-			</div>
-			
-			<div class="downContainer" id="scroller2">
-			
-			</div>
-	</div>
-</div>
 <!-- _________________________________________________________________________________________________________ -->
 
 <div class="left" id="left">	
@@ -232,7 +153,7 @@ $(document).ready(function() {
 				echo ' kategoorias "'.$_GET['lecture'].'".</a>';
 			}
 			else{
-				echo ' kõigis kategooriates.';
+				echo ' kõigis kategooriates.</a>';
 				$data = getAllPosts("", $_GET['search']);
 			}
 			
@@ -314,5 +235,88 @@ $(document).ready(function() {
 	?>
 </div>
 </div>
+
+
+<div class="right">
+	<div class="up" id="up">
+	<?php
+		
+		include_once '_Sidebar.php';
+		
+		// kas sisselogimisnuppu on vajutatud
+		if (isset( $_POST['login_button'] )){
+			//$fbUser = false;
+			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
+				$_SESSION['login_user']= $_POST['login_username']; 
+				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
+			}
+			else{
+				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
+			}
+		}
+		else if (isset($_POST['fb'])){
+			if (userExists ($_POST['fb'], "") != 0){
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			else{
+				addUser($_POST['fb'], "");
+				$_SESSION['login_user']= $_POST['fb'];
+				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+			}
+			 
+		}
+		
+		// kas väljalogimisnuppu on vajutatud
+		if (isset( $_POST['logout_button'] )){
+			unset($_SESSION['login_user']); 
+			unset($_SESSION['login_user_id']); 
+		}
+		
+
+		
+		// kas kasutaja on sisse logitud
+		if (isset( $_SESSION['login_user'] )){
+			
+			// is facebook user?
+			if (getUserById($_SESSION['login_user_id'])[0]['Password'] == null ){
+				$fbUser = true;
+			}
+			else{
+				$fbUser = false;
+			}
+			
+			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
+			$sidebar->draw_sidebar_top();
+		}
+		// kui ei siis n2ita sisselogimisnuppu
+		else{
+			$sidebar = new Sidebar("", false);
+			$sidebar->draw_login_form();
+		}
+	?>
+	</div>
+	
+	<div class="down" id="down">	
+		<div class="separator2"></div>
+			<div class="s2">
+			<form method="post">
+				<input type="search" class="search2" value="<?php 
+					if (isset($_GET['filter'])){
+						echo $_GET['filter'];
+					}
+					else{
+						echo '';
+					}				
+				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
+			</form>
+			</div>
+			
+			<div class="downContainer" id="scroller2">
+			
+			</div>
+	</div>
+</div>
+
 </body>
 </html>
