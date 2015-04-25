@@ -6,16 +6,16 @@
 				addUser($_POST['makeacc_username'], $_POST['makeacc_password']);
 				
 				// success message
-				echo '<font color="white">Konto '.$_POST['makeacc_username'].' loodud.</font></br>';
+				echo '<a style="color:white;">Konto '.$_POST['makeacc_username'].' loodud.</a><br/>';
 			}
 			else{
 				// password mismatch message
-				echo '<font color="white">Paroolid on erinevad.</font></br>';
+				echo '<a style="color:white;">Paroolid on erinevad.</a><br/>';
 			}
 		}
 		else{
 			// username taken message
-			echo '<font color="white">Konto '.$_POST['makeacc_username'].' on juba olemas.</font></br>';
+			echo '<a style="color:white;">Konto '.$_POST['makeacc_username'].' on juba olemas.</a><br/>';
 		}
 	}
 ?>
@@ -23,6 +23,6 @@
 	<input type="text" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_username'])) echo $_POST['makeacc_username']; ?>" placeholder="Kasutajanimi" style="color:black" name="makeacc_username" ><br/>
 	<input type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password'])) echo $_POST['makeacc_password']; ?>" placeholder="Parool" style="color:black" name="makeacc_password" ><br/>	
 	<input type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password2'])) echo $_POST['makeacc_password2']; ?>" placeholder="Korda parooli" style="color:black" name="makeacc_password2" ><br/>
-	<a><input class="n2 rightLink" type="submit" name="makeacc_button" id="makeacc_button" value="Loo"></a>
+	<input class="n2 rightLink" type="submit" name="makeacc_button" id="makeacc_button" value="Loo">
 
 </form>	

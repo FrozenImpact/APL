@@ -33,7 +33,7 @@ $post->draw_post();
 
 echo '
 	<div class="selfPost">
-		<font color="white"> ' .$post_data[0]['Description']. ' </font>
+		<a style="color:white;"> ' .$post_data[0]['Description']. ' </a>
 	</div>';
 ?>
 

@@ -1,11 +1,3 @@
-<html>
-
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400;300' rel='stylesheet' type='text/css'>
-</head>
-
 <?php
 	$username = "";
 	if (isset($_GET['profile_id'])){
@@ -38,7 +30,7 @@
 	
 			
 	if ($fbUser){
-		$fbIcon = '<img src="img/facebook-icon.png" width="10" height="10"/>';
+		$fbIcon = '<img src="img/facebook-icon.png" alt="" width="10" height="10"/>';
 		$userNameDotsInsteadOfSpaces = str_replace(" ", ".", $username);
 		$userImageUrl = 'http://graph.facebook.com/'.$userNameDotsInsteadOfSpaces.'/picture?type=large';
 	}
@@ -48,12 +40,10 @@
 	}
 	
 ?>
-<img src='<?php echo $userImageUrl ?>' style=''><br/>
+<img src='<?php echo $userImageUrl ?>' alt="" style=''><br/>
 
-<font color="white">Joined: <?php echo formatDate($userInfo['Joined']); ?> </font><br/>
+<a style="color:white;">Joined: <?php echo formatDate($userInfo['Joined']); ?> </a><br/>
 
-<font color="white">Username: <?php echo $fbIcon. '' .$username; ?><br>
+<a style="color:white;">Username: <?php echo $fbIcon. '' .$username; ?><br>
 			Posts: ??<br>
-			Comments: ??<br></font>
-
-</html>
+			Comments: ??<br></a>

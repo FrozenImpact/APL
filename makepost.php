@@ -29,7 +29,7 @@ function perioodiliselt_tehtav() {
 	}
 	else{
 		// Lehekülg, kui õppeaine on valimata
-		echo '<font color="white">Esmalt peate valima paremalt õppeaine.</font>';
+		echo '<a style="color:white;">Esmalt peate valima paremalt õppeaine.</a>';
 	}
 
 
@@ -37,7 +37,7 @@ function perioodiliselt_tehtav() {
 		$uusid = save($_POST);
 		// success message
 		// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-		echo '<font color="white">Postitus loodud.</font>';
+		echo '<a style="color:white;">Postitus loodud.</a>';
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		echo "<script type='text/javascript'>$.removeCookie('example2');</script>";
 		echo "<script type='text/javascript'>$.removeCookie('example3');</script>";

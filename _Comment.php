@@ -43,7 +43,7 @@ class Comment {
 		
 			<div class="postDataBox">
 				<div class="postDataBoxUp">	
-					<font color="white">' .$this->sisu. '</font>
+					<a style="color:white;">' .$this->sisu. '</a>
 				</div>
 				
 				<div class="postDataBoxDown">

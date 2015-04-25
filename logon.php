@@ -1,5 +1,12 @@
-﻿<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen">
+<title>APL</title>
+</head>
+
+<body style="background-color: #222222;">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="facebook.js"></script>	
@@ -19,7 +26,7 @@
 		else{
 			// TÄHELEPANU! Laimis, muuda järgnevat rida ka. Mida öelda kasutajale kes sisestab vale nime/parooli. echo ülakomade vahele võib lisada mis iganes dive, uusi ridu jms.
 			// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-			echo '<font color="red">Sisestati vale või puudulik info.</font>';
+			echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
 			// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		}
 	}
@@ -45,20 +52,20 @@
 	// kui ei siis n2ita sisselogimisdialoogi
 ?>
 
-<body bgcolor="#222222">
 
 <div class="center-wrapper_">
 
-	<font color="white">Selle lehekülje nägemiseks peate olema sisse logitud.</br></font>
+	<a style="color:white;">Selle lehekülje nägemiseks peate olema sisse logitud.<br/></a>
 	<form method="POST" id="login_form" style="display: inline;">
 		<input type="text" size="15" maxlength="15" value="" placeholder="Kasutajanimi" style="color:black" id="Username" name="login_username" ><br/>
 		<input type="password" size="15" maxlength="15" value="" placeholder="Parool" style="color:black" name="login_password" ><br/>	
-		<a><input class="n2 rightLink" type="submit" name="login_button" id="login_button" value="Logi sisse"></a>
+		<input class="n2 rightLink" type="submit" name="login_button" id="login_button" value="Logi sisse">
 
 	</form>	
 
-	<a><input class="n2 rightLink" type="button" name="facebook" id="facebook" value="Facebook"></a>
-	<a href="index.php?kontoloomine=true"><button class="n2 rightLink" type="button">Looge konto</button></a>
+	<input class="n2 rightLink" type="button" name="facebook" id="facebook" value="Facebook">
+	<a href="index.php?kontoloomine=true" class="rightLink" id="makeacc">Looge konto</a>
 
 </div>
 </body>
+</html>

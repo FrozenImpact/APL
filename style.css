@@ -493,7 +493,7 @@ input {
 	outline: none;
 	color:#fff;
 }
-input[type=search] {
+input[class=search] {
 	-webkit-appearance: textfield;
 	-webkit-box-sizing: content-box;
 	font-family: inherit;
@@ -504,7 +504,7 @@ input::-webkit-search-cancel-button {
 	display: none; 
 }
 
-input[type=search] {
+input[class=search] {
 	background: url('img/search-icon.png') no-repeat 9px center;
 	border: solid 1px #20538D;
 	width: 55px;	
@@ -522,7 +522,7 @@ input[type=search] {
 	-moz-transition: all .25s;
 	transition: all .25s;	
 }
-input[type=search]:focus {
+input[class=search]:focus {
 	width: 130px;
 	background-color: #fff;
 	border-color: #66CC75;	
@@ -539,19 +539,19 @@ input::-webkit-input-placeholder{
 	color: #999;
 }
 
-#searchMain input[type=search] {
+#searchMain input[class=search] {
 	float:right;
 	width: 15px;
 	padding-left: 10px;
 	color: transparent;
 	cursor: pointer;
 }
-#searchMain input[type=search]:hover {
+#searchMain input[class=search]:hover {
 	background: url('img/search-iconB.png') no-repeat 9px center;
 	float:right;
 	background-color: #fff;
 }
-#searchMain input[type=search]:focus {
+#searchMain input[class=search]:focus {
 	background: url('img/search-iconB.png') no-repeat 9px center;
 	float:right;
 	width: 130px;
@@ -569,13 +569,13 @@ input::-webkit-input-placeholder{
 	color: transparent;
 }
 
-input[type=search2] {
+input[class=search2] {
 	-webkit-appearance: textfield;
 	-webkit-box-sizing: content-box;
 	font-family: inherit;
 	font-size: 100%;
 }
-input[type=search2] {
+input[class=search2] {
 	background: url('img/search-iconB.png') no-repeat 9px center;
 	background-color:#222222;
 	border: solid 1px #20538D;
@@ -594,7 +594,7 @@ input[type=search2] {
 	-moz-transition: all .1s;
 	transition: all .1s;
 }
-input[type=search2]:focus {
+input[class=search2]:focus {
 	width: 88%;	
 	background-color: #1E1E1E;
 	
@@ -602,19 +602,19 @@ input[type=search2]:focus {
 	-moz-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
 	box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
 }
-#searchMain input[type=search2] {
+#searchMain input[class=search2] {
 	float:right;
 	width: 15px;
 	padding-left: 10px;
 	color: transparent;
 	cursor: pointer;
 }
-#searchMain input[type=search2]:hover {
+#searchMain input[class=search2]:hover {
 	background: url('img/search-iconB.png') no-repeat 9px center;
 	float:right;
 	background-color: #fff;
 }
-#searchMain input[type=search2]:focus {
+#searchMain input[class=search2]:focus {
 	background: url('img/search-iconB.png') no-repeat 9px center;
 	float:right;
 	width: 130px;

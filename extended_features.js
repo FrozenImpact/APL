@@ -16,9 +16,9 @@ $(document).ready(function() {
 	error: function(xhr) {
 			$('#infobox').empty();
 			$( '#infobox').append( '\
-			<font color="red">TÄHELEPANU: Ühendus serveriga katkes.\
+			<a style="color:red;">TÄHELEPANU: Ühendus serveriga katkes.\
 			Võite teksti kirjutamist jätkata, sest selle mustandit talletatakse teie arvutis.\
-			</font>\
+			</a>\
 			' );
 		}
 	})

@@ -1,5 +1,11 @@
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css?v=1.1" media="screen">
+<title>APL</title>
+</head>
+<body>
 <?php
 	session_start();
 	include_once 'db/sql_functions.php';
@@ -9,7 +15,7 @@
 <script>
 function readClasses() {
 	$('#scroller2').empty();
-	$( '#scroller2').append( '<font color="white">Loading...</font>' );
+	$( '#scroller2').append( '<a style="color:white;">Loading...</a>' );
 	$.post( 
 	'readClasses.php', 
 	{ filter: $("#class_search_entry").val() }, 
@@ -52,7 +58,7 @@ $(document).ready(function() {
 	var search2 = $("#searchBig");
 	$("#searchBig").keyup(function() {		
 		$('#priit').empty();
-		$( '#priit').append( '<font color="white"><br/><br/><br/>Loading...</font>' );
+		$( '#priit').append( '<a style="color:white;"><br/><br/><br/>Loading...</a>' );
 		$.post( 
 			'searchPosts.php',
 			{ filter: search2.val() },
@@ -94,7 +100,7 @@ $(document).ready(function() {
 				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 			}
 			else{
-				echo '<font color="red">Sisestati vale või puudulik info.</font>';
+				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
 			}
 		}
 		else if (isset($_POST['fb'])){
@@ -133,7 +139,7 @@ $(document).ready(function() {
 		<div class="separator2"></div>
 			<div class="s2">
 			<form method="post">
-				<input type="search2" value="<?php 
+				<input type="search" class="search2" value="<?php 
 					if (isset($_GET['filter'])){
 						echo $_GET['filter'];
 					}
@@ -149,7 +155,7 @@ $(document).ready(function() {
 			</div>
 	</div>
 </div>
-<!-- ------------------------------------------------------------------------------------- -->
+<!-- _________________________________________________________________________________________________________ -->
 
 <div class="left" id="left">	
 
@@ -171,7 +177,7 @@ $(document).ready(function() {
 		</div>
 		<div class="headRight">			
 			<form id="searchMain" method="GET">
-				<input type="search" id="searchBig" placeholder="Search" name="search">
+				<input type="search" class="search" id="searchBig" placeholder="Search" name="search">
 			<?php	
 				if (isset($_GET['lecture'])){
 					echo '<input type="hidden" name="lecture" value="' . $_GET['lecture'] . '" />';
@@ -202,17 +208,17 @@ $(document).ready(function() {
 		if (isset($_GET['search'])){
 			echo '
 			<form method="GET">
-				<input type="search2" placeholder="Search SubPages" name="search" value="'.$_GET['search'].'">';
+				<input type="search" class="search2" placeholder="Search SubPages" name="search" value="'.$_GET['search'].'">';
 				
 			if (isset($_GET['lecture'])){
 				echo '<input type="hidden" name="lecture" value="' . $_GET['lecture'] . '" />';
 			}
 			echo'</form>';
-			echo '<font color="white">Otsingu "'.$_GET['search'].'" tulemused';
+			echo '<a style="color:white;">Otsingu "'.$_GET['search'].'" tulemused';
 			
 			if (isset($_GET['lecture'])){
 				$data = getAllPosts($_GET['lecture'], $_GET['search']);
-				echo ' kategoorias "'.$_GET['lecture'].'".</font>';
+				echo ' kategoorias "'.$_GET['lecture'].'".</a>';
 			}
 			else{
 				echo ' kõigis kategooriates.';
@@ -255,7 +261,7 @@ $(document).ready(function() {
 		
 		// homepage
 		else if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
-			echo '<font color="white">Tere!<br/>Valige õppeaine. </br>Populaarsed õppeained:<br/><br/>';
+			echo '<a style="color:white;">Tere!<br/>Valige õppeaine. <br/>Populaarsed õppeained:<br/><br/></a>';
 			$data = getCategoriesInPopularityOrder();
 			
 			$oneOrTwo = 1;
@@ -280,7 +286,7 @@ $(document).ready(function() {
 				// <a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
 			// echo '<a class="rightLink" href="workspacePost.php">workspacePost</a><br/><br/>';
 			// echo '<a class="rightLink" href="workspaceLogin.php">workspaceLogin</a><br/><br/>';
-			// echo '<a class="rightLink" href="profile.php">profile</a><br/></font>';
+			// echo '<a class="rightLink" href="profile.php">profile</a><br/></a>';
 		}
 		
 
@@ -297,3 +303,5 @@ $(document).ready(function() {
 	?>
 </div>
 </div>
+</body>
+</html>
