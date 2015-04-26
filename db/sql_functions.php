@@ -1,13 +1,13 @@
 <?php
 // priit lisas
 function formatDate($str){
-	$space = explode(" ", $str);
-	$minus = explode("-", $space[0]);
-	$colon = explode(":", $space[1]);
-	return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
+    $space = explode(" ", $str);
+    $minus = explode("-", $space[0]);
+    $colon = explode(":", $space[1]);
+    return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
 }
 
-	
+    
 function connect()
 {
     // DB connection info
@@ -32,19 +32,30 @@ function connect()
     
     return $conn;
 }
-function addUser($username, $password)
+function addUser($username, $password, $Profilepicture)
 {
     $conn = connect();
-    if ($password==""){
+    if ($password=="" and $Profilepicture==""){
         $sql = "INSERT INTO User (Name) VALUES (?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $username);
     }
-    else {
+    else if ($Profilepicture==""){
         $sql = "INSERT INTO User (Name, Password) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $username);
         $stmt->bindValue(2, $password);
+    } else if ($password=="") {
+        $sql = "INSERT INTO User (Name, Profilepicture) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $Profilepicture);
+    } else{
+        $sql = "INSERT INTO User (Name, Password, Profilepicture) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $password);
+        $stmt->bindValue(3, $Profilepicture);
     }
     $stmt->execute();
 }
@@ -166,7 +177,7 @@ function getAllComments($post_id)
 function getUserById($user_id)
 {
     $conn = connect();
-    $sql = "SELECT Name, Password, Joined FROM user WHERE ID = ? ";
+    $sql = "SELECT Name, Password, Joined, Profilepicture FROM user WHERE ID = ? ";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $user_id);
     $stmt->execute();
@@ -232,4 +243,45 @@ foreach($data as $row){
     echo $row['name']."<br>";
 }
 */
+
+//tagastab tabeli post+comment, uuemad on eespool
+
+function getUserPostsandComments($username){
+    $conn = connect();
+    $sql = "SELECT post.id, Description, Null as Content, Category, User_ID, Posted, Heading, Null as Post_ID, Downvote, Upvote  FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name= ?
+            UNION
+            SELECT comment.id, Null as Description, Content, Null as Category, User_ID, Posted, Null as Heading, Post_ID, Upvote, Downvote FROM comment INNER JOIN user ON User_ID=user.ID WHERE user.name= ? ORDER BY posted DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $username);
+    $stmt->bindValue(2, $username);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+
+function nuberofCommentsandPostsbyUser($username){
+    $conn = connect();
+    $sql = "SELECT count(*) as 'summa' from(SELECT post.id, Description, Category, User_ID, Posted, Heading, Downvote, Upvote FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name=?
+            UNION
+            SELECT comment.id, Content, Null as Category, User_ID, Posted, Post_ID, Upvote, Downvote FROM comment INNER JOIN user ON User_ID=user.ID WHERE user.name=? ORDER BY posted ASC) as tem";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $username);
+    $stmt->bindValue(2, $username);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+
+
+//kontrollib, kas pärast mingit kellaaega on postitusi lisatud, time on string 'aaaa-kk-pp tt:mm:ss', kellaaja või kellaaja sekundid võib lisamata jätta, kui vaja pole
+//tagastab null, kui pole lisatud pärast seda kellaaega
+function postsAddedAfterTime($time){
+    $conn = connect();
+    $sql = "SELECT * FROM post WHERE Posted>?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $time);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
 ?>
