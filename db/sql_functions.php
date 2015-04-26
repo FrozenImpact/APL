@@ -259,7 +259,7 @@ function getUserPostsandComments($username){
     return $data;
 }
 
-function nuberofCommentsandPostsbyUser($username){
+function numberofCommentsandPostsbyUser($username){
     $conn = connect();
     $sql = "SELECT count(*) as 'summa' from(SELECT post.id, Description, Category, User_ID, Posted, Heading, Downvote, Upvote FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name=?
             UNION
@@ -378,5 +378,31 @@ function downVote($userid, $post_id, $comment_id){
         $stmt2->bindValue(2, $post_id);
         $stmt2->execute();
     }
+}
+
+function numberOfComments($userid){
+    $conn = connect();
+    $sql = "select count(*) from comment where User_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $userid);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_NUM );
+    foreach($data as $row){
+        $result = $row[0];
+    }
+    return $result;
+}
+
+function numberOfPosts($userid){
+    $conn = connect();
+    $sql = "select count(*) from post where User_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $userid);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_NUM );
+    foreach($data as $row){
+        $result = $row[0];
+    }
+    return $result;
 }
 ?>
