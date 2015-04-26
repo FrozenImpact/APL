@@ -284,4 +284,99 @@ function postsAddedAfterTime($time){
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
+
+function hasVotedComment($comment_id){
+        $conn = connect();
+        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Comment_ID= ?) , 0)";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bindValue(1, $comment_id);
+        $stmt3->execute();
+        $data = $stmt3->fetchAll( PDO::FETCH_NUM );
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+        }
+        return $result;
+}
+
+function hasVotedPost($post_id){
+        $conn = connect();
+        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Post_ID= ?) , 0)";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bindValue(1, $post_id);
+        $stmt3->execute();
+        $data = $stmt3->fetchAll( PDO::FETCH_NUM );
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+        }
+        return $result;
+}
+
+function upVote($userid, $post_id, $comment_id){
+    $conn = connect();
+    if ($post_id==""){
+        $r = hasVotedComment($comment_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        } else {
+        $sql = "UPDATE comment SET Upvote = Upvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $comment_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Comment_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $comment_id);
+        $stmt2->execute();
+        }
+    } else if ($comment_id==""){
+        $r = hasVotedPost($post_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE post SET Upvote = Upvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $post_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Post_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $post_id);
+        $stmt2->execute();
+    }
+}
+
+function downVote($userid, $post_id, $comment_id){
+    $conn = connect();
+    if ($post_id==""){
+        $r = hasVotedComment($comment_id);
+        if ($r != 0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE comment SET Downvote = Downvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $comment_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Comment_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $comment_id);
+        $stmt2->execute();
+    } else if ($comment_id==""){
+        $r = hasVotedPost($post_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE post SET Downvote = Downvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $post_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Post_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $post_id);
+        $stmt2->execute();
+    }
+}
 ?>
