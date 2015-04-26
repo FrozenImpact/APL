@@ -143,7 +143,7 @@ function getAllPosts($category_name, $searchstring)
         $stmt->bindValue(1, $search);
         $stmt->bindValue(2, $search);
     } elseif ($searchstring == "") {
-        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? ORDER BY posted DESC LIMIT 20";
+        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? ORDER BY posted DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $category_name);
     } else {
