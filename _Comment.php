@@ -1,12 +1,14 @@
 <?php
 class Comment {
+	private $id;
 	private $sisu;
 	private $autor;
 	private $kuup2ev;
 	private $skoor;
 	private $fbUser;
 	
-	public function __construct ($sisu, $author, $date, $score) {
+	public function __construct ($id, $sisu, $author, $date, $score) {
+	$this->id = $id;
 	$this->sisu = $sisu;
 	if ($sisu == ""){
 		$this->sisu = "-";
@@ -38,7 +40,7 @@ class Comment {
 		echo '
 		<div class="postBox">	
 			<div class="voteBox">
-				<a class="s1" href="#"><img class="mid"" src="img/upV.png" width="30" height="30" alt="" /></a>
+				<a class="s1" id="vote'.$this->id.'"><img class="mid"" src="img/upV.png" width="30" height="30" alt="" /></a>
 			</div>
 		
 			<div class="postDataBox">

@@ -1,13 +1,12 @@
 <?php
 // priit lisas
 function formatDate($str){
-	$space = explode(" ", $str);
-	$minus = explode("-", $space[0]);
-	$colon = explode(":", $space[1]);
-	return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
+    $space = explode(" ", $str);
+    $minus = explode("-", $space[0]);
+    $colon = explode(":", $space[1]);
+    return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
 }
-
-	
+    
 function connect()
 {
     // DB connection info
@@ -32,19 +31,30 @@ function connect()
     
     return $conn;
 }
-function addUser($username, $password)
+function addUser($username, $password, $Profilepicture)
 {
     $conn = connect();
-    if ($password==""){
+    if ($password=="" and $Profilepicture==""){
         $sql = "INSERT INTO User (Name) VALUES (?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $username);
     }
-    else {
+    else if ($Profilepicture==""){
         $sql = "INSERT INTO User (Name, Password) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $username);
         $stmt->bindValue(2, $password);
+    } else if ($password=="") {
+        $sql = "INSERT INTO User (Name, Profilepicture) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $Profilepicture);
+    } else{
+        $sql = "INSERT INTO User (Name, Password, Profilepicture) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $password);
+        $stmt->bindValue(3, $Profilepicture);
     }
     $stmt->execute();
 }
@@ -132,7 +142,7 @@ function getAllPosts($category_name, $searchstring)
         $stmt->bindValue(1, $search);
         $stmt->bindValue(2, $search);
     } elseif ($searchstring == "") {
-        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? ORDER BY posted DESC LIMIT 20";
+        $sql = "SELECT * FROM post JOIN category ON category.id=category WHERE category.name = ? ORDER BY posted DESC";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $category_name);
     } else {
@@ -166,7 +176,7 @@ function getAllComments($post_id)
 function getUserById($user_id)
 {
     $conn = connect();
-    $sql = "SELECT Name, Password, Joined FROM user WHERE ID = ? ";
+    $sql = "SELECT Name, Password, Joined, Profilepicture FROM user WHERE ID = ? ";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $user_id);
     $stmt->execute();
@@ -176,8 +186,6 @@ function getUserById($user_id)
     // }
     return $data;
 }
-
-
 //userExists(username, password); tagastab user_id, kui userit pole tagastab 0
 //fbUserHasLoggedOnBefore(username); tagastab user_id, kui pole varem sisse loginud tagastab 0
 function userExists($username, $password)
@@ -232,4 +240,155 @@ foreach($data as $row){
     echo $row['name']."<br>";
 }
 */
+//tagastab tabeli post+comment, uuemad on eespool
+function getUserPostsandComments($username){
+    $conn = connect();
+    $sql = "SELECT post.id, Description, Null as Content, Category, User_ID, Posted, Heading, Null as Post_ID, Downvote, Upvote  FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name= ?
+            UNION
+            SELECT comment.id, Null as Description, Content, Null as Category, User_ID, Posted, Null as Heading, Post_ID, Upvote, Downvote FROM comment INNER JOIN user ON User_ID=user.ID WHERE user.name= ? ORDER BY posted DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $username);
+    $stmt->bindValue(2, $username);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+function numberofCommentsandPostsbyUser($username){
+    $conn = connect();
+    $sql = "SELECT count(*) as 'summa' from(SELECT post.id, Description, Category, User_ID, Posted, Heading, Downvote, Upvote FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name=?
+            UNION
+            SELECT comment.id, Content, Null as Category, User_ID, Posted, Post_ID, Upvote, Downvote FROM comment INNER JOIN user ON User_ID=user.ID WHERE user.name=? ORDER BY posted ASC) as tem";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $username);
+    $stmt->bindValue(2, $username);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+//kontrollib, kas pärast mingit kellaaega on postitusi lisatud, time on string 'aaaa-kk-pp tt:mm:ss', kellaaja või kellaaja sekundid võib lisamata jätta, kui vaja pole
+//tagastab null, kui pole lisatud pärast seda kellaaega
+function postsAddedAfterTime($time){
+    $conn = connect();
+    $sql = "SELECT * FROM post WHERE Posted>?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $time);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
+    return $data;
+}
+function hasVotedComment($comment_id){
+        $conn = connect();
+        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Comment_ID= ?) , 0)";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bindValue(1, $comment_id);
+        $stmt3->execute();
+        $data = $stmt3->fetchAll( PDO::FETCH_NUM );
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+        }
+        return $result;
+}
+function hasVotedPost($post_id){
+        $conn = connect();
+        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Post_ID= ?) , 0)";
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->bindValue(1, $post_id);
+        $stmt3->execute();
+        $data = $stmt3->fetchAll( PDO::FETCH_NUM );
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+        }
+        return $result;
+}
+function upVote($userid, $post_id, $comment_id){
+    $conn = connect();
+    if ($post_id==""){
+        $r = hasVotedComment($comment_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        } else {
+        $sql = "UPDATE comment SET Upvote = Upvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $comment_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Comment_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $comment_id);
+        $stmt2->execute();
+        }
+    } else if ($comment_id==""){
+        $r = hasVotedPost($post_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE post SET Upvote = Upvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $post_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Post_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $post_id);
+        $stmt2->execute();
+    }
+}
+function downVote($userid, $post_id, $comment_id){
+    $conn = connect();
+    if ($post_id==""){
+        $r = hasVotedComment($comment_id);
+        if ($r != 0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE comment SET Downvote = Downvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $comment_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Comment_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $comment_id);
+        $stmt2->execute();
+    } else if ($comment_id==""){
+        $r = hasVotedPost($post_id);
+        if ($r!=0){
+            return "Oled seda juba vote'inud";
+        }
+        $sql = "UPDATE post SET Downvote = Downvote + 1 WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(1, $post_id);
+        $stmt->execute();
+        $sql2 = "INSERT INTO votes(User_ID, Post_ID) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(1, $userid);
+        $stmt2->bindValue(2, $post_id);
+        $stmt2->execute();
+    }
+}
+function numberOfComments($userid){
+    $conn = connect();
+    $sql = "select count(*) from comment where User_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $userid);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_NUM );
+    foreach($data as $row){
+        $result = $row[0];
+    }
+    return $result;
+}
+function numberOfPosts($userid){
+    $conn = connect();
+    $sql = "select count(*) from post where User_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(1, $userid);
+    $stmt->execute();
+    $data = $stmt->fetchAll( PDO::FETCH_NUM );
+    foreach($data as $row){
+        $result = $row[0];
+    }
+    return $result;
+}
 ?>

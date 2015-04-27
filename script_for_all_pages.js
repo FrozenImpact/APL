@@ -38,7 +38,7 @@ $(document).ready(function() {
 	});
 	
 	
-	
+	/*
 	//suur otsing ülemise riba paremas servas
 	var search2 = $("#searchBig");
 	$("#searchBig").keyup(function() {		
@@ -65,5 +65,5 @@ $(document).ready(function() {
 			$('#priit').fadeOut();
 		//}, 200);
 	});		
-	
+	*/
 });

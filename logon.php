@@ -10,6 +10,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="facebook.js"></script>	
+<div class="center-wrapper_">
 
 <?php
 	session_start();
@@ -26,11 +27,26 @@
 		else{
 			// TÄHELEPANU! Laimis, muuda järgnevat rida ka. Mida öelda kasutajale kes sisestab vale nime/parooli. echo ülakomade vahele võib lisada mis iganes dive, uusi ridu jms.
 			// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-			echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
+			echo '<a style="color:red;">Sisestati vale või puudulik info.</a><br/>';
 			// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		}
 	}
-
+	
+	// kas fesari nuppu on vajutatud?
+	if (isset($_POST['fb'])){
+		if (userExists ($_POST['fb'], "") != 0){
+			$_SESSION['login_user']= $_POST['fb'];
+			$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+		}
+		else{
+			addUser($_POST['fb'], "");
+			$_SESSION['login_user']= $_POST['fb'];
+			$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+		}
+		 
+	}
+		
+		
 	// kas kasutaja on sisse logitud
 	if (isset( $_SESSION['login_user'] )){
 		if (isset($_GET['newpost'])){
@@ -53,16 +69,14 @@
 ?>
 
 
-<div class="center-wrapper_">
 
 	<a style="color:white;">Selle lehekülje nägemiseks peate olema sisse logitud.<br/></a>
 	<form method="POST" id="login_form" style="display: inline;">
-		<input type="text" size="15" maxlength="15" value="" placeholder="Kasutajanimi" style="color:black" id="Username" name="login_username" ><br/>
-		<input type="password" size="15" maxlength="15" value="" placeholder="Parool" style="color:black" name="login_password" ><br/>	
+		<input class="loginField" type="text" size="15" maxlength="15" value="<?php if (isset($_POST['login_username'])) echo $_POST['login_username']; ?>" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
+		<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['login_password'])) echo $_POST['login_password']; ?>" placeholder="Parool" name="login_password" ><br/><br/>
 		<input class="n2 rightLink" type="submit" name="login_button" id="login_button" value="Logi sisse">
 
 	</form>	
-
 	<input class="n2 rightLink" type="button" name="facebook" id="facebook" value="Facebook">
 	<a href="index.php?kontoloomine=true" class="rightLink" id="makeacc">Looge konto</a>
 

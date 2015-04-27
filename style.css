@@ -210,7 +210,6 @@ h{
 .upUpRightRight{
         margin-top:17px;
         text-align:center;
-        background:red;
 }
 .upUpRightLeft{
         display: table;
@@ -219,6 +218,15 @@ h{
         float:left;
         border-top:1px solid #000000;
         margin-top:17px;
+        text-align:center;
+}
+ 
+.upUpRightLeft2{
+        display: table;
+        table-layout: fixed;
+        width:125px;
+        float:left;
+        margin-top:13px;
         text-align:center;
 }
  
@@ -490,7 +498,12 @@ h{
 /*SEARCH TRINKET*/
 input {
         outline: none;
-        color:#fff;
+        color:#999;
+}
+ 
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+        display: none;
 }
 input[class=search] {
         -webkit-appearance: textfield;
@@ -498,11 +511,6 @@ input[class=search] {
         font-family: inherit;
         font-size: 100%;
 }
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-        display: none;
-}
- 
 input[class=search] {
         background: url('img/search-icon.png') no-repeat 9px center;
         border: solid 1px #20538D;
@@ -601,6 +609,32 @@ input[class=search2]:focus {
         -moz-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
         box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
 }
+ 
+input[class=loginField] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        font-family: inherit;
+        font-size: 100%;
+}
+input[class=loginField] {
+                margin-top: 5px;
+        background-color:#222222;
+        border: solid 1px #20538D;
+        padding: 2px 2px 2px 10px;
+               
+                -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.25);
+               
+}
+input[class=loginField]:focus {
+        background-color: #1E1E1E;
+       
+        -webkit-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.75);
+}
+ 
 #searchMain input[class=search2] {
         float:right;
         width: 15px;
