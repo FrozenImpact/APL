@@ -31,8 +31,10 @@ $(document).ready(function() {
 	});
 	
 	// new post
-	$("#title").val($.cookie("example2"))
+	//char[] alphabet = "abcdefghijklmnopqrsšzžtuvwxyõäöü1234567890".toCharArray();
+	$("#title").val($.cookie("example2"));
 	$("#title").keyup(function() {
+		
 		$.cookie("example2", $("#title").val());
 	});
 	

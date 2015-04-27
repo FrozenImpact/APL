@@ -1,4 +1,6 @@
 <?php
+require_once 'db/sql_functions.php';
+
 class Post {
 	private $id;
 	private $tiitel;
@@ -26,13 +28,27 @@ class Post {
 		$upmod = "'upmod'";
 		$downmod = "'downmod'";
 		
+		
+		if ( isset( $_SESSION['login_user']) ){
+			$onClickScript = 'onclick="$.post( 
+		\'upvote.php\', 
+		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
+		function( data ){ 
+		});this.classList.toggle( '.$upmod.' ); "';
+		}
+		else{
+			$userMessage = "'Only avaiable to registered users.'";
+			$onClickScript = 'onclick="alert('.$userMessage.')"';
+		}
+
+		
 		echo '
 			<div class="postBoxRow" id="postBoxRow">
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
 			<div class="voteBox">
-					<a id="upvote" href="#" onclick="this.classList.toggle( '.$upmod.' );"><span></span></a>
+					<a id="upvote" '.$onClickScript.' ><span></span></a>
 				
 			</div>
 			<div class="postDataBox">	
@@ -42,7 +58,7 @@ class Post {
 				</div>
 				<div class="postDataBoxDown">
 					<div class="dataComments">	
-						<h>Replies: ??</h>
+						<h>Replies: '.count(getAllComments($this->id)).'</h>
 						
 					</div>
 					<div class="dataScore">	
@@ -56,14 +72,18 @@ class Post {
 				</div>			
 			</div>			
 			<div class="voteBox">
-					<a id="downvote" href="#" onclick="this.classList.toggle( '.$downmod.' );"><span></span></a>
+					<a id="downvote" onclick="this.classList.toggle( '.$downmod.' );"><span></span></a>
 				
 			</div>				
 		</div>	
 	</div>
 		';
+		if ( isset( $_SESSION['login_user']) ){
+			if (   true ){
+			echo '<script>alert("gg");this.classList.toggle( '.$upmod.' );</script>';
+			}
+		}
 	}
-
 	public function draw_post_mini (){	
 			echo'<div class="downBoxRow1">
 				<a class="n1" href="index.php?lecture=' .$this->category. '&lehekylg=' .$this->tiitel. '&post_id=' .$this->id. '"><b>' .$this->tiitel. '</b></a>

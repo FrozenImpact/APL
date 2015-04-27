@@ -20,7 +20,7 @@
 			
 		// }
 		
-		// mitu postitust praegu näha saab?
+		//mitu postitust praegu näha saab?
 		$loendur=0;
 		for($i = $page*10; $i<($page*10)+10; $i++){
 			//echo '<font color="white">'.$i.'</font><br/>';

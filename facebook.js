@@ -1,7 +1,5 @@
 // facebook
 
-$.ajaxSetup({ cache: true });
-
 $.getScript('//connect.facebook.net/ee_ET/all.js', function(){
 	FB.init({
 		 appId: 901484619902464,
@@ -16,7 +14,11 @@ $.getScript('//connect.facebook.net/ee_ET/all.js', function(){
 
 $("#facebook").click(function() {
 	
+	$("#upUpRightLeft2").empty();
+	$("#upUpRightLeft2").append('<a style="color:white;">Loading...</a>');
 	//$( '#up').append(e);
+		
+		
 		
 		FB.login(function(response) {       
 				if (response.status === "connected") {
@@ -26,7 +28,7 @@ $("#facebook").click(function() {
 						//$("#login_form").submit();
 						
 						$.post( 
-							'index.php', 
+							window.location, 
 							{ fb: data.name }, 
 							function( data ){ 
 								location.reload();

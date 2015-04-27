@@ -20,9 +20,8 @@
 	}
 ?>
 <form method="POST" id="makeacc_form" style="display: inline;">
-	<input type="text" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_username'])) echo $_POST['makeacc_username']; ?>" placeholder="Kasutajanimi" style="color:black" name="makeacc_username" ><br/>
-	<input type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password'])) echo $_POST['makeacc_password']; ?>" placeholder="Parool" style="color:black" name="makeacc_password" ><br/>	
-	<input type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password2'])) echo $_POST['makeacc_password2']; ?>" placeholder="Korda parooli" style="color:black" name="makeacc_password2" ><br/>
+	<input class="loginField" type="text" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_username'])) echo $_POST['makeacc_username']; ?>" placeholder="Kasutajanimi" name="makeacc_username" ><br/>
+	<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password'])) echo $_POST['makeacc_password']; ?>" placeholder="Parool" name="makeacc_password" ><br/>	
+	<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['makeacc_password2'])) echo $_POST['makeacc_password2']; ?>" placeholder="Korda parooli" name="makeacc_password2" ><br/>
 	<input class="n2 rightLink" type="submit" name="makeacc_button" id="makeacc_button" value="Loo">
-
 </form>	

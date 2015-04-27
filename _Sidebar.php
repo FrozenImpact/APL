@@ -3,11 +3,25 @@
 class Sidebar {
 private $username;
 private $fbUser;
-	public function __construct ($username, $fbUser) {
+private $posts;
+private $comments;
+
+public function __construct ($username, $fbUser) {
 	$this->username = $username;
 	$this->fbUser = $fbUser;
 	
 }
+
+public function setPosts($posts){
+	$this->posts = $posts;
+	
+}
+
+public function setComments($comments){
+	$this->comments = $comments;
+	
+}
+
 
 public function getLecture(){
 	if (isset($_GET['lecture'])){
@@ -27,14 +41,15 @@ public function draw_login_form (){
 			</div>	
 		
 			<div class="upUpRight">						
-				<div class="upUpRightLeft">
+				<div class="upUpRightLeft2" id="upUpRightLeft2">
+				
 					<form method="POST" id="login_form" style="display: inline;">
-		
-							<input type="text" size="15" maxlength="15" value="" placeholder="Kasutajanimi" style="color:black" id="Username" name="login_username" ><br/>
-							<input type="password" size="15" maxlength="15" value="" placeholder="Parool" style="color:black" name="login_password" ><br/><br/>
+							<input class="loginField" type="text" size="12" maxlength="15" value="" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
+							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Parool" name="login_password" ><br/>
 							<input class="rightLink" type="submit" name="login_button" id="login_button" value="Log in"><br/><br/>
 					</form>	
-					<input class="n2 rightLink" type="button" name="facebook" id="facebook" value="Facebook">
+					
+						<a class="rightLink" id="facebook" >Facebook</a>
 				</div>
 				
 				<div class="upUpRightRight">				
@@ -87,11 +102,11 @@ echo'
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: ??</a></b>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: '.$this->posts.'</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: ??</b></a>
+						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: '.$this->comments.'</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				

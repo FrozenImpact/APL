@@ -17,17 +17,14 @@
 		else{
 			return '';
 	}
-}
 	
+	
+}
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="script_for_all_pages.js"></script>	
 <script src="facebook.js"></script>	
 
-
-
-
-<!-- _________________________________________________________________________________________________________ -->
 
 <div class="left" id="left">	
 
@@ -58,9 +55,7 @@
 				
 			</form>
 			
-			<div class="searchSuggestionBox" id="priit">
-				<!-- priidu loodud -->
-			</div>
+		<!--	<div class="searchSuggestionBox" id="priit"> </div>	-->
 		</div>
 	</div>
 	
@@ -78,33 +73,7 @@
 		
 		// search results page
 		if (isset($_GET['search'])){
-			echo '
-			<form method="GET">
-				<input type="search" class="search2" placeholder="Search SubPages" name="search" value="'.$_GET['search'].'">';
-				
-			if (isset($_GET['lecture'])){
-				echo '<input type="hidden" name="lecture" value="' . $_GET['lecture'] . '" />';
-			}
-			echo'</form>';
-			echo '<a style="color:white;">Otsingu "'.$_GET['search'].'" tulemused';
-			
-			if (isset($_GET['lecture'])){
-				$data = getAllPosts($_GET['lecture'], $_GET['search']);
-				echo ' kategoorias "'.$_GET['lecture'].'".</a>';
-			}
-			else{
-				echo ' kõigis kategooriates.</a>';
-				$data = getAllPosts("", $_GET['search']);
-			}
-			
-			foreach($data as $row){
-				$category = getCategoryName($row['Category']);
-				$post = new Post($row['ID'], $row['Heading'], $category, $row['Posted'], $row['Upvote']-$row['Downvote']);
-				$post->draw_post();
-				
-			}	
-		
-			
+			include_once 'search.php';
 		}
 		
 		// make profile page
@@ -155,6 +124,7 @@
 				$kogus+=1;
 	}
 			
+			
 			// echo 'Testimist abistavad ajutised lingid:<br/><br/>
 				// <a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
 			// echo '<a class="rightLink" href="workspacePost.php">workspacePost</a><br/><br/>';
@@ -182,6 +152,16 @@
 	<?php
 		
 		include_once '_Sidebar.php';
+				
+		// kas väljalogimisnuppu on vajutatud
+		if (isset( $_POST['logout_button'] ) ){
+			unset($_SESSION['login_user']); 
+			unset($_SESSION['login_user_id']);
+			unset($_POST['logout_button']);
+			
+		}
+		
+		
 		
 		// kas sisselogimisnuppu on vajutatud
 		if (isset( $_POST['login_button'] )){
@@ -194,7 +174,9 @@
 				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
 			}
 		}
-		else if (isset($_POST['fb'])){
+		
+		// kas fesari nuppu on vajutatud?
+		if (isset($_POST['fb'])){
 			if (userExists ($_POST['fb'], "") != 0){
 				$_SESSION['login_user']= $_POST['fb'];
 				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
@@ -206,13 +188,7 @@
 			}
 			 
 		}
-		
-		// kas väljalogimisnuppu on vajutatud
-		if (isset( $_POST['logout_button'] )){
-			unset($_SESSION['login_user']); 
-			unset($_SESSION['login_user_id']); 
-		}
-		
+
 
 		
 		// kas kasutaja on sisse logitud
@@ -225,8 +201,10 @@
 			else{
 				$fbUser = false;
 			}
-			
+
 			$sidebar = new Sidebar($_SESSION['login_user'], $fbUser);
+			$sidebar->setPosts( numberOfPosts($_SESSION['login_user_id']) );
+			$sidebar->setComments( numberOfComments($_SESSION['login_user_id']) );
 			$sidebar->draw_sidebar_top();
 		}
 		// kui ei siis n2ita sisselogimisnuppu
@@ -248,7 +226,7 @@
 					else{
 						echo '';
 					}				
-				?>" onkeyup="submit" name="class_search_entry" id="class_search_entry" size="15" maxlength="15">
+				?>" name="class_search_entry" id="class_search_entry" placeholder="Search SubPages" size="15" maxlength="15">
 			</form>
 			</div>
 			
