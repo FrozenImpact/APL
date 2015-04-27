@@ -6,7 +6,6 @@ function formatDate($str){
     $colon = explode(":", $space[1]);
     return $minus[2].'.'.$minus[1].'.'.$minus[0].' '.$colon[0].':'.$colon[1].'';
 }
-
     
 function connect()
 {
@@ -187,8 +186,6 @@ function getUserById($user_id)
     // }
     return $data;
 }
-
-
 //userExists(username, password); tagastab user_id, kui userit pole tagastab 0
 //fbUserHasLoggedOnBefore(username); tagastab user_id, kui pole varem sisse loginud tagastab 0
 function userExists($username, $password)
@@ -243,9 +240,7 @@ foreach($data as $row){
     echo $row['name']."<br>";
 }
 */
-
 //tagastab tabeli post+comment, uuemad on eespool
-
 function getUserPostsandComments($username){
     $conn = connect();
     $sql = "SELECT post.id, Description, Null as Content, Category, User_ID, Posted, Heading, Null as Post_ID, Downvote, Upvote  FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name= ?
@@ -258,7 +253,6 @@ function getUserPostsandComments($username){
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
-
 function numberofCommentsandPostsbyUser($username){
     $conn = connect();
     $sql = "SELECT count(*) as 'summa' from(SELECT post.id, Description, Category, User_ID, Posted, Heading, Downvote, Upvote FROM post INNER JOIN user ON User_ID=user.ID WHERE user.name=?
@@ -271,8 +265,6 @@ function numberofCommentsandPostsbyUser($username){
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
-
-
 //kontrollib, kas pärast mingit kellaaega on postitusi lisatud, time on string 'aaaa-kk-pp tt:mm:ss', kellaaja või kellaaja sekundid võib lisamata jätta, kui vaja pole
 //tagastab null, kui pole lisatud pärast seda kellaaega
 function postsAddedAfterTime($time){
@@ -284,42 +276,35 @@ function postsAddedAfterTime($time){
     $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     return $data;
 }
-
 function hasVotedComment($comment_id){
         $conn = connect();
-        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Comment_ID= ?) , 0)";
+        $sql3 = "SELECT User_ID FROM votes WHERE Comment_ID= ?";
         $stmt3 = $conn->prepare($sql3);
         $stmt3->bindValue(1, $comment_id);
         $stmt3->execute();
         $data = $stmt3->fetchAll( PDO::FETCH_NUM );
-        foreach ($data as $row)
-        {
-            $result = $row[0];
-        }
-        return $result;
+        return $data;
 }
-
 function hasVotedPost($post_id){
         $conn = connect();
-        $sql3 = "SELECT IFNULL( (SELECT User_ID FROM votes WHERE Post_ID= ?) , 0)";
+        $sql3 = "SELECT User_ID FROM votes WHERE Post_ID= ?";
         $stmt3 = $conn->prepare($sql3);
         $stmt3->bindValue(1, $post_id);
         $stmt3->execute();
         $data = $stmt3->fetchAll( PDO::FETCH_NUM );
-        foreach ($data as $row)
-        {
-            $result = $row[0];
-        }
-        return $result;
+        return $data;
 }
-
 function upVote($userid, $post_id, $comment_id){
     $conn = connect();
     if ($post_id==""){
-        $r = hasVotedComment($comment_id);
-        if ($r!=0){
-            return "Oled seda juba vote'inud";
-        } else {
+        $data = hasVotedComment($comment_id);
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+            if ($result==$userid){
+                return "Oled seda juba vote'inud";
+            }
+        }
         $sql = "UPDATE comment SET Upvote = Upvote + 1 WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(1, $comment_id);
@@ -329,11 +314,15 @@ function upVote($userid, $post_id, $comment_id){
         $stmt2->bindValue(1, $userid);
         $stmt2->bindValue(2, $comment_id);
         $stmt2->execute();
-        }
+        
     } else if ($comment_id==""){
-        $r = hasVotedPost($post_id);
-        if ($r!=0){
-            return "Oled seda juba vote'inud";
+        $data = hasVotedPost($post_id);
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+            if ($result==$userid){
+                return "Oled seda juba vote'inud";
+            }
         }
         $sql = "UPDATE post SET Upvote = Upvote + 1 WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -346,13 +335,16 @@ function upVote($userid, $post_id, $comment_id){
         $stmt2->execute();
     }
 }
-
 function downVote($userid, $post_id, $comment_id){
     $conn = connect();
     if ($post_id==""){
-        $r = hasVotedComment($comment_id);
-        if ($r != 0){
-            return "Oled seda juba vote'inud";
+        $data = hasVotedComment($comment_id);
+        foreach ($data as $row)
+        {
+            $result = $row[0];
+            if ($result==$userid){
+                return "Oled seda juba vote'inud";
+            }
         }
         $sql = "UPDATE comment SET Downvote = Downvote + 1 WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -364,9 +356,12 @@ function downVote($userid, $post_id, $comment_id){
         $stmt2->bindValue(2, $comment_id);
         $stmt2->execute();
     } else if ($comment_id==""){
-        $r = hasVotedPost($post_id);
-        if ($r!=0){
-            return "Oled seda juba vote'inud";
+        $data = hasVotedPost($post_id);
+        foreach ($data as $row){
+            $result = $row[0];
+            if ($result==$userid){
+                return "Oled seda juba vote'inud";
+            }
         }
         $sql = "UPDATE post SET Downvote = Downvote + 1 WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -379,7 +374,6 @@ function downVote($userid, $post_id, $comment_id){
         $stmt2->execute();
     }
 }
-
 function numberOfComments($userid){
     $conn = connect();
     $sql = "select count(*) from comment where User_ID=?";
@@ -392,7 +386,6 @@ function numberOfComments($userid){
     }
     return $result;
 }
-
 function numberOfPosts($userid){
     $conn = connect();
     $sql = "select count(*) from post where User_ID=?";
