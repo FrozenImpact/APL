@@ -30,25 +30,35 @@ class Post {
 		
 		
 		if ( isset( $_SESSION['login_user']) ){
-			$onClickScript = 'onclick="$.post( 
+			$onClickScriptUp = 'onclick="$.post( 
 		\'upvote.php\', 
 		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
 		});this.classList.toggle( '.$upmod.' ); "';
+		
+			$onClickScriptDown = 'onclick="$.post( 
+		\'downvote.php\', 
+		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
+		function( data ){ 
+		});this.classList.toggle( '.$downmod.' ); "';
 		}
 		else{
 			$userMessage = "'Only avaiable to registered users.'";
-			$onClickScript = 'onclick="alert('.$userMessage.')"';
+			$onClickScriptUp = 'onclick="alert('.$userMessage.')"';
+			$onClickScriptDown = 'onclick="alert('.$userMessage.')"';
 		}
 
-		
+		// replies: '.count(getAllComments($this->id)).'
+		// <a id="upvote" '.$onClickScriptUp.' ><span></span></a>
+		// <a id="downvote" '.$onClickScriptDown.' ><span></span></a>
 		echo '
-			<div class="postBoxRow" id="postBoxRow">
+			<div class="postBoxRow">
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
 			<div class="voteBox">
-					<a id="upvote" '.$onClickScript.' ><span></span></a>
+				
+				<a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/upV.png" width="50" height="50" alt="" /></a>
 				
 			</div>
 			<div class="postDataBox">	
@@ -58,31 +68,28 @@ class Post {
 				</div>
 				<div class="postDataBoxDown">
 					<div class="dataComments">	
-						<h>Replies: '.count(getAllComments($this->id)).'</h>
+						<a class="h">Replies: ??</a>
 						
 					</div>
 					<div class="dataScore">	
-						<i1>' .$this->score. '</i1>
+						<a class="i1">' .$this->score. '</a>
 						
 					</div>				
 					<div class="dataDate">	
-						<h>' .$this->postDate. '</h>
+						<a class="h">' .$this->postDate. '</a>
 						
 					</div>
 				</div>			
 			</div>			
 			<div class="voteBox">
-					<a id="downvote" onclick="this.classList.toggle( '.$downmod.' );"><span></span></a>
+				
+				<a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/downV.png" width="50" height="50" alt="" /></a>
 				
 			</div>				
 		</div>	
 	</div>
 		';
-		if ( isset( $_SESSION['login_user']) ){
-			if (   true ){
-			echo '<script>alert("gg");this.classList.toggle( '.$upmod.' );</script>';
-			}
-		}
+
 	}
 	public function draw_post_mini (){	
 			echo'<div class="downBoxRow1">

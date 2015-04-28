@@ -25,10 +25,8 @@
 			$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 		}
 		else{
-			// TÄHELEPANU! Laimis, muuda järgnevat rida ka. Mida öelda kasutajale kes sisestab vale nime/parooli. echo ülakomade vahele võib lisada mis iganes dive, uusi ridu jms.
-			// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+			// vigane sisend
 			echo '<a style="color:red;">Sisestati vale või puudulik info.</a><br/>';
-			// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		}
 	}
 	

@@ -34,7 +34,6 @@ $(document).ready(function() {
 	//char[] alphabet = "abcdefghijklmnopqrsšzžtuvwxyõäöü1234567890".toCharArray();
 	$("#title").val($.cookie("example2"));
 	$("#title").keyup(function() {
-		
 		$.cookie("example2", $("#title").val());
 	});
 	
@@ -46,7 +45,7 @@ $(document).ready(function() {
 	// kasutaja informeerimine võrguühenduse katkemisest
 	setInterval(function(){
 		checkConnection();
-	}, 1000);
+	}, 1500);
 	
 	
 /* 	$("#scroller1").scroll(function () {

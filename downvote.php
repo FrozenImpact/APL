@@ -15,11 +15,11 @@ else{
 }
 
 include_once 'db/sql_functions.php';
-upVote($_POST['usr'], $postid, $commid);
+downVote($_POST['usr'], $postid, $commid);
 
 
 // $fp = fopen('vote_log.txt', 'a+');
-// fwrite($fp, "upvoted post_id: ".$postid.", user_id: ".$_POST['usr'].", comment_id: ".$commid);
+// fwrite($fp, "upvoted post_id: ".$_POST['id'].", user_id: ".$_POST['usr']);
 // fwrite($fp, ''. PHP_EOL .'');
 // fclose($fp);
 ?>

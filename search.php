@@ -47,7 +47,7 @@
 			$lec="";
 		}
 		
-		echo '<br/><a href="index.php?search='.$_GET['search'].''.$lec.'&page='.$pagePlusOne.'" class="rightLink" id="makeacc">Next page</a><div class="separator1"></div>';
+		echo '<br/><a href="index.php?search='.$_GET['search'].''.$lec.'&page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
 	}
 	else if ($loendur==0){
 		echo '<a style="color:white;"><br/>There seems to be nothing here...</a>';

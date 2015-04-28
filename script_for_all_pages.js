@@ -11,6 +11,8 @@ function readClasses() {
 	});
 }
 
+ 
+
 $(document).ready(function() {
 	
 	// ainete filter paremal all

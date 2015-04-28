@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '_Comment.php';
 include_once 'db/sql_functions.php';
 

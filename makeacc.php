@@ -1,5 +1,4 @@
 <?php
-	// Laimis, muuda kõik echo read ka, lisa sinna ülakomade vahele mis iganes dive, uusi ridu jms.
 	if (isset( $_POST['makeacc_button'] )){
 		if (userExists($_POST['makeacc_username'], "")==0){
 			if (stripos ($_POST['makeacc_password'], $_POST['makeacc_password2']) !== false){

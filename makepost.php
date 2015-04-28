@@ -13,19 +13,16 @@ function perioodiliselt_tehtav() {
 	}
 
 	if (isset($_GET['lecture'])) {
-		// PEAMINE LEHEKÜLG. Sellel lehel oli keeruline html-i eraldada. echo ülakomade sisse võib kirjutada misiganes dive, uusi ridu jms.
-		// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 		echo'
 		<div class="selfComment">	
 			<form method="POST">
-				<textarea rows="1" cols="68" placeholder="Insert the title of your post here..." value="" name="title" id="title" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>	
+				<textarea rows="1" cols="68" placeholder="Insert the title of your post here..." name="title" id="title" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>	
 				<input type="hidden" name="action" value="new_entry"/>
-				<textarea rows="6" cols="68" placeholder="Insert the content of your post here..." value="" name="kehatekst" id="kehatekst" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
+				<textarea rows="6" cols="68" placeholder="Insert the content of your post here..." name="kehatekst" id="kehatekst" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
 				<input class="rightLink" type="submit" value="Post"/>
 			</form>	
 		</div>
 		';
-		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	}
 	else{
 		// Lehekülg, kui õppeaine on valimata
@@ -36,7 +33,6 @@ function perioodiliselt_tehtav() {
 	if (isset($_POST['action'])) {
 		$uusid = save($_POST);
 		// success message
-		// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 		echo '<a style="color:white;">Postitus loodud.</a>';
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		echo "<script type='text/javascript'>$.removeCookie('example2');</script>";

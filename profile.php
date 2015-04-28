@@ -51,22 +51,45 @@
 <a style="color:white;">Username: <?php echo $fbIcon. '' .$username; ?><br/>
 			Posts:  <?php echo numberOfPosts($userInfoBig); ?><br/>
 			Comments: <?php echo numberOfComments($userInfoBig); ?><br/></a>
-
+			<div class="separator1"></div>
 			
 <?php 
 			
 	$data = getUserPostsandComments($username);
-	foreach($data as $row){
-		if ($row['Content'] == null){
-			$category = getCategoryName($row['Category']);
-			$post = new Post($row['Post_ID'], $row['Heading'], $category, $row['Posted'], $row['Upvote']-$row['Downvote']);
-			$post->draw_post();
-		}
-		else if ($row['Description'] == null){
-			$user = getUserById($row['User_ID']);
-			$comment = new Comment($row['Content'], $user, $row['Posted'], $row['Upvote']-$row['Downvote']);
-			$comment->draw_comment();
+	if (!isset($_GET['page'])){
+		$page=0;
+	}
+	else{
+		$page=$_GET['page'];
+	}
+	
+	$loendur=0;
+	for($i = $page*10; $i<($page*10)+10; $i++){
+		//echo '<font color="white">'.$i.'</font><br/>';
+		if (isset($data[$i])){
+			$loendur++;
+			if ($data[$i]['Content'] == null){
+				$category = getCategoryName($data[$i]['Category']);
+				$post = new Post($data[$i]['id'], $data[$i]['Heading'], $category, $data[$i]['Posted'], $data[$i]['Upvote']-$data[$i]['Downvote']);
+				$post->draw_post();
+			}
+			else if ($data[$i]['Description'] == null){
+				$user = getUserById($data[$i]['User_ID']);
+				$comment = new Comment($data[$i]['id'],$data[$i]['Content'], $user, $data[$i]['Posted'], $data[$i]['Upvote']-$data[$i]['Downvote']);
+				$comment->setParentPostId ($data[$i]['Post_ID']);
+				$comment->draw_comment();
+			}
 		}
 	}
+	if ($loendur>=10){
+		$pagePlusOne=$page+1;
+		echo '<br/><a href="index.php?profile='.$_GET['profile'].'&page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
+	}
+	else if ($loendur==0){
+		echo '<a style="color:white;"><br/>There seems to be nothing here...</a>';
+	}
+	
+	
+
 
 ?>			

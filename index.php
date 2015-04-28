@@ -9,7 +9,43 @@
 <?php
 	session_start();
 	include_once 'db/sql_functions.php';
-
+				
+	// kas väljalogimisnuppu on vajutatud
+	if (isset( $_POST['logout_button'] ) ){
+		unset($_SESSION['login_user']); 
+		unset($_SESSION['login_user_id']);
+		unset($_POST['logout_button']);
+		
+	}
+	
+	
+	
+	// kas sisselogimisnuppu on vajutatud
+	if (isset( $_POST['login_button'] )){
+		//$fbUser = false;
+		if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
+			$_SESSION['login_user']= $_POST['login_username']; 
+			$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
+		}
+		else{
+			echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
+		}
+	}
+	
+	// kas fesari nuppu on vajutatud?
+	if (isset($_POST['fb'])){
+		if (userExists ($_POST['fb'], "") != 0){
+			$_SESSION['login_user']= $_POST['fb'];
+			$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+		}
+		else{
+			addUser($_POST['fb'], "");
+			$_SESSION['login_user']= $_POST['fb'];
+			$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
+		}
+		 
+	}
+		
 	function getLecture(){
 		if (isset($_GET['lecture'])){
 			return '&lecture='.$_GET['lecture'].'';
@@ -70,6 +106,14 @@
 	<?php
 		
 		include_once '_Post.php';
+		
+		// post page small url
+		if (isset($_GET['p'])){
+			$post_data = getPost($_GET['p']);
+			$category = getCategoryName($post_data[0]['Category']);
+			echo '<script>window.location.href = "index.php?lecture='.$category.'&lehekylg='.$post_data[0]['Heading'].'&post_id='.$_GET['p'].'";</script>';
+			exit();
+		}
 		
 		// search results page
 		if (isset($_GET['search'])){
@@ -152,42 +196,7 @@
 	<?php
 		
 		include_once '_Sidebar.php';
-				
-		// kas väljalogimisnuppu on vajutatud
-		if (isset( $_POST['logout_button'] ) ){
-			unset($_SESSION['login_user']); 
-			unset($_SESSION['login_user_id']);
-			unset($_POST['logout_button']);
-			
-		}
-		
-		
-		
-		// kas sisselogimisnuppu on vajutatud
-		if (isset( $_POST['login_button'] )){
-			//$fbUser = false;
-			if (userExists ($_POST['login_username'], $_POST['login_password']) != 0){
-				$_SESSION['login_user']= $_POST['login_username']; 
-				$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
-			}
-			else{
-				echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
-			}
-		}
-		
-		// kas fesari nuppu on vajutatud?
-		if (isset($_POST['fb'])){
-			if (userExists ($_POST['fb'], "") != 0){
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			else{
-				addUser($_POST['fb'], "");
-				$_SESSION['login_user']= $_POST['fb'];
-				$_SESSION['login_user_id']= userExists ($_POST['fb'], "");
-			}
-			 
-		}
+
 
 
 		

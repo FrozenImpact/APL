@@ -40,7 +40,7 @@ echo '
 <div class="selfComment">	
 	<form method="POST">
 		<input type="hidden" name="action" value="new_entry"/>
-		<textarea rows="6" cols="68" value="" name="name" id="comment" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
+		<textarea rows="6" cols="68" name="name" id="comment" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
 		<input class="rightLink" type="submit" value="Reply"/>
 	</form>	
 </div>
@@ -58,6 +58,7 @@ if (isset($_POST['action'])) {
 }
 ?>
 <div id="comments">
+<a style="color:white;">Loading comments...</a>
 <script>perioodiliselt_tehtav();</script>
 </div>
 
