@@ -698,23 +698,23 @@ input[class=loginField]:focus {
  
  
  
-#upvote, #downvote {cursor: pointer; padding: 10px 35px 16px 0px; display: inline-block; margin-top:15px;}
+.upvote, .downvote {cursor: pointer; padding: 10px 35px 16px 0px; display: inline-block; margin-top:15px;}
  
-#upvote span, #upvote span:before, #upvote span:after,
-#downvote span, #downvote span:before, #downvote span:after {
+.upvote span, .upvote span:before, .upvote span:after,
+.downvote span, .downvote span:before, .downvote span:after {
   transition: all 300ms ease-in-out;
 }
  
-#upvote.upmod span {
+.upvote.upmod span {
   transform: rotate(450deg);
   background: #ff8b60;
 }
  
-#upvote.upmod span:before, #upvote.upmod span:after {
+.upvote.upmod span:before, .upvote.upmod span:after {
   top: 0;
 }
  
-#upvote.upmod span:before {
+.upvote.upmod span:before {
   transform: rotate(401deg);
   top: 6px;
   left: -4px;
@@ -722,7 +722,7 @@ input[class=loginField]:focus {
   background: #ff8b60;
 }
  
-#upvote.upmod span:after {
+.upvote.upmod span:after {
   transform: rotate(-401deg);
   top: -6px;
   left: -4px;
@@ -730,16 +730,16 @@ input[class=loginField]:focus {
   background: #ff8b60;
 }
  
-#downvote.downmod span {
+.downvote.downmod span {
   transform: rotate(-90deg);
   background: #9494ff;
 }
  
-#downvote.downmod span:before, #downvote.downmod span:after {
+.downvote.downmod span:before, .downvote.downmod span:after {
   top: 0;
 }
  
-#downvote.downmod span:before {
+.downvote.downmod span:before {
   transform: rotate(401deg);
   left: -4px;
   width: 20px;
@@ -747,7 +747,7 @@ input[class=loginField]:focus {
   background: #9494ff;
 }
  
-#downvote.downmod span:after {
+.downvote.downmod span:after {
   transform: rotate(-401deg);
   top: -6px;
   left: -3px;
@@ -756,7 +756,7 @@ input[class=loginField]:focus {
 }
  
 /*-----------UNCLICKED---------*/
-#upvote span {
+.upvote span {
   transform: rotate(90deg);
   background: grey;
   cursor: pointer;
@@ -768,7 +768,7 @@ input[class=loginField]:focus {
   content: '';
 }
  
-#upvote span:before, #upvote span:after {
+.upvote span:before, .upvote span:after {
   cursor: pointer;
   border-radius: 1px;
   height: 5px;
@@ -778,7 +778,7 @@ input[class=loginField]:focus {
   content: '';
 }
  
-#upvote span:before {
+.upvote span:before {
   transform: rotate(41deg);
   top: 6px;
   left: -4px;
@@ -786,7 +786,7 @@ input[class=loginField]:focus {
   background: grey;
 }
  
-#upvote span:after {
+.upvote span:after {
   transform: rotate(-41deg);
   top: -6px;
   left: -4px;
@@ -794,7 +794,7 @@ input[class=loginField]:focus {
   background: grey;
 }
  
-#downvote span {
+.downvote span {
         transform: rotate(270deg);
         background: #9494ff;
         cursor: pointer;
@@ -808,7 +808,7 @@ input[class=loginField]:focus {
         content: '';
 }
  
-#downvote span:before, #downvote span:after {
+.downvote span:before, .downvote span:after {
   top: 0;
   cursor: pointer;
         border-radius: 1px;
@@ -821,14 +821,14 @@ input[class=loginField]:focus {
         top: -10px;
 }
  
-#downvote span:before {
+.downvote span:before {
   transform: rotate(41deg);
   left: -4px;
   width: 20px;
   top: 5px;
 }
  
-#downvote span:after {
+.downvote span:after {
   transform: rotate(-41deg);
   top: -6px;
   left: -3px;

@@ -39,7 +39,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	
 	/*
 	//suur otsing ülemise riba paremas servas
 	var search2 = $("#searchBig");

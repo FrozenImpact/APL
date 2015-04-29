@@ -30,35 +30,40 @@ class Post {
 		
 		
 		if ( isset( $_SESSION['login_user']) ){
-			$onClickScriptUp = 'onclick="$.post( 
+			$onClickScriptUp = 'onclick="
+		$.post( 
 		\'upvote.php\', 
 		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
-		});this.classList.toggle( '.$upmod.' ); "';
+		});
+		this.classList.toggle( \'upmod\' ); "';
 		
 			$onClickScriptDown = 'onclick="$.post( 
 		\'downvote.php\', 
 		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
-		});this.classList.toggle( '.$downmod.' ); "';
+		});
+		this.classList.toggle( \'downmod\' ); "';
 		}
 		else{
 			$userMessage = "'Only avaiable to registered users.'";
-			$onClickScriptUp = 'onclick="alert('.$userMessage.')"';
-			$onClickScriptDown = 'onclick="alert('.$userMessage.')"';
+			$onClickScriptUp = 'onclick="alert(\'Only available to registered users.\')"';
+			$onClickScriptDown = 'onclick="alert(\'Only available to registered users.\')"';
 		}
 
 		// replies: '.count(getAllComments($this->id)).'
 		// <a id="upvote" '.$onClickScriptUp.' ><span></span></a>
+		// <a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/upV.png" width="50" height="50" alt="" /></a>
+		// <a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/downV.png" width="50" height="50" alt="" /></a>
 		// <a id="downvote" '.$onClickScriptDown.' ><span></span></a>
 		echo '
-			<div class="postBoxRow">
+	<div class="postBoxRow">
 		<div class="vertIcon">
 		</div>
 		<div class="postBox">	
 			<div class="voteBox">
+				<a id="upvote'.$this->id.'" class="upvote" '.$onClickScriptUp.' ><span></span></a>
 				
-				<a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/upV.png" width="50" height="50" alt="" /></a>
 				
 			</div>
 			<div class="postDataBox">	
@@ -82,8 +87,8 @@ class Post {
 				</div>			
 			</div>			
 			<div class="voteBox">
-				
-				<a class="s1" '.$onClickScriptUp.' ><img class="mid" src="img/downV.png" width="50" height="50" alt="" /></a>
+								
+				<a id="downvote'.$this->id.'" class="downvote" '.$onClickScriptDown.' ><span></span></a>
 				
 			</div>				
 		</div>	
