@@ -15,8 +15,11 @@ else{
 }
 
 include_once 'db/sql_functions.php';
-upVote($_POST['usr'], $postid, $commid);
+$vote = upVote($_POST['usr'], $postid, $commid);
 
+if ($vote=="Oled seda juba vote'inud"){
+	echo 'jah';
+}
 
 // $fp = fopen('vote_log.txt', 'a+');
 // fwrite($fp, "upvoted post_id: ".$postid.", user_id: ".$_POST['usr'].", comment_id: ".$commid);

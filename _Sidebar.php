@@ -25,7 +25,7 @@ public function setComments($comments){
 
 public function getLecture(){
 	if (isset($_GET['lecture'])){
-		return '&lecture='.$_GET['lecture'].'';
+		return '&amp;lecture='.urlencode($_GET['lecture']).'';
 	}
 	else{
 		return '';
@@ -43,7 +43,7 @@ public function draw_login_form (){
 			<div class="upUpRight">						
 				<div class="upUpRightLeft2" id="upUpRightLeft2">
 				
-					<form method="POST" id="login_form" style="display: inline;">
+					<form method="POST" id="login_form" class="formDontAffectLayout">
 							<input class="loginField" type="text" size="12" maxlength="15" value="" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
 							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Parool" name="login_password" ><br/>
 							<input class="rightLink" type="submit" name="login_button" id="login_button" value="Log in"><br/><br/>
@@ -82,7 +82,7 @@ public function draw_sidebar_top (){
 	if ($this->fbUser){
 		$fbIcon = '<img src="img/facebook-icon.png" alt="" width="15" height="15"/>';
 		$userNameDotsInsteadOfSpaces = str_replace(" ", ".", $this->username);
-		$userImageUrl = 'http://graph.facebook.com/'.$userNameDotsInsteadOfSpaces.'/picture?type=large';
+		$userImageUrl = 'http://graph.facebook.com/'.urlencode($userNameDotsInsteadOfSpaces).'/picture?type=large';
 	}
 	else{
 		$fbIcon = '';
@@ -98,15 +98,15 @@ echo'
 			<div class="upUpRight">		
 				<div class="upUpRightLeft">	
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>'.$fbIcon.''.$this->username.'</b></a>
+						<a class="m1" href="index.php?profile=' .urlencode($this->username). '"><b>'.$fbIcon.''.$this->username.'</b></a>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Posts: '.$this->posts.'</a></b>
+						<a class="m1" href="index.php?profile=' .urlencode($this->username). '"><b>Posts: '.$this->posts.'</a></b>
 					</div>
 					<div class="upUpRightBoxT"></div>
 					<div class="upUpRightBox">
-						<a class="m1" href="index.php?profile=' .$this->username. '"><b>Comments: '.$this->comments.'</b></a>
+						<a class="m1" href="index.php?profile=' .urlencode($this->username). '"><b>Comments: '.$this->comments.'</b></a>
 					</div>
 				</div>
 				<div class="upUpRightRight">				
@@ -114,7 +114,7 @@ echo'
 			</div>					
 		</div>
 		
-		<form method="POST" style="display: inline;">
+		<form method="POST" class="formDontAffectLayout">
 		
 			<div class="upDown">
 				<div class="upDownLeft">

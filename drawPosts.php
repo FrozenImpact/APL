@@ -33,10 +33,10 @@
 		}
 		if ($loendur>=10){
 			$pagePlusOne=$page+1;
-			echo '<br/><a href="index.php?lecture='.$_POST['lecture'].'&page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
+			echo '<br/><a href="index.php?lecture='.urlencode($_POST['lecture']).'&amp;page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
 		}
 		else if ($loendur==0){
-			echo '<a style="color:white;"><br/>There seems to be nothing here...</a>';
+			echo '<a class="w"><br/>There seems to be nothing here...</a>';
 		}
 	}
 ?>

@@ -46,9 +46,9 @@
 ?>
 <img src='<?php echo $userImageUrl ?>' alt="" style=''><br/>
 
-<a style="color:white;">Joined: <?php echo formatDate($userInfo['Joined']); ?> </a><br/>
+<a class="w">Joined: <?php echo formatDate($userInfo['Joined']); ?> </a><br/>
 
-<a style="color:white;">Username: <?php echo $fbIcon. '' .$username; ?><br/>
+<a class="w">Username: <?php echo $fbIcon. '' .$username; ?><br/>
 			Posts:  <?php echo numberOfPosts($userInfoBig); ?><br/>
 			Comments: <?php echo numberOfComments($userInfoBig); ?><br/></a>
 			<div class="separator1"></div>
@@ -83,10 +83,10 @@
 	}
 	if ($loendur>=10){
 		$pagePlusOne=$page+1;
-		echo '<br/><a href="index.php?profile='.$_GET['profile'].'&page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
+		echo '<br/><a href="index.php?profile='.urlencode($_GET['profile']).'&amp;page='.$pagePlusOne.'" class="rightLink" id="nextpage">Next page</a><div class="separator1"></div>';
 	}
 	else if ($loendur==0){
-		echo '<a style="color:white;"><br/>There seems to be nothing here...</a>';
+		echo '<a class="w"><br/>There seems to be nothing here...</a>';
 	}
 	
 	

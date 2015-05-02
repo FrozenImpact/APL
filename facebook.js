@@ -15,7 +15,7 @@ $.getScript('//connect.facebook.net/ee_ET/all.js', function(){
 $("#facebook").click(function() {
 	
 	$("#upUpRightLeft2").empty();
-	$("#upUpRightLeft2").append('<a style="color:white;">Loading...</a>');
+	$("#upUpRightLeft2").append('<a class="w">Loading...</a>');
 	//$( '#up').append(e);
 		
 		

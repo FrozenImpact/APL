@@ -15,7 +15,11 @@ else{
 }
 
 include_once 'db/sql_functions.php';
-downVote($_POST['usr'], $postid, $commid);
+$vote = downVote($_POST['usr'], $postid, $commid);
+
+if ($vote=="Oled seda juba vote'inud"){
+	echo 'jah';
+}
 
 
 // $fp = fopen('vote_log.txt', 'a+');

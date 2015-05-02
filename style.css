@@ -100,12 +100,43 @@ img.mid {
 .h{
         color:#999;
 }
- 
- 
+
+/* priidu lisatud, css lahususe nõue */
+y{
+	color:yellow;
+}
+upC{
+	color:#ff8b60;
+}
+downC{
+	color:#9494ff;
+}
+
+r{
+	color:red;
+}
+
+/* tavaline tekst, kirjutada <a class="w">, <w> ei ole lubatud html kehtivuses*/
+.w{
+	color:white;
+}
+.logon_body{
+	background-color:#222222;
+}
+.largeTextEntry{
+	color: white; 
+	background-color: #1E1E1E;
+}
+.formDontAffectLayout{
+	display: inline;
+}
+/* priidu lisatud ^^ */
+
+
 /*--------------EKRAANI JAOTAMINE---------------*/
  
  
-/*priidu loodud*/
+/*priidu loodud, obsolete, aga j2tta alles igaks juhuks*/
 .searchSuggestionBox{
         position : absolute;  
         border: 1px solid black;
@@ -142,11 +173,11 @@ img.mid {
 }
  
 .leftMain {
-                position: absolute;
-                top: 50px;
-                bottom: 0;
-                left: 0;
-                right: 400px;
+		position: absolute;
+		top: 50px;
+		bottom: 0;
+		left: 0;
+		right: 400px;
         overflow:auto;
         text-align:center;
         background:#222222;

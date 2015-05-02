@@ -6,7 +6,7 @@
 <title>APL</title>
 </head>
 
-<body style="background-color: #222222;">
+<body class="logon_body">
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="facebook.js"></script>	
@@ -26,7 +26,7 @@
 		}
 		else{
 			// vigane sisend
-			echo '<a style="color:red;">Sisestati vale või puudulik info.</a><br/>';
+			echo '<r>Sisestati vale või puudulik info.</r><br/>';
 		}
 	}
 	
@@ -49,14 +49,14 @@
 	if (isset( $_SESSION['login_user'] )){
 		if (isset($_GET['newpost'])){
 			if (isset($_GET['lecture'])){
-				echo '<script>window.location.href = "index.php?newpost=true&lecture=' .$_GET['lecture']. '";</script>';
+				echo '<script>window.location.href = "index.php?newpost=true&lecture=' .urlencode($_GET['lecture']). '";</script>';
 			}
 			else{
 				echo '<script>window.location.href = "index.php?newpost=true";</script>';
 			}
 		}
 		else if (isset($_GET['lecture']) && isset($_GET['lehekylg'])){				
-			echo '<script>window.location.href = "index.php?lecture=' .$_GET['lecture']. '&lehekylg=' .$_GET['lehekylg']. '&post_id=' .$_GET['post_id']. '";</script>';
+			echo '<script>window.location.href = "index.php?lecture=' .urlencode($_GET['lecture']). '&lehekylg=' .urlencode($_GET['lehekylg']). '&post_id=' .urlencode($_GET['post_id']). '";</script>';
 		}
 		else{				
 			echo '<script>window.location.href = "index.php";</script>';
@@ -68,8 +68,8 @@
 
 
 
-	<a style="color:white;">Selle lehekülje nägemiseks peate olema sisse logitud.<br/></a>
-	<form method="POST" id="login_form" style="display: inline;">
+	<a class="w">Selle lehekülje nägemiseks peate olema sisse logitud.<br/></a>
+	<form method="POST" id="login_form" class="formDontAffectLayout">
 		<input class="loginField" type="text" size="15" maxlength="15" value="<?php if (isset($_POST['login_username'])) echo $_POST['login_username']; ?>" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
 		<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['login_password'])) echo $_POST['login_password']; ?>" placeholder="Parool" name="login_password" ><br/><br/>
 		<input class="n2 rightLink" type="submit" name="login_button" id="login_button" value="Logi sisse">

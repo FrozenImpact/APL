@@ -16,9 +16,9 @@ function perioodiliselt_tehtav() {
 		echo'
 		<div class="selfComment">	
 			<form method="POST">
-				<textarea rows="1" cols="68" placeholder="Insert the title of your post here..." name="title" id="title" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>	
+				<textarea rows="1" cols="68" placeholder="Insert the title of your post here..." name="title" id="title" class="largeTextEntry" ></textarea><br><br/>	
 				<input type="hidden" name="action" value="new_entry"/>
-				<textarea rows="6" cols="68" placeholder="Insert the content of your post here..." name="kehatekst" id="kehatekst" style="color: white; background-color: #1E1E1E" ></textarea><br><br/>			
+				<textarea rows="6" cols="68" placeholder="Insert the content of your post here..." name="kehatekst" id="kehatekst" class="largeTextEntry" ></textarea><br><br/>			
 				<input class="rightLink" type="submit" value="Post"/>
 			</form>	
 		</div>
@@ -26,14 +26,14 @@ function perioodiliselt_tehtav() {
 	}
 	else{
 		// Lehekülg, kui õppeaine on valimata
-		echo '<a style="color:white;">Esmalt peate valima paremalt õppeaine.</a>';
+		echo '<a class="w">Esmalt peate valima paremalt õppeaine.</a>';
 	}
 
 
 	if (isset($_POST['action'])) {
 		$uusid = save($_POST);
 		// success message
-		echo '<a style="color:white;">Postitus loodud.</a>';
+		echo '<a class="w">Postitus loodud.</a>';
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		echo "<script type='text/javascript'>$.removeCookie('example2');</script>";
 		echo "<script type='text/javascript'>$.removeCookie('example3');</script>";

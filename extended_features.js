@@ -1,7 +1,9 @@
 // mõned lisaomadused, mida igal leheküljel vaja ei lähe, näiteks data push ja offline text editing
 function checkConnection() {
-	$.post('checkServerConnection.php', function(data){ 
-		$('#infobox').empty(); 
+	$.post('checkServerConnection.php', function(data){
+		if ($('#infobox').text().indexOf('TÄHELEPANU') > -1){
+			$('#infobox').empty();
+		}
 		perioodiliselt_tehtav();
 	});
 }
@@ -16,9 +18,9 @@ $(document).ready(function() {
 	error: function(xhr) {
 			$('#infobox').empty();
 			$( '#infobox').append( '\
-			<a style="color:red;">TÄHELEPANU: Ühendus serveriga katkes.\
+			<r>TÄHELEPANU: Ühendus serveriga katkes.\
 			Võite teksti kirjutamist jätkata, sest selle mustandit talletatakse teie arvutis.\
-			</a>\
+			</r>\
 			' );
 		}
 	})

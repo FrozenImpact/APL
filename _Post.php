@@ -34,21 +34,42 @@ class Post {
 		$.post( 
 		\'upvote.php\', 
 		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
-		function( data ){ 
+		function( data ){
+			if (data != \'jah\'){
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<upC>Upvoted post: '.$this->tiitel.'</upC>\' );
+			}
+			else{
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<y>You have already voted on this: '.$this->tiitel.'</y>\' );				
+			}			
 		});
-		this.classList.toggle( \'upmod\' ); "';
+		this.classList.toggle( \'upmod\' ); 
+
+		"';
 		
 			$onClickScriptDown = 'onclick="$.post( 
 		\'downvote.php\', 
 		{ id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
+			if (data != \'jah\'){
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<downC>Downvoted post: '.$this->tiitel.'</downC>\' );
+			}
+			else{
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<y>You have already voted on this: '.$this->tiitel.'</y>\' );				
+			}
 		});
-		this.classList.toggle( \'downmod\' ); "';
+		this.classList.toggle( \'downmod\' ); 
+
+		"';
 		}
 		else{
-			$userMessage = "'Only avaiable to registered users.'";
-			$onClickScriptUp = 'onclick="alert(\'Only available to registered users.\')"';
-			$onClickScriptDown = 'onclick="alert(\'Only available to registered users.\')"';
+			$onClickScriptUp = 'onclick="
+			$(\'#infobox\').empty();
+			$( \'#infobox\').append( \'<y>Voting is only available to registered users.</y>\' );"';
+			$onClickScriptDown = $onClickScriptUp;
 		}
 
 		// replies: '.count(getAllComments($this->id)).'
@@ -68,7 +89,7 @@ class Post {
 			</div>
 			<div class="postDataBox">	
 				<div class="postDataBoxUp">	
-					<a class="s1" href="index.php?lecture=' .$this->category. '&lehekylg=' .$this->tiitel. '&post_id=' .$this->id. '">' .$this->tiitel. '</a>
+					<a class="s1" href="index.php?lecture=' .urlencode($this->category). '&amp;lehekylg=' .urlencode($this->tiitel). '&amp;post_id=' .urlencode($this->id). '">' .$this->tiitel. '</a>
 					
 				</div>
 				<div class="postDataBoxDown">
@@ -96,9 +117,11 @@ class Post {
 		';
 
 	}
+	
+	// probably obsolete
 	public function draw_post_mini (){	
 			echo'<div class="downBoxRow1">
-				<a class="n1" href="index.php?lecture=' .$this->category. '&lehekylg=' .$this->tiitel. '&post_id=' .$this->id. '"><b>' .$this->tiitel. '</b></a>
+				<a class="n1" href="index.php?lecture=' .$this->category. '&amp;lehekylg=' .$this->tiitel. '&amp;post_id=' .$this->id. '"><b>' .$this->tiitel. '</b></a>
 			</div>';
 	}
 

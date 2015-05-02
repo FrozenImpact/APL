@@ -34,15 +34,15 @@ class Comment {
 	public function draw_comment (){
 		
 		if (isset($this->parentPostId)){
-			$urlLine = '<a class="n1" href="index.php?p='.$this->parentPostId.'"> Click here for OP </a>';
+			$urlLine = '<a class="n1" href="index.php?p='.urlencode($this->parentPostId).'"> Click here for OP </a>';
 		}	
 		else if ($this->fbUser){
 			$fbIcon = '<img src="img/facebook-icon.png" width="10" height="10"/>';
-			$urlLine = '<a class="n1" href="index.php?profile='.$this->autor.'">'.$fbIcon.''.$this->autor.' </a>';
+			$urlLine = '<a class="n1" href="index.php?profile='.urlencode($this->autor).'">'.$fbIcon.''.$this->autor.' </a>';
 		}
 		else{
 			//$fbIcon = '';
-			$urlLine = '<a class="n1" href="index.php?profile='.$this->autor.'">'.$this->autor.' </a>';
+			$urlLine = '<a class="n1" href="index.php?profile='.urlencode($this->autor).'">'.$this->autor.' </a>';
 		}
 		
 		
@@ -51,18 +51,35 @@ class Comment {
 		\'upvote.php\', 
 		{ comm_id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
+			if (data != \'jah\'){
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<upC>Upvoted comment: '.$this->sisu.'</upC>\' );
+			}
+			else{
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<y>You have already voted on this: '.$this->sisu.'</y>\' );				
+			}		
 		}); "';
 		
 			$onClickScriptDown = 'onclick="$.post( 
 		\'downvote.php\', 
 		{ comm_id: '.$this->id.', usr: '.$_SESSION['login_user_id'].' }, 
 		function( data ){ 
+			if (data != \'jah\'){
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<downC>Downvoted comment: '.$this->sisu.'</downC>\' );
+			}
+			else{
+				$(\'#infobox\').empty();
+				$( \'#infobox\').append( \'<y>You have already voted on this: '.$this->sisu.'</y>\' );				
+			}		
 		}); "';
 		}
 		else{
-			$userMessage = "'Only avaiable to registered users.'";
-			$onClickScriptUp = 'onclick="alert('.$userMessage.')"';
-			$onClickScriptDown = 'onclick="alert('.$userMessage.')"';
+			$onClickScriptUp = 'onclick="
+			$(\'#infobox\').empty();
+			$( \'#infobox\').append( \'<y>Voting is only available to registered users.</y>\' );"';
+			$onClickScriptDown = $onClickScriptUp;
 		}
 		
 		
@@ -74,7 +91,7 @@ class Comment {
 		
 			<div class="postDataBox">
 				<div class="postDataBoxUp">	
-					<a style="color:white;">' .$this->sisu. '</a>
+					<a class="w">' .$this->sisu. '</a>
 				</div>
 				
 				<div class="postDataBoxDown">

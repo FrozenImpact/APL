@@ -1,6 +1,6 @@
 function readClasses() {
 	$('#scroller2').empty();
-	$( '#scroller2').append( '<a style="color:white;">Loading...</a>' );
+	$( '#scroller2').append( '<a class="w">Loading...</a>' );
 	$.post( 
 	'readClasses.php', 
 	{ filter: $("#class_search_entry").val() }, 
@@ -44,7 +44,7 @@ $(document).ready(function() {
 	var search2 = $("#searchBig");
 	$("#searchBig").keyup(function() {		
 		$('#priit').empty();
-		$( '#priit').append( '<a style="color:white;"><br/><br/><br/>Loading...</a>' );
+		$( '#priit').append( '<a class="w"><br/><br/><br/>Loading...</a>' );
 		$.post( 
 			'searchPosts.php',
 			{ filter: search2.val() },

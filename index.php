@@ -14,7 +14,6 @@
 	if (isset( $_POST['logout_button'] ) ){
 		unset($_SESSION['login_user']); 
 		unset($_SESSION['login_user_id']);
-		unset($_POST['logout_button']);
 		
 	}
 	
@@ -28,7 +27,7 @@
 			$_SESSION['login_user_id']= userExists ($_POST['login_username'], $_POST['login_password']);
 		}
 		else{
-			echo '<a style="color:red;">Sisestati vale või puudulik info.</a>';
+			echo '<r>Sisestati vale või puudulik info.</r>';
 		}
 	}
 	
@@ -48,7 +47,7 @@
 		
 	function getLecture(){
 		if (isset($_GET['lecture'])){
-			return '&lecture='.$_GET['lecture'].'';
+			return '&lecture='.urlencode($_GET['lecture']).'';
 		}
 		else{
 			return '';
@@ -69,7 +68,7 @@
 			<a href="index.php" class="headLink">APL</a>
 		</div>
 		<div class="headMid">
-			<a href="index.php<?php if (isset($_GET['lecture'])) echo '?lecture='.$_GET['lecture'].''; ?>" class="headLink">
+			<a href="index.php<?php if (isset($_GET['lecture'])) echo '?lecture='.urlencode($_GET['lecture']).''; ?>" class="headLink">
 			<?php 
 			if (isset($_GET['lecture'])){
 				echo ''.$_GET['lecture'].'';
@@ -96,12 +95,12 @@
 	</div>
 	
 	<!-- veebilehe peamine osa -->
-	
+
 	<div class="leftMain" id="scroller1">	
 				
 	<div class="separator1"></div>
-	<div id="infobox"></div>
 
+	<div id="infobox"></div>
 
 	<?php
 		
@@ -111,7 +110,7 @@
 		if (isset($_GET['p'])){
 			$post_data = getPost($_GET['p']);
 			$category = getCategoryName($post_data[0]['Category']);
-			echo '<script>window.location.href = "index.php?lecture='.$category.'&lehekylg='.$post_data[0]['Heading'].'&post_id='.$_GET['p'].'";</script>';
+			echo '<script>window.location.href = "index.php?lecture='.urlencode($category).'&lehekylg='.urlencode($post_data[0]['Heading']).'&post_id='.urlencode($_GET['p']).'";</script>';
 			exit();
 		}
 		
@@ -147,7 +146,7 @@
 		
 		// homepage
 		else if (!isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
-			echo '<a style="color:white;">Tere!<br/>Valige õppeaine. <br/>Populaarsed õppeained:<br/><br/></a>';
+			echo '<a class="w">Tere!<br/>Valige õppeaine. <br/>Populaarsed õppeained:<br/><br/></a>';
 			$data = getCategoriesInPopularityOrder();
 			
 			$oneOrTwo = 1;
@@ -157,7 +156,7 @@
 					break;
 				}
 				echo '<div class="downBoxRow'.$oneOrTwo.'">
-					<a class="n1" href="index.php?lecture=' .$row['name']. '"><b>' .$row['name']. '</b></a>
+					<a class="n1" href="index.php?lecture=' .urlencode($row['name']). '"><b>' .$row['name']. '</b></a>
 				</div>';
 				if ($oneOrTwo == 1){
 					$oneOrTwo=2;
@@ -168,6 +167,13 @@
 				$kogus+=1;
 	}
 			
+			// echo '
+			// <upC>Upvoted post: tere</upC><br/>
+			// <downC>Downvoted post: tere</downC><br/>
+			// <y>You have already voted on this: tere</y><br/>
+			// <y>Voting is only available to registered users.</y><br/>
+			// <r>TÄHELEPANU: Ühendus serveriga katkes. Võite teksti kirjutamist jätkata, sest selle mustandit talletatakse teie arvutis.</r>
+			// ';
 			
 			// echo 'Testimist abistavad ajutised lingid:<br/><br/>
 				// <a class="rightLink" href="workspaceIndex.php">workspaceIndex</a><br/><br/>';
@@ -178,7 +184,7 @@
 		
 
 		// subreddit homepage
-		else if (isset($_GET['lecture']) &&  !isset($_GET['lehekylg'])){
+		else if (isset($_GET['lecture']) && !isset($_GET['lehekylg'])){
 			include_once 'home.php';
 		}
 	

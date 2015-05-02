@@ -18,7 +18,7 @@
 	foreach($data as $row){
 	 
 		echo '<div class="downBoxRow'.$oneOrTwo.'">
-			<a class="n1" href="index.php?lecture=' .$row['name']. '"><b>' .$row['name']. '</b></a>
+			<a class="n1" href="index.php?lecture=' .urlencode($row['name']). '"><b>' .$row['name']. '</b></a>
 		</div>';
 		if ($oneOrTwo == 1){
 			$oneOrTwo=2;
