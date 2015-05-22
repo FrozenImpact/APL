@@ -11,13 +11,34 @@ function readClasses() {
 	});
 }
 
- 
+function suurus(){
+	//alert($(window).width());
+	if ($(window).width() < 800){
+		$("#right").hide();
+		$("#sidebar_toggle_button_container").show();
+	}
+	else {
+		$("#right").show();
+		$("#sidebar_toggle_button_container").hide();
+	}	
+}
+
+$( window ).resize(function() {
+	suurus();
+});
+
 
 $(document).ready(function() {
+	
+
+	suurus();
+	$("#sidebar_toggle_button_container").append('<a class="headLink" id="sidebar_toggle_button">></a>');
+	$("#sidebar_toggle_button").click(function() { $("#right").toggle(); });
 	
 	// ainete filter paremal all
 	// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida
 	readClasses();
+	
 	var vana = $("#class_search_entry").val();
 	$("#class_search_entry").keyup(function() {
 		
@@ -38,6 +59,7 @@ $(document).ready(function() {
 			vana = $("#class_search_entry").val();
 		}
 	});
+	
 	
 	/*
 	//suur otsing ülemise riba paremas servas

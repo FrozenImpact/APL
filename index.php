@@ -67,6 +67,7 @@
 		<div class="headLeft">
 			<a href="index.php" class="headLink">APL</a>
 		</div>
+
 		<div class="headMid">
 			<a href="index.php<?php if (isset($_GET['lecture'])) echo '?lecture='.urlencode($_GET['lecture']).''; ?>" class="headLink">
 			<?php 
@@ -92,6 +93,12 @@
 			
 		<!--	<div class="searchSuggestionBox" id="priit"> </div>	-->
 		</div>
+		
+				
+		<div class="headRight" id="sidebar_toggle_button_container">
+			
+		</div>
+		
 	</div>
 	
 	<!-- veebilehe peamine osa -->
@@ -199,7 +206,7 @@
 	</div>
 </div>
 
-<div class="right">
+<div class="right" id="right">
 	<div class="up" id="up">
 	<?php
 		
