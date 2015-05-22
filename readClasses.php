@@ -1,6 +1,12 @@
 <?php
 	// skript, mis filtreerib paremas servas olevat loetelu, käivitatakse onKeyUp korral AJAXiga
-	if (isset($_POST['filter'])){
+	if (isset($_POST['class_search_entry'])){
+		$filter = $_POST['class_search_entry'];
+	}
+	else if (isset($_GET['filter'])){
+		$filter = $_GET['filter'];
+	}
+	else if (isset($_POST['filter'])){
 		$filter = $_POST['filter'];
 	}
 	else{

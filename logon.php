@@ -70,8 +70,8 @@
 
 	<a class="w">Selle lehekülje nägemiseks peate olema sisse logitud.<br/></a>
 	<form method="POST" id="login_form" class="formDontAffectLayout">
-		<input class="loginField" type="text" size="15" maxlength="15" value="<?php if (isset($_POST['login_username'])) echo $_POST['login_username']; ?>" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
-		<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['login_password'])) echo $_POST['login_password']; ?>" placeholder="Parool" name="login_password" ><br/><br/>
+		<input class="loginField" type="text" size="15" maxlength="15" value="<?php if (isset($_POST['login_username'])) echo $_POST['login_username']; ?>" placeholder="Username" id="Username" name="login_username" ><br/>
+		<input class="loginField" type="password" size="15" maxlength="15" value="<?php if (isset($_POST['login_password'])) echo $_POST['login_password']; ?>" placeholder="Password" name="login_password" ><br/><br/>
 		<input class="n2 rightLink" type="submit" name="login_button" id="login_button" value="Logi sisse">
 
 	</form>	

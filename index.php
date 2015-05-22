@@ -110,6 +110,7 @@
 		if (isset($_GET['p'])){
 			$post_data = getPost($_GET['p']);
 			$category = getCategoryName($post_data[0]['Category']);
+			echo '<a class="w" href="index.php?lecture='.urlencode($category).'&lehekylg='.urlencode($post_data[0]['Heading']).'&post_id='.urlencode($_GET['p']).'">If automatic forwarding doesnt work, click here.</a>';
 			echo '<script>window.location.href = "index.php?lecture='.urlencode($category).'&lehekylg='.urlencode($post_data[0]['Heading']).'&post_id='.urlencode($_GET['p']).'";</script>';
 			exit();
 		}
@@ -134,6 +135,7 @@
 				include_once 'makepost.php';
 			}
 			else{
+				echo '<a class="w"> Please log in/make account to use this feature </a>';
 				echo '<script>window.location.href = "logon.php?newpost=true'.getLecture().'";</script>';
 			}
 		}	
@@ -235,7 +237,10 @@
 			<div class="s2">
 			<form method="post">
 				<input type="search" class="search2" value="<?php 
-					if (isset($_GET['filter'])){
+					if (isset($_POST['class_search_entry'])){
+						echo $_POST['class_search_entry'];
+					}
+					else if (isset($_GET['filter'])){
 						echo $_GET['filter'];
 					}
 					else{
@@ -246,7 +251,9 @@
 			</div>
 			
 			<div class="downContainer" id="scroller2">
-			
+				<?php
+					include_once 'readClasses.php';
+				?>
 			</div>
 	</div>
 </div>

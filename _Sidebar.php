@@ -44,8 +44,8 @@ public function draw_login_form (){
 				<div class="upUpRightLeft2" id="upUpRightLeft2">
 				
 					<form method="POST" id="login_form" class="formDontAffectLayout">
-							<input class="loginField" type="text" size="12" maxlength="15" value="" placeholder="Kasutajanimi" id="Username" name="login_username" ><br/>
-							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Parool" name="login_password" ><br/>
+							<input class="loginField" type="text" size="12" maxlength="15" value="" placeholder="Username" id="Username" name="login_username" ><br/>
+							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Password" name="login_password" ><br/>
 							<input class="rightLink" type="submit" name="login_button" id="login_button" value="Log in"><br/><br/>
 					</form>	
 					

@@ -33,10 +33,11 @@ function perioodiliselt_tehtav() {
 	if (isset($_POST['action'])) {
 		$uusid = save($_POST);
 		// success message
-		echo '<a class="w">Postitus loodud.</a>';
+		echo '<a class="w">Your post has been submitted.</a><br/>';
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		echo "<script type='text/javascript'>$.removeCookie('example2');</script>";
 		echo "<script type='text/javascript'>$.removeCookie('example3');</script>";
+		echo '<a class="w" href="index.php?'.getLecture().'&lehekylg='.$_POST['title'].'&post_id='.$uusid.'">If automatic forwarding (to your newly created post) doesnt work, click here.</a>';
 		echo '<script>window.location.href = "index.php?'.getLecture().'&lehekylg='.$_POST['title'].'&post_id='.$uusid.'";</script>';
 	}
 

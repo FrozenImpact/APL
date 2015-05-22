@@ -58,7 +58,8 @@ if (isset($_POST['action'])) {
 }
 ?>
 <div id="comments">
-<a class="w">Loading comments...</a>
-<script>perioodiliselt_tehtav();</script>
+<?php
+include_once 'drawComments.php';
+?>
 </div>
 

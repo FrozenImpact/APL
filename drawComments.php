@@ -1,9 +1,15 @@
 <?php
-session_start();
 include_once '_Comment.php';
 include_once 'db/sql_functions.php';
 
-$data = getAllComments($_POST['post_id']);
+if (isset($_GET['post_id'])){
+	$postid = $_GET['post_id'];
+}
+else {		
+	$postid = $_POST['post_id'];
+}
+	
+$data = getAllComments($postid);
 
 foreach ($data as $row) {
     $user = getUserById($row['User_ID']);

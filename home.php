@@ -1,6 +1,6 @@
 <script src='extended_features.js'></script>
 <script src='jquery.cookie.js'></script>
-<div id="postarea"></div>
+<div id="postarea">
 <script>
 function perioodiliselt_tehtav() {
 	$.post( 
@@ -12,5 +12,9 @@ function perioodiliselt_tehtav() {
 	});
 		
 }
-perioodiliselt_tehtav();
+//perioodiliselt_tehtav();
 </script>
+<?php
+include_once 'drawPosts.php';
+?>
+</div>

@@ -5,16 +5,16 @@
 				addUser($_POST['makeacc_username'], $_POST['makeacc_password']);
 				
 				// success message
-				echo '<a class="w">Konto '.$_POST['makeacc_username'].' loodud.</a><br/>';
+				echo '<a class="w">User '.$_POST['makeacc_username'].' succesfully created.</a><br/>';
 			}
 			else{
 				// password mismatch message
-				echo '<a class="w">Paroolid on erinevad.</a><br/>';
+				echo '<a class="w">Password mismatch.</a><br/>';
 			}
 		}
 		else{
 			// username taken message
-			echo '<a class="w">Konto '.$_POST['makeacc_username'].' on juba olemas.</a><br/>';
+			echo '<a class="w">User '.$_POST['makeacc_username'].' already exists.</a><br/>';
 		}
 	}
 ?>
