@@ -5,6 +5,7 @@
         height:100%;
         width:100%;
         overflow:hidden;
+		background:#222222;
 }
  
 /*SCORE*/
@@ -150,7 +151,7 @@ r{
 }
 .center-wrapper_{
    position: absolute;  
-        text-align:center;
+    text-align:center;
     top: 0;
     bottom: 0;
     left: 0;
@@ -160,46 +161,44 @@ r{
     margin: auto;
  
 }
- 
- 
- 
+  
 /*see on meie vasakpoolne ekraani osa*/
 .left {
-        display: table-cell;
-        vertical-align: top;
-        height:100%;
+        position: absolute;
+		top: 0px;
+		bottom: 0;
+		left: 0;
+		right: 415px;
         text-align:center;
         background:#222222;
 }
  
 .leftMain {
 		position: absolute;
-		top: 50px;
+		top: 65px;
 		bottom: 0;
-		left: 0;
-		right: 400px;
-        overflow:auto;
-        text-align:center;
-        background:#222222;
-        border-right:2px solid #252525;
+		left: 15px;
+		right: 0px;
+        background:#222222;        
 }
  
 /*parepoolne ekraani osa*/
 .right {
-        display: table-cell;
-        vertical-align: top;
-        display: table;
         height:100%;
         width:400px;
+		float:right;
         /*border-collapse: collapse;*/
         background:#171717;
-        border:2px solid black;
+		-webkit-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
+box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
 }
  
 /*profiili osa*/
 .up {
+		
         display:table-row;
-                height:205px;
+        height:205px;
         background:#222222;
 }
 .upUp{
@@ -333,8 +332,6 @@ r{
 /*postituse osa pealehel*/
 .postBoxRow{
         position:relative;
-        margin-left:10px;
-        margin-right:10px;
         margin-top:10px;
         background:#1E1E1E;
         border: 1px solid black;
@@ -375,26 +372,30 @@ r{
 }
  
 /*HEADER*/
-.head{
-        display: table;
-        /*border-collapse:separate; probably useless*/
-    width: 100%;
+.head{        
+        /*border-collapse:separate; probably useless*/  
+		position:absolute;
         background: #4479BA;
-    color: #FFF;
         height:50px;
-        -webkit-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
-        box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.75);
+		top: 0px;
+		bottom: 0;
+		left: 0;
+		right: -15px;		
+		-webkit-box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);
 }
 .headLeft{    
         display: table-cell;
         padding-left:15px;
+		padding-top:5px;
         width:200px;
         text-align: left;
         vertical-align: middle;
 }
 .headMid{
         display: table-cell;
+		padding-top:5px;
         width:100%;
         text-align: center;
         vertical-align: middle;
@@ -402,6 +403,7 @@ r{
 .headRight{
         display: table-cell;
         padding-right:15px;
+		padding-top:5px;
         width: 200px;
         text-align: center;
         vertical-align: middle;
