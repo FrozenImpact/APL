@@ -45,7 +45,7 @@ public function draw_login_form (){
 				
 					<form method="POST" id="login_form" class="formDontAffectLayout">
 							<input class="loginField" type="text" size="12" maxlength="15" value="" placeholder="Username" id="Username" name="login_username" ><br/>
-							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Password" name="login_password" ><br/>
+							<input class="loginField" type="password" size="12" maxlength="15" value="" placeholder="Password" name="login_password" ><div class="separator1"></div>
 							<input class="rightLink" type="submit" name="login_button" id="login_button" value="Log in"><br/><br/>
 					</form>	
 					
@@ -68,7 +68,7 @@ public function draw_login_form (){
 				</div>
 					
 
-			<div class="upDownRight">
+			<div class="upDownRight" id="upDownRight">
 				<a href="index.php?kontoloomine=true" class="rightLink" id="makeacc">Looge konto</a>
 			</div>
 		</div>
@@ -121,7 +121,7 @@ echo'
 					<a href="index.php?newpost=true'.$this->getLecture().'" class="rightLink" id="newpost">New post</a>								
 				</div>
 				
-				<div class="upDownRight">
+				<div class="upDownRight" id="upDownRight">
 					<input class="rightLink" type="submit" name="logout_button" value="Log Out">					
 				</div>	
 				

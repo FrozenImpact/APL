@@ -11,16 +11,63 @@ function readClasses() {
 	});
 }
 
+
+// hides right panel when screen size is lesser than 800
 function suurus(){
-	//alert($(window).width());
 	if ($(window).width() < 800){
+		
+		// Hack to get 320x480 semi-working. Default width for right pane is 400. Manually adjust 2 elements.
+		if ($(window).width() < 400){
+			$("#upDownRight").css('text-align', 'left');
+			$("#upDownRight").css('padding-right', '0px');
+			$("#upDownRight").css('padding-left', '10px');
+			$("#scroller2").css('width', $(window).width()-30);
+		}
+		else{
+			$("#upDownRight").css('text-align', 'right');
+			$("#upDownRight").css('padding-right', '10px');
+			$("#upDownRight").css('padding-left', '0px');
+			$("#scroller2").css('width', '376px');
+		}
+		
+		// hide right pane
 		$("#right").hide();
+		$("#left").css('right', '15px');
 		$("#sidebar_toggle_button_container").show();
 	}
 	else {
+		// revert everything to original css
 		$("#right").show();
+		$("#left").css('right', '415px');
 		$("#sidebar_toggle_button_container").hide();
+		
+		$("#right").css('position', 'absolute');
+		$("#right").css('top', '0px');
+		$("#head").css('position', 'absolute');
+		$("#head").css('right', '-15px');
 	}	
+}
+
+
+// Toggles whether right panel is visible or not. Activated when user click button.
+function toggleRight(){
+	if ( $("#left").css('right') == '415px' ){
+		$("#left").css('right', '15px');
+		
+		$("#right").css('position', 'absolute');
+		$("#right").css('top', '0px');
+		$("#head").css('position', 'absolute');
+		$("#head").css('right', '-15px');
+	}
+	else{
+		$("#left").css('right', '415px');
+		$("#right").css('position', 'relative');
+		$("#right").css('top', '50px');
+		$("#head").css('position', 'fixed');
+		$("#head").css('right', '0px');
+	}
+	$("#right").toggle();
+	
 }
 
 $( window ).resize(function() {
@@ -33,7 +80,7 @@ $(document).ready(function() {
 
 	suurus();
 	$("#sidebar_toggle_button_container").append('<a class="headLink" id="sidebar_toggle_button">></a>');
-	$("#sidebar_toggle_button").click(function() { $("#right").toggle(); });
+	$("#sidebar_toggle_button").click(function() { toggleRight(); });
 	
 	// ainete filter paremal all
 	// seda AJAXiga lehel tehtud muudatust saab ka bookmarkida

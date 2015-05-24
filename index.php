@@ -63,7 +63,7 @@
 
 <div class="left" id="left">	
 
-	<div class="head">	
+	<div class="head" id="head">	
 		<div class="headLeft">
 			<a href="index.php" class="headLink">APL</a>
 		</div>
@@ -241,7 +241,13 @@
 	
 	<div class="down" id="down">	
 		<div class="separator2"></div>
-			<div class="s2">
+
+			<div class="downContainer" id="scroller2">
+				<?php
+					include_once 'readClasses.php';
+				?>
+			</div>
+						<div class="s2">
 			<form method="post">
 				<input type="search" class="search2" value="<?php 
 					if (isset($_POST['class_search_entry'])){
@@ -257,11 +263,7 @@
 			</form>
 			</div>
 			
-			<div class="downContainer" id="scroller2">
-				<?php
-					include_once 'readClasses.php';
-				?>
-			</div>
+			
 	</div>
 </div>
 

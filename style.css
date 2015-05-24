@@ -177,6 +177,7 @@ r{
 		position: absolute;
 		top: 65px;
 		bottom: 0;
+		overflow:auto;
 		left: 15px;
 		right: 0px;
         background:#222222;        
@@ -186,17 +187,20 @@ r{
 .right {
         height:100%;
         width:400px;
-		float:right;
+		right: 0;
+		position:absolute;
+		overflow:hidden;
+		/*float:right;*/
         /*border-collapse: collapse;*/
         background:#171717;
-		-webkit-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
+	/*	-webkit-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
-box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
+box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);*/
+border-left: 2.5px solid black;
 }
  
 /*profiili osa*/
-.up {
-		
+.up {		
         display:table-row;
         height:205px;
         background:#222222;
@@ -288,12 +292,11 @@ box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
  
 /*otsingu osa*/
 .down{
-    display:table-row;
     height:100%;
     width:400px;
 }
 .downContainer{
-        overflow:auto;
+       overflow:auto;
         border:1px solid;
         background:#1E1E1E;
         margin:10px;
@@ -302,6 +305,7 @@ box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
     top: 286px;
     bottom: 0;
 }
+
 .downBoxRow1{
         line-height: 31px;
         /*height:31px;*/
@@ -333,6 +337,7 @@ box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
 .postBoxRow{
         position:relative;
         margin-top:10px;
+		margin-right:9px;
         background:#1E1E1E;
         border: 1px solid black;
 }
@@ -380,7 +385,7 @@ box-shadow: -5px 0px 14px 0px rgba(0,0,0,0.75);
 		top: 0px;
 		bottom: 0;
 		left: 0;
-		right: -15px;		
+		right: -15px;
 		-webkit-box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);
 		-moz-box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);
 		box-shadow: 0px 5px 14px 0px rgba(0,0,0,0.75);

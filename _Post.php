@@ -7,6 +7,7 @@ class Post {
 	private $category;
 	private $postDate;
 	private $score;
+	private $replies;
 	
 	
 	public function __construct ($id, $tiitel, $category, $postDate, $score) {
@@ -18,6 +19,8 @@ class Post {
 		}else{
 			$this->postDate = formatDate($postDate);
 		}
+		$this->replies = numberOfCommentsPerPost($id);
+		//$this->replies = '??';
 		$this->score = $score;
 	}
 	
@@ -94,7 +97,7 @@ class Post {
 				</div>
 				<div class="postDataBoxDown">
 					<div class="dataComments">	
-						<a class="h">Replies: ??</a>
+						<a class="h">Replies: '.$this->replies.'</a>
 						
 					</div>
 					<div class="dataScore">	
