@@ -406,7 +406,7 @@ function numberOfPosts($userid){
 
 function numberOfCommentsPerPost($post_id){
     $conn = connect();
-    $sql = "sSELECT COUNT(*) FROM comment WHERE Post_ID=?;";
+    $sql = "SELECT COUNT(*) FROM comment WHERE Post_ID=?;";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(1, $post_id);
     $stmt->execute();
